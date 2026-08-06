@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'category_item_model.dart';
 export 'category_item_model.dart';
 
@@ -15,8 +12,8 @@ class CategoryItemWidget extends StatefulWidget {
     String? label,
     Color? tone,
     this.onTap,
-  })  : this.label = label ?? 'Grocery',
-        this.tone = tone ?? const Color(0x00000000);
+  })  : label = label ?? 'Grocery',
+        tone = tone ?? const Color(0x00000000);
 
   final Widget? icon;
   final String label;
@@ -63,17 +60,17 @@ class _CategoryItemWidgetState extends State<CategoryItemWidget> {
             height: 64.0,
             decoration: BoxDecoration(
               color: valueOrDefault<Color>(
-                widget!.tone,
+                widget.tone,
                 FlutterFlowTheme.of(context).primary,
-              ).withOpacity(0.1),
+              ).withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12.0),
               shape: BoxShape.rectangle,
             ),
-            child: widget!.icon!,
+            child: widget.icon!,
           ),
           Text(
             valueOrDefault<String>(
-              widget!.label,
+              widget.label,
               'Grocery',
             ),
             style: FlutterFlowTheme.of(context).labelMedium.override(
@@ -89,7 +86,7 @@ class _CategoryItemWidgetState extends State<CategoryItemWidget> {
                   lineHeight: 1.3,
                 ),
           ),
-        ].divide(SizedBox(height: 4.0)),
+        ].divide(const SizedBox(height: 4.0)),
       ),
     );
   }

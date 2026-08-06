@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'login_header_model.dart';
 export 'login_header_model.dart';
 
@@ -13,9 +10,9 @@ class LoginHeaderWidget extends StatefulWidget {
     super.key,
     String? subtitle,
     String? title,
-  })  : this.subtitle = subtitle ??
+  })  : subtitle = subtitle ??
             'Enter your mobile number to get started with fast delivery in Degloor.',
-        this.title = title ?? 'Welcome to DDNDS';
+        title = title ?? 'Welcome to DDNDS';
 
   final String subtitle;
   final String title;
@@ -61,7 +58,7 @@ class _LoginHeaderWidgetState extends State<LoginHeaderWidget> {
             borderRadius: BorderRadius.circular(12.0),
             shape: BoxShape.rectangle,
           ),
-          alignment: AlignmentDirectional(0.0, 0.0),
+          alignment: const AlignmentDirectional(0.0, 0.0),
           child: Icon(
             Icons.local_shipping_rounded,
             color: FlutterFlowTheme.of(context).primary,
@@ -75,7 +72,7 @@ class _LoginHeaderWidgetState extends State<LoginHeaderWidget> {
           children: [
             Text(
               valueOrDefault<String>(
-                widget!.title,
+                widget.title,
                 'Welcome to DDNDS',
               ),
               style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -94,7 +91,7 @@ class _LoginHeaderWidgetState extends State<LoginHeaderWidget> {
             ),
             Text(
               valueOrDefault<String>(
-                widget!.subtitle,
+                widget.subtitle,
                 'Enter your mobile number to get started with fast delivery in Degloor.',
               ),
               style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -113,9 +110,9 @@ class _LoginHeaderWidgetState extends State<LoginHeaderWidget> {
                     lineHeight: 1.5,
                   ),
             ),
-          ].divide(SizedBox(height: 4.0)),
+          ].divide(const SizedBox(height: 4.0)),
         ),
-      ].divide(SizedBox(height: 16.0)),
+      ].divide(const SizedBox(height: 16.0)),
     );
   }
 }

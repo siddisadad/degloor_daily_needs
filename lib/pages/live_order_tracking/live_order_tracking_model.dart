@@ -2,16 +2,10 @@ import '/components/button/button_widget.dart';
 import '/components/tracking_step/tracking_step_widget.dart';
 import '/components/bottom_nav/bottom_nav_widget.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'live_order_tracking_widget.dart' show LiveOrderTrackingWidget;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class LiveOrderTrackingModel extends FlutterFlowModel<LiveOrderTrackingWidget> {
   ///  State fields for stateful widgets in this page.

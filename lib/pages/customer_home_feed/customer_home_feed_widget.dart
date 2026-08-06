@@ -9,8 +9,6 @@ import '/components/text_field/text_field_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -67,22 +65,22 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Add New Address'),
+        title: const Text('Add New Address'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: labelController,
-              decoration: InputDecoration(labelText: 'Label (e.g. Home, Office)'),
+              decoration: const InputDecoration(labelText: 'Label (e.g. Home, Office)'),
             ),
             TextField(
               controller: addressController,
-              decoration: InputDecoration(labelText: 'Full Address'),
+              decoration: const InputDecoration(labelText: 'Full Address'),
             ),
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: Text('Cancel')),
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
           TextButton(
             onPressed: () {
               if (labelController.text.isNotEmpty && addressController.text.isNotEmpty) {
@@ -96,7 +94,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                 showSnackbar(context, 'Address added successfully!');
               }
             },
-            child: Text('Add'),
+            child: const Text('Add'),
           ),
         ],
       ),
@@ -162,7 +160,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 16.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 16.0),
                     child: Container(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -185,7 +183,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                       await showModalBottomSheet(
                                         context: context,
                                         builder: (context) => Container(
-                                          padding: EdgeInsets.all(24.0),
+                                          padding: const EdgeInsets.all(24.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
@@ -193,7 +191,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                                 'Select Delivery Address',
                                                 style: FlutterFlowTheme.of(context).titleMedium,
                                               ),
-                                              SizedBox(height: 16.0),
+                                              const SizedBox(height: 16.0),
                                               ...addressProvider.addresses.asMap().entries.map((entry) {
                                                 final index = entry.key;
                                                 final address = entry.value;
@@ -208,8 +206,8 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                                     Navigator.pop(context);
                                                   },
                                                 );
-                                              }).toList(),
-                                              Divider(),
+                                              }),
+                                              const Divider(),
                                               ListTile(
                                                 leading: Icon(Icons.add, color: FlutterFlowTheme.of(context).primary),
                                                 title: Text('Add New Address', style: TextStyle(color: FlutterFlowTheme.of(context).primary, fontWeight: FontWeight.bold)),
@@ -258,8 +256,8 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                                 ),
                                           ),
                                         ),
-                                        Icon(Icons.keyboard_arrow_down, size: 18.0),
-                                      ].divide(SizedBox(width: 4.0)),
+                                        const Icon(Icons.keyboard_arrow_down, size: 18.0),
+                                      ].divide(const SizedBox(width: 4.0)),
                                     ),
                                   ),
                                   Text(
@@ -291,14 +289,14 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                           lineHeight: 1.2,
                                         ),
                                   ),
-                                ].divide(SizedBox(height: 4.0)),
+                                ].divide(const SizedBox(height: 4.0)),
                               ),
                               FlutterFlowIconButton(
                                 borderRadius: 9999.0,
                                 buttonSize: 40.0,
                                 fillColor: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.person_outline_rounded,
                                   size: 24.0,
                                 ),
@@ -331,7 +329,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                               error: false,
                             ),
                           ),
-                        ].divide(SizedBox(height: 16.0)),
+                        ].divide(const SizedBox(height: 16.0)),
                       ),
                     ),
                   ),
@@ -357,22 +355,22 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                         child: Container(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Container(
+                              SizedBox(
                                 height: 160.0,
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 16.0),
                                   child: Container(
                                     child: Container(
                                       height: 128.0,
-                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
                                         child: Row(
@@ -383,7 +381,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                               CrossAxisAlignment.center,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       16.0, 0.0, 16.0, 0.0),
                                               child: Container(
@@ -409,7 +407,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                                             BoxShape.rectangle,
                                                       ),
                                                       child: Padding(
-                                                        padding: EdgeInsets.all(
+                                                        padding: const EdgeInsets.all(
                                                             24.0),
                                                         child: Container(
                                                           child: Column(
@@ -492,7 +490,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                                                     safeSetState(
                                                                         () {}),
                                                                 child:
-                                                                    ButtonWidget(
+                                                                    const ButtonWidget(
                                                                   iconPresent:
                                                                       false,
                                                                   iconEndPresent:
@@ -510,7 +508,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                                                       false,
                                                                 ),
                                                               ),
-                                                            ].divide(SizedBox(
+                                                            ].divide(const SizedBox(
                                                                 height: 8.0)),
                                                           ),
                                                         ),
@@ -530,7 +528,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                                             BoxShape.rectangle,
                                                       ),
                                                       child: Padding(
-                                                        padding: EdgeInsets.all(
+                                                        padding: const EdgeInsets.all(
                                                             24.0),
                                                         child: Container(
                                                           child: Column(
@@ -613,7 +611,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                                                     safeSetState(
                                                                         () {}),
                                                                 child:
-                                                                    ButtonWidget(
+                                                                    const ButtonWidget(
                                                                   iconPresent:
                                                                       false,
                                                                   iconEndPresent:
@@ -631,14 +629,14 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                                                       false,
                                                                 ),
                                                               ),
-                                                            ].divide(SizedBox(
+                                                            ].divide(const SizedBox(
                                                                 height: 8.0)),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
                                                   ].divide(
-                                                      SizedBox(width: 16.0)),
+                                                      const SizedBox(width: 16.0)),
                                                 ),
                                               ),
                                             ),
@@ -650,7 +648,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 16.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
@@ -681,7 +679,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                     GridView(
                                       padding: EdgeInsets.zero,
                                       gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 4,
                                         crossAxisSpacing: 16.0,
                                         mainAxisSpacing: 16.0,
@@ -747,11 +745,11 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                         );
                                       }).toList(),
                                     ),
-                                  ].divide(SizedBox(height: 16.0)),
+                                  ].divide(const SizedBox(height: 16.0)),
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 16.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
@@ -791,7 +789,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                           model: _model.buttonModel3,
                                           updateCallback: () =>
                                               safeSetState(() {}),
-                                          child: ButtonWidget(
+                                          child: const ButtonWidget(
                                             iconPresent: false,
                                             iconEndPresent: false,
                                             content: 'See All',
@@ -830,12 +828,12 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                             );
                                           },
                                         );
-                                      }).toList().divide(SizedBox(height: 16.0)),
+                                      }).toList().divide(const SizedBox(height: 16.0)),
                                     ),
-                                  ].divide(SizedBox(height: 16.0)),
+                                  ].divide(const SizedBox(height: 16.0)),
                                 ),
                               ),
-                            ].divide(SizedBox(height: 24.0)),
+                            ].divide(const SizedBox(height: 24.0)),
                           ),
                         ),
                       ),
@@ -845,13 +843,13 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, 1.0),
+              alignment: const AlignmentDirectional(0.0, 1.0),
               child: Container(
                 child: wrapWithModel(
                   model: _model.bottomNavModel,
                   updateCallback: () => safeSetState(() {}),
                   child: BottomNavWidget(
-                    child: () => BottomNavChildWidget(),
+                    child: () => const BottomNavChildWidget(),
                   ),
                 ),
               ),

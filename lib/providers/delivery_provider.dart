@@ -47,7 +47,7 @@ class DeliveryProvider extends ChangeNotifier {
   bool _isOnline = true;
   double _todayEarnings = 425.50;
   int _ordersCompleted = 12;
-  double _rating = 4.9;
+  final double _rating = 4.9;
 
   List<OrderRequest> _requests = [
     OrderRequest(

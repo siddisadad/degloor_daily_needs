@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'transaction_item_model.dart';
 export 'transaction_item_model.dart';
 
@@ -15,10 +12,10 @@ class TransactionItemWidget extends StatefulWidget {
     String? date,
     String? title,
     bool? isCredit,
-  })  : this.amount = amount ?? '50.00',
-        this.date = date ?? 'Oct 24, 2023 • 11:20 AM',
-        this.title = title ?? 'Cashback Received',
-        this.isCredit = isCredit ?? true;
+  })  : amount = amount ?? '50.00',
+        date = date ?? 'Oct 24, 2023 • 11:20 AM',
+        title = title ?? 'Cashback Received',
+        isCredit = isCredit ?? true;
 
   final String amount;
   final String date;
@@ -54,7 +51,7 @@ class _TransactionItemWidgetState extends State<TransactionItemWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         shape: BoxShape.rectangle,
       ),
       child: Column(
@@ -62,7 +59,7 @@ class _TransactionItemWidgetState extends State<TransactionItemWidget> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
             child: Container(
               child: Row(
                 mainAxisSize: MainAxisSize.max,
@@ -75,26 +72,26 @@ class _TransactionItemWidgetState extends State<TransactionItemWidget> {
                     decoration: BoxDecoration(
                       color: valueOrDefault<Color>(
                         valueOrDefault<bool>(
-                          widget!.isCredit,
+                          widget.isCredit,
                           true,
                         )
-                            ? Color(0xFFE8F5E9)
-                            : Color(0xFFFFEBEE),
-                        Color(0xFFE8F5E9),
+                            ? const Color(0xFFE8F5E9)
+                            : const Color(0xFFFFEBEE),
+                        const Color(0xFFE8F5E9),
                       ),
                       borderRadius: BorderRadius.circular(9999.0),
                       shape: BoxShape.rectangle,
                     ),
-                    alignment: AlignmentDirectional(0.0, 0.0),
-                    child: Container(
+                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    child: SizedBox(
                       width: 20.0,
                       height: 20.0,
                       child: Stack(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         children: [
                           if (valueOrDefault<bool>(
                             valueOrDefault<bool>(
-                              widget!.isCredit,
+                              widget.isCredit,
                               true,
                             )
                                 ? true
@@ -105,7 +102,7 @@ class _TransactionItemWidgetState extends State<TransactionItemWidget> {
                               Icons.add_rounded,
                               color: valueOrDefault<Color>(
                                 valueOrDefault<bool>(
-                                  widget!.isCredit,
+                                  widget.isCredit,
                                   true,
                                 )
                                     ? FlutterFlowTheme.of(context).success
@@ -116,7 +113,7 @@ class _TransactionItemWidgetState extends State<TransactionItemWidget> {
                             ),
                           if (valueOrDefault<bool>(
                             valueOrDefault<bool>(
-                              widget!.isCredit,
+                              widget.isCredit,
                               true,
                             )
                                 ? false
@@ -127,7 +124,7 @@ class _TransactionItemWidgetState extends State<TransactionItemWidget> {
                               Icons.remove_rounded,
                               color: valueOrDefault<Color>(
                                 valueOrDefault<bool>(
-                                  widget!.isCredit,
+                                  widget.isCredit,
                                   true,
                                 )
                                     ? FlutterFlowTheme.of(context).success
@@ -149,7 +146,7 @@ class _TransactionItemWidgetState extends State<TransactionItemWidget> {
                       children: [
                         Text(
                           valueOrDefault<String>(
-                            widget!.title,
+                            widget.title,
                             'Cashback Received',
                           ),
                           maxLines: 1,
@@ -174,7 +171,7 @@ class _TransactionItemWidgetState extends State<TransactionItemWidget> {
                         ),
                         Text(
                           valueOrDefault<String>(
-                            widget!.date,
+                            widget.date,
                             'Oct 24, 2023 • 11:20 AM',
                           ),
                           style: FlutterFlowTheme.of(context)
@@ -200,12 +197,12 @@ class _TransactionItemWidgetState extends State<TransactionItemWidget> {
                                 lineHeight: 1.2,
                               ),
                         ),
-                      ].divide(SizedBox(height: 4.0)),
+                      ].divide(const SizedBox(height: 4.0)),
                     ),
                   ),
                   Text(
                     valueOrDefault<String>(
-                      '{${widget!.isCredit.toString()} ? + : -} ₹${widget!.amount}',
+                      '{${widget.isCredit.toString()} ? + : -} ₹${widget.amount}',
                       '{true ? + : -} ₹50.00',
                     ),
                     style: FlutterFlowTheme.of(context).titleSmall.override(
@@ -217,7 +214,7 @@ class _TransactionItemWidgetState extends State<TransactionItemWidget> {
                           ),
                           color: valueOrDefault<Color>(
                             valueOrDefault<bool>(
-                              widget!.isCredit,
+                              widget.isCredit,
                               true,
                             )
                                 ? FlutterFlowTheme.of(context).success
@@ -231,7 +228,7 @@ class _TransactionItemWidgetState extends State<TransactionItemWidget> {
                           lineHeight: 1.4,
                         ),
                   ),
-                ].divide(SizedBox(width: 16.0)),
+                ].divide(const SizedBox(width: 16.0)),
               ),
             ),
           ),

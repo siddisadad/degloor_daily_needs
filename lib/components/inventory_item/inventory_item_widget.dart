@@ -2,12 +2,9 @@ import '/components/switch_component/switch_component_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'inventory_item_model.dart';
 export 'inventory_item_model.dart';
 
@@ -23,12 +20,12 @@ class InventoryItemWidget extends StatefulWidget {
     this.onToggle,
     this.onEdit,
     this.onDelete,
-  })  : this.available = available ?? false,
-        this.category = category ?? 'Grocery',
-        this.name = name ?? 'Product Name',
-        this.imageUrl = imageUrl ?? 'https://dimg.dreamflow.cloud/v1/image/placeholder',
-        this.price = price ?? '345',
-        this.stock = stock ?? '24';
+  })  : available = available ?? false,
+        category = category ?? 'Grocery',
+        name = name ?? 'Product Name',
+        imageUrl = imageUrl ?? 'https://dimg.dreamflow.cloud/v1/image/placeholder',
+        price = price ?? '345',
+        stock = stock ?? '24';
 
   final bool available;
   final String category;
@@ -79,14 +76,13 @@ class _InventoryItemWidgetState extends State<InventoryItemWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(24.0),
-        child: Container(
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ClipRRect(
+        padding: const EdgeInsets.all(24.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ClipRRect(
                 borderRadius: BorderRadius.circular(6.0),
                 child: Container(
                   width: 64.0,
@@ -97,14 +93,14 @@ class _InventoryItemWidgetState extends State<InventoryItemWidget> {
                     shape: BoxShape.rectangle,
                   ),
                   child: CachedNetworkImage(
-                    fadeInDuration: Duration(milliseconds: 0),
-                    fadeOutDuration: Duration(milliseconds: 0),
+                    fadeInDuration: const Duration(milliseconds: 0),
+                    fadeOutDuration: const Duration(milliseconds: 0),
                     imageUrl: valueOrDefault<String>(
-                      widget!.imageUrl,
+                      widget.imageUrl,
                       'https://dimg.dreamflow.cloud/v1/image/Sona%20Masoori%20Rice%20(5kg)',
                     ),
                     fit: BoxFit.cover,
-                    alignment: Alignment(0.0, 0.0),
+                    alignment: const Alignment(0.0, 0.0),
                   ),
                 ),
               ),
@@ -117,7 +113,7 @@ class _InventoryItemWidgetState extends State<InventoryItemWidget> {
                   children: [
                     Text(
                       valueOrDefault<String>(
-                        widget!.name,
+                        widget.name,
                         'Product Name',
                       ),
                       style: FlutterFlowTheme.of(context).titleMedium.override(
@@ -138,7 +134,7 @@ class _InventoryItemWidgetState extends State<InventoryItemWidget> {
                     ),
                     Text(
                       valueOrDefault<String>(
-                        widget!.category,
+                        widget.category,
                         'Grocery',
                       ),
                       style: FlutterFlowTheme.of(context).labelSmall.override(
@@ -168,7 +164,7 @@ class _InventoryItemWidgetState extends State<InventoryItemWidget> {
                       children: [
                         Text(
                           valueOrDefault<String>(
-                            '₹${widget!.price}',
+                            '₹${widget.price}',
                             '₹345',
                           ),
                           style:
@@ -190,7 +186,7 @@ class _InventoryItemWidgetState extends State<InventoryItemWidget> {
                         ),
                         Text(
                           valueOrDefault<String>(
-                            '${widget!.stock} units',
+                            '${widget.stock} units',
                             '24 units',
                           ),
                           style: FlutterFlowTheme.of(context)
@@ -216,9 +212,9 @@ class _InventoryItemWidgetState extends State<InventoryItemWidget> {
                                 lineHeight: 1.4,
                               ),
                         ),
-                      ].divide(SizedBox(width: 16.0)),
+                      ].divide(const SizedBox(width: 16.0)),
                     ),
-                  ].divide(SizedBox(height: 4.0)),
+                  ].divide(const SizedBox(height: 4.0)),
                 ),
               ),
               Column(
@@ -236,7 +232,7 @@ class _InventoryItemWidgetState extends State<InventoryItemWidget> {
                         labelPresent: true,
                         variant: 'iOS',
                         active: valueOrDefault<bool>(
-                          widget!.available,
+                          widget.available,
                           false,
                         ),
                       ),
@@ -271,12 +267,11 @@ class _InventoryItemWidgetState extends State<InventoryItemWidget> {
                         ),
                         onPressed: widget.onDelete,
                       ),
-                    ].divide(SizedBox(width: 4.0)),
+                    ].divide(const SizedBox(width: 4.0)),
                   ),
-                ].divide(SizedBox(height: 8.0)),
+                ].divide(const SizedBox(height: 8.0)),
               ),
-            ].divide(SizedBox(width: 16.0)),
-          ),
+            ].divide(const SizedBox(width: 16.0)),
         ),
       ),
     );

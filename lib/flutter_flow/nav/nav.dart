@@ -1,17 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '/main.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/lat_lng.dart';
-import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'serialization_util.dart';
 
 import '/index.dart';
 
@@ -88,22 +81,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         }
         return null;
       },
-      errorBuilder: (context, state) => MobileOTPLoginWidget(),
+      errorBuilder: (context, state) => const MobileOTPLoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => MobileOTPLoginWidget(),
+          builder: (context, _) => const MobileOTPLoginWidget(),
         ),
         FFRoute(
           name: MobileOTPLoginWidget.routeName,
           path: MobileOTPLoginWidget.routePath,
-          builder: (context, params) => MobileOTPLoginWidget(),
+          builder: (context, params) => const MobileOTPLoginWidget(),
         ),
         FFRoute(
           name: CustomerHomeFeedWidget.routeName,
           path: CustomerHomeFeedWidget.routePath,
-          builder: (context, params) => CustomerHomeFeedWidget(),
+          builder: (context, params) => const CustomerHomeFeedWidget(),
         ),
         FFRoute(
           name: StoreStorefrontWidget.routeName,
@@ -119,7 +112,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: CartCheckoutWidget.routeName,
           path: CartCheckoutWidget.routePath,
-          builder: (context, params) => CartCheckoutWidget(),
+          builder: (context, params) => const CartCheckoutWidget(),
         ),
         FFRoute(
           name: LiveOrderTrackingWidget.routeName,
@@ -131,37 +124,37 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: DeliveryPartnerDashboardWidget.routeName,
           path: DeliveryPartnerDashboardWidget.routePath,
-          builder: (context, params) => DeliveryPartnerDashboardWidget(),
+          builder: (context, params) => const DeliveryPartnerDashboardWidget(),
         ),
         FFRoute(
           name: StoreOwnerInventoryWidget.routeName,
           path: StoreOwnerInventoryWidget.routePath,
-          builder: (context, params) => StoreOwnerInventoryWidget(),
+          builder: (context, params) => const StoreOwnerInventoryWidget(),
         ),
         FFRoute(
           name: AdminAnalyticsPortalWidget.routeName,
           path: AdminAnalyticsPortalWidget.routePath,
-          builder: (context, params) => AdminAnalyticsPortalWidget(),
+          builder: (context, params) => const AdminAnalyticsPortalWidget(),
         ),
         FFRoute(
           name: UserWalletRewardsWidget.routeName,
           path: UserWalletRewardsWidget.routePath,
-          builder: (context, params) => UserWalletRewardsWidget(),
+          builder: (context, params) => const UserWalletRewardsWidget(),
         ),
         FFRoute(
           name: CustomerSupportChatWidget.routeName,
           path: CustomerSupportChatWidget.routePath,
-          builder: (context, params) => CustomerSupportChatWidget(),
+          builder: (context, params) => const CustomerSupportChatWidget(),
         ),
         FFRoute(
           name: OrderHistoryWidget.routeName,
           path: OrderHistoryWidget.routePath,
-          builder: (context, params) => OrderHistoryWidget(),
+          builder: (context, params) => const OrderHistoryWidget(),
         ),
         FFRoute(
           name: UserProfileWidget.routeName,
           path: UserProfileWidget.routePath,
-          builder: (context, params) => UserProfileWidget(),
+          builder: (context, params) => const UserProfileWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -327,7 +320,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

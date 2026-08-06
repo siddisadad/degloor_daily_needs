@@ -2,16 +2,10 @@ import '/components/button/button_widget.dart';
 import '/components/category_tab/category_tab_widget.dart';
 import '/components/product_card/product_card_widget.dart';
 import '/components/text_field/text_field_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'store_storefront_widget.dart' show StoreStorefrontWidget;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class StoreStorefrontModel extends FlutterFlowModel<StoreStorefrontWidget> {
   ///  State fields for stateful widgets in this page.

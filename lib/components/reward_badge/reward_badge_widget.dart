@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'reward_badge_model.dart';
 export 'reward_badge_model.dart';
 
@@ -14,8 +11,8 @@ class RewardBadgeWidget extends StatefulWidget {
     this.icon,
     String? label,
     String? value,
-  })  : this.label = label ?? 'Cashback Earned',
-        this.value = value ?? '₹450';
+  })  : label = label ?? 'Cashback Earned',
+        value = value ?? '₹450';
 
   final Widget? icon;
   final String label;
@@ -60,14 +57,14 @@ class _RewardBadgeWidgetState extends State<RewardBadgeWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(24.0),
         child: Container(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              widget!.icon!,
+              widget.icon!,
               Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -75,7 +72,7 @@ class _RewardBadgeWidgetState extends State<RewardBadgeWidget> {
                 children: [
                   Text(
                     valueOrDefault<String>(
-                      widget!.label,
+                      widget.label,
                       'Cashback Earned',
                     ),
                     style: FlutterFlowTheme.of(context).labelSmall.override(
@@ -99,7 +96,7 @@ class _RewardBadgeWidgetState extends State<RewardBadgeWidget> {
                   ),
                   Text(
                     valueOrDefault<String>(
-                      widget!.value,
+                      widget.value,
                       '₹450',
                     ),
                     style: FlutterFlowTheme.of(context).titleMedium.override(
@@ -118,9 +115,9 @@ class _RewardBadgeWidgetState extends State<RewardBadgeWidget> {
                           lineHeight: 1.4,
                         ),
                   ),
-                ].divide(SizedBox(height: 4.0)),
+                ].divide(const SizedBox(height: 4.0)),
               ),
-            ].divide(SizedBox(height: 8.0)),
+            ].divide(const SizedBox(height: 8.0)),
           ),
         ),
       ),

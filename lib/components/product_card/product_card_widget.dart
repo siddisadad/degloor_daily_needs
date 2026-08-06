@@ -3,9 +3,7 @@ import '../../models/product_model.dart';
 import '../../providers/cart_provider.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
-import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,12 +19,12 @@ class ProductCardWidget extends StatefulWidget {
     String? price,
     String? weight,
     bool? inStock,
-  })  : this.imageDesc = imageDesc ??
+  })  : imageDesc = imageDesc ??
             'https://dimg.dreamflow.cloud/v1/image/bag%20of%20long%20grain%20rice',
-        this.name = name ?? 'Premium Basmati Rice',
-        this.price = price ?? '₹110',
-        this.weight = weight ?? '1 kg',
-        this.inStock = inStock ?? false;
+        name = name ?? 'Premium Basmati Rice',
+        price = price ?? '₹110',
+        weight = weight ?? '1 kg',
+        inStock = inStock ?? false;
 
   final String imageDesc;
   final String name;
@@ -73,7 +71,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Container(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -90,14 +88,14 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                     shape: BoxShape.rectangle,
                   ),
                   child: CachedNetworkImage(
-                    fadeInDuration: Duration(milliseconds: 0),
-                    fadeOutDuration: Duration(milliseconds: 0),
+                    fadeInDuration: const Duration(milliseconds: 0),
+                    fadeOutDuration: const Duration(milliseconds: 0),
                     imageUrl: valueOrDefault<String>(
-                      widget!.imageDesc,
+                      widget.imageDesc,
                       'https://dimg.dreamflow.cloud/v1/image/bag%20of%20long%20grain%20rice',
                     ),
                     fit: BoxFit.cover,
-                    alignment: Alignment(0.0, 0.0),
+                    alignment: const Alignment(0.0, 0.0),
                   ),
                 ),
               ),
@@ -108,7 +106,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                 children: [
                   Text(
                     valueOrDefault<String>(
-                      widget!.name,
+                      widget.name,
                       'Premium Basmati Rice',
                     ),
                     maxLines: 1,
@@ -129,7 +127,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                   ),
                   Text(
                     valueOrDefault<String>(
-                      widget!.weight,
+                      widget.weight,
                       '1 kg',
                     ),
                     style: FlutterFlowTheme.of(context).labelSmall.override(
@@ -151,7 +149,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           lineHeight: 1.2,
                         ),
                   ),
-                ].divide(SizedBox(height: 4.0)),
+                ].divide(const SizedBox(height: 4.0)),
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
@@ -160,7 +158,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                 children: [
                   Text(
                     valueOrDefault<String>(
-                      widget!.price,
+                      widget.price,
                       '₹110',
                     ),
                     style: FlutterFlowTheme.of(context).titleSmall.override(
@@ -180,7 +178,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                   ),
                   Consumer<CartProvider>(
                     builder: (context, cart, child) {
-                      final cartItemIndex = cart.items.indexWhere((item) => item.product.id == widget!.name);
+                      final cartItemIndex = cart.items.indexWhere((item) => item.product.id == widget.name);
                       final isInCart = cartItemIndex >= 0;
                       final quantity = isInCart ? cart.items[cartItemIndex].quantity : 0;
 
@@ -197,10 +195,10 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                                 color: FlutterFlowTheme.of(context).primary,
                                 size: 16.0,
                               ),
-                              onPressed: () => cart.decrementItem(widget!.name),
+                              onPressed: () => cart.decrementItem(widget.name),
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 8.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
                               child: Text(
                                 '$quantity',
                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -220,11 +218,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                               ),
                               onPressed: () {
                                 final product = Product(
-                                  id: widget!.name,
-                                  name: widget!.name,
-                                  description: widget!.weight,
-                                  price: double.tryParse(widget!.price.replaceAll('₹', '').replaceAll(',', '')) ?? 0.0,
-                                  imageUrl: widget!.imageDesc,
+                                  id: widget.name,
+                                  name: widget.name,
+                                  description: widget.weight,
+                                  price: double.tryParse(widget.price.replaceAll('₹', '').replaceAll(',', '')) ?? 0.0,
+                                  imageUrl: widget.imageDesc,
                                   category: '',
                                 );
                                 cart.addItem(product);
@@ -236,19 +234,19 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
 
                       return InkWell(
                         onTap: valueOrDefault<bool>(
-                          widget!.inStock,
+                          widget.inStock,
                           false,
                         )
                             ? () {
                                 final product = Product(
-                                  id: widget!.name,
-                                  name: widget!.name,
-                                  description: widget!.weight,
-                                  price: double.tryParse(widget!.price
+                                  id: widget.name,
+                                  name: widget.name,
+                                  description: widget.weight,
+                                  price: double.tryParse(widget.price
                                           .replaceAll('₹', '')
                                           .replaceAll(',', '')) ??
                                       0.0,
-                                  imageUrl: widget!.imageDesc,
+                                  imageUrl: widget.imageDesc,
                                   category: '',
                                 );
                                 cart.addItem(product);
@@ -267,7 +265,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                             loading: false,
                             disabled: valueOrDefault<bool>(
                               valueOrDefault<bool>(
-                                widget!.inStock,
+                                widget.inStock,
                                 false,
                               )
                                   ? false
@@ -281,7 +279,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                   ),
                 ],
               ),
-            ].divide(SizedBox(height: 8.0)),
+            ].divide(const SizedBox(height: 8.0)),
           ),
         ),
       ),

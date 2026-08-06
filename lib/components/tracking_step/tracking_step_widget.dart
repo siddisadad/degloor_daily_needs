@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'tracking_step_model.dart';
 export 'tracking_step_model.dart';
 
@@ -15,10 +12,10 @@ class TrackingStepWidget extends StatefulWidget {
     String? time,
     bool? completed,
     bool? isLast,
-  })  : this.label = label ?? 'Order Confirmed',
-        this.time = time ?? '11:30 AM',
-        this.completed = completed ?? true,
-        this.isLast = isLast ?? false;
+  })  : label = label ?? 'Order Confirmed',
+        time = time ?? '11:30 AM',
+        completed = completed ?? true,
+        isLast = isLast ?? false;
 
   final String label;
   final String time;
@@ -69,7 +66,7 @@ class _TrackingStepWidgetState extends State<TrackingStepWidget> {
               decoration: BoxDecoration(
                 color: valueOrDefault<Color>(
                   valueOrDefault<bool>(
-                    widget!.completed,
+                    widget.completed,
                     true,
                   )
                       ? FlutterFlowTheme.of(context).success
@@ -81,7 +78,7 @@ class _TrackingStepWidgetState extends State<TrackingStepWidget> {
                 border: Border.all(
                   color: valueOrDefault<Color>(
                     valueOrDefault<bool>(
-                      widget!.completed,
+                      widget.completed,
                       true,
                     )
                         ? FlutterFlowTheme.of(context).success
@@ -90,7 +87,7 @@ class _TrackingStepWidgetState extends State<TrackingStepWidget> {
                   ),
                   width: valueOrDefault<double>(
                     valueOrDefault<bool>(
-                      widget!.completed,
+                      widget.completed,
                       true,
                     )
                         ? 2.0
@@ -102,7 +99,7 @@ class _TrackingStepWidgetState extends State<TrackingStepWidget> {
             ),
             if (valueOrDefault<bool>(
               valueOrDefault<bool>(
-                widget!.isLast,
+                widget.isLast,
                 false,
               )
                   ? false
@@ -115,7 +112,7 @@ class _TrackingStepWidgetState extends State<TrackingStepWidget> {
                 decoration: BoxDecoration(
                   color: valueOrDefault<Color>(
                     valueOrDefault<bool>(
-                      widget!.completed,
+                      widget.completed,
                       true,
                     )
                         ? FlutterFlowTheme.of(context).success
@@ -136,7 +133,7 @@ class _TrackingStepWidgetState extends State<TrackingStepWidget> {
             children: [
               Text(
                 valueOrDefault<String>(
-                  widget!.label,
+                  widget.label,
                   'Order Confirmed',
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -148,7 +145,7 @@ class _TrackingStepWidgetState extends State<TrackingStepWidget> {
                       ),
                       color: valueOrDefault<Color>(
                         valueOrDefault<bool>(
-                          widget!.completed,
+                          widget.completed,
                           true,
                         )
                             ? FlutterFlowTheme.of(context).primaryText
@@ -165,7 +162,7 @@ class _TrackingStepWidgetState extends State<TrackingStepWidget> {
               ),
               Text(
                 valueOrDefault<String>(
-                  widget!.time,
+                  widget.time,
                   '11:30 AM',
                 ),
                 style: FlutterFlowTheme.of(context).labelSmall.override(
@@ -184,10 +181,10 @@ class _TrackingStepWidgetState extends State<TrackingStepWidget> {
                       lineHeight: 1.2,
                     ),
               ),
-            ].divide(SizedBox(height: 4.0)),
+            ].divide(const SizedBox(height: 4.0)),
           ),
         ),
-      ].divide(SizedBox(width: 16.0)),
+      ].divide(const SizedBox(width: 16.0)),
     );
   }
 }

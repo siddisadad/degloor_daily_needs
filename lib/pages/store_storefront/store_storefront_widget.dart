@@ -6,8 +6,6 @@ import '/components/text_field/text_field_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -157,7 +155,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(24.0),
+                    padding: const EdgeInsets.all(24.0),
                     child: Container(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -173,7 +171,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                 borderRadius: 8.0,
                                 buttonSize: 40.0,
                                 fillColor: Colors.transparent,
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.arrow_back_rounded,
                                   size: 24.0,
                                 ),
@@ -258,9 +256,9 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                                 lineHeight: 1.4,
                                               ),
                                         ),
-                                      ].divide(SizedBox(width: 4.0)),
+                                      ].divide(const SizedBox(width: 4.0)),
                                     ),
-                                  ].divide(SizedBox(height: 4.0)),
+                                  ].divide(const SizedBox(height: 4.0)),
                                 ),
                               ),
                               Container(
@@ -270,7 +268,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                   shape: BoxShape.rectangle,
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       8.0, 4.0, 8.0, 4.0),
                                   child: Container(
                                     child: Row(
@@ -314,12 +312,12 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                                 lineHeight: 1.3,
                                               ),
                                         ),
-                                      ].divide(SizedBox(width: 4.0)),
+                                      ].divide(const SizedBox(width: 4.0)),
                                     ),
                                   ),
                                 ),
                               ),
-                            ].divide(SizedBox(width: 16.0)),
+                            ].divide(const SizedBox(width: 16.0)),
                           ),
                           wrapWithModel(
                             model: _model.textFieldModel,
@@ -392,7 +390,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                           lineHeight: 1.2,
                                         ),
                                   ),
-                                ].divide(SizedBox(width: 4.0)),
+                                ].divide(const SizedBox(width: 4.0)),
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -434,11 +432,11 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                           lineHeight: 1.2,
                                         ),
                                   ),
-                                ].divide(SizedBox(width: 4.0)),
+                                ].divide(const SizedBox(width: 4.0)),
                               ),
-                            ].divide(SizedBox(width: 16.0)),
+                            ].divide(const SizedBox(width: 16.0)),
                           ),
-                        ].divide(SizedBox(height: 16.0)),
+                        ].divide(const SizedBox(height: 16.0)),
                       ),
                     ),
                   ),
@@ -469,7 +467,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
                           child: Container(
                             child: Row(
@@ -492,7 +490,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                     _filterProducts();
                                   },
                                 );
-                              }).toList().divide(SizedBox(width: 24.0)),
+                              }).toList().divide(const SizedBox(width: 24.0)),
                             ),
                           ),
                         ),
@@ -520,7 +518,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(24.0),
+                        padding: const EdgeInsets.all(24.0),
                         child: Container(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -532,17 +530,17 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                   gradient: LinearGradient(
                                     colors: [
                                       FlutterFlowTheme.of(context).primary,
-                                      Color(0xFF3D5A35)
+                                      const Color(0xFF3D5A35)
                                     ],
-                                    stops: [0.0, 1.0],
-                                    begin: AlignmentDirectional(-1.0, 0.0),
-                                    end: AlignmentDirectional(1.0, 0),
+                                    stops: const [0.0, 1.0],
+                                    begin: const AlignmentDirectional(-1.0, 0.0),
+                                    end: const AlignmentDirectional(1.0, 0),
                                   ),
                                   borderRadius: BorderRadius.circular(12.0),
                                   shape: BoxShape.rectangle,
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.all(24.0),
+                                  padding: const EdgeInsets.all(24.0),
                                   child: Container(
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -626,7 +624,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                                       lineHeight: 1.4,
                                                     ),
                                               ),
-                                            ].divide(SizedBox(height: 4.0)),
+                                            ].divide(const SizedBox(height: 4.0)),
                                           ),
                                         ),
                                         Icon(
@@ -635,7 +633,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                               .onPrimary,
                                           size: 32.0,
                                         ),
-                                      ].divide(SizedBox(width: 16.0)),
+                                      ].divide(const SizedBox(width: 16.0)),
                                     ),
                                   ),
                                 ),
@@ -708,7 +706,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                   GridView(
                                     padding: EdgeInsets.zero,
                                     gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
                                       crossAxisSpacing: 16.0,
                                       mainAxisSpacing: 16.0,
@@ -727,9 +725,9 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                       );
                                     }).toList(),
                                   ),
-                                ].divide(SizedBox(height: 16.0)),
+                                ].divide(const SizedBox(height: 16.0)),
                               ),
-                            ].divide(SizedBox(height: 24.0)),
+                            ].divide(const SizedBox(height: 24.0)),
                           ),
                         ),
                       ),
@@ -739,13 +737,13 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, 1.0),
+              alignment: const AlignmentDirectional(0.0, 1.0),
               child: Consumer<CartProvider>(
                 builder: (context, cart, child) {
-                  if (cart.items.isEmpty) return SizedBox.shrink();
+                  if (cart.items.isEmpty) return const SizedBox.shrink();
                   return Container(
                     child: Padding(
-                      padding: EdgeInsets.all(24.0),
+                      padding: const EdgeInsets.all(24.0),
                       child: Container(
                         child: Container(
                           decoration: BoxDecoration(
@@ -754,7 +752,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                             shape: BoxShape.rectangle,
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 16.0, 24.0, 16.0),
                             child: Container(
                               child: Row(
@@ -844,7 +842,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                           ),
                                         ],
                                       ),
-                                    ].divide(SizedBox(width: 16.0)),
+                                    ].divide(const SizedBox(width: 16.0)),
                                   ),
                                   InkWell(
                                     splashColor: Colors.transparent,

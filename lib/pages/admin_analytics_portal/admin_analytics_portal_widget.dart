@@ -7,8 +7,6 @@ import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -73,7 +71,7 @@ class _AdminAnalyticsPortalWidgetState
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
+                        const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
                     child: Container(
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -125,7 +123,7 @@ class _AdminAnalyticsPortalWidgetState
                                       lineHeight: 1.3,
                                     ),
                               ),
-                            ].divide(SizedBox(height: 4.0)),
+                            ].divide(const SizedBox(height: 4.0)),
                           ),
                           Row(
                             mainAxisSize: MainAxisSize.max,
@@ -174,22 +172,23 @@ class _AdminAnalyticsPortalWidgetState
                                       final confirm = await showDialog<bool>(
                                         context: context,
                                         builder: (context) => AlertDialog(
-                                          title: Text('Logout'),
-                                          content: Text('Are you sure?'),
+                                          title: const Text('Logout'),
+                                          content: const Text('Are you sure?'),
                                           actions: [
                                             TextButton(
                                                 onPressed: () =>
                                                     Navigator.pop(context, false),
-                                                child: Text('Cancel')),
+                                                child: const Text('Cancel')),
                                             TextButton(
                                                 onPressed: () =>
                                                     Navigator.pop(context, true),
-                                                child: Text('Logout')),
+                                                child: const Text('Logout')),
                                           ],
                                         ),
                                       );
-                                      if (confirm == true)
+                                      if (confirm == true) {
                                         AppStateNotifier.instance.logout();
+                                      }
                                     },
                                   ),
                                   Container(
@@ -199,7 +198,7 @@ class _AdminAnalyticsPortalWidgetState
                                       color: FlutterFlowTheme.of(context).primary,
                                       shape: BoxShape.circle,
                                     ),
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Text(
                                   'AD',
                                   textAlign: TextAlign.center,
@@ -227,7 +226,7 @@ class _AdminAnalyticsPortalWidgetState
                                   overflow: TextOverflow.clip,
                                 ),
                               ),
-                            ].divide(SizedBox(width: 8.0)),
+                            ].divide(const SizedBox(width: 8.0)),
                           ),
                         ],
                       ),
@@ -253,7 +252,7 @@ class _AdminAnalyticsPortalWidgetState
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(24.0),
+                      padding: const EdgeInsets.all(24.0),
                       child: Container(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -303,7 +302,7 @@ class _AdminAnalyticsPortalWidgetState
                                     ),
                                   ),
                                 ),
-                              ].divide(SizedBox(width: 16.0)),
+                              ].divide(const SizedBox(width: 16.0)),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
@@ -348,7 +347,7 @@ class _AdminAnalyticsPortalWidgetState
                                     ),
                                   ),
                                 ),
-                              ].divide(SizedBox(width: 16.0)),
+                              ].divide(const SizedBox(width: 16.0)),
                             ),
                             Container(
                               decoration: BoxDecoration(
@@ -362,7 +361,7 @@ class _AdminAnalyticsPortalWidgetState
                                 ),
                               ),
                               child: Padding(
-                                padding: EdgeInsets.all(24.0),
+                                padding: const EdgeInsets.all(24.0),
                                 child: Container(
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
@@ -447,7 +446,7 @@ class _AdminAnalyticsPortalWidgetState
                                                       lineHeight: 1.2,
                                                     ),
                                               ),
-                                            ].divide(SizedBox(height: 4.0)),
+                                            ].divide(const SizedBox(height: 4.0)),
                                           ),
                                           wrapWithModel(
                                             model: _model.buttonModel1,
@@ -473,14 +472,14 @@ class _AdminAnalyticsPortalWidgetState
                                           ),
                                         ],
                                       ),
-                                      Container(
+                                      SizedBox(
                                         height: 200.0,
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 16.0, 0.0),
                                           child: Container(
-                                            child: Container(
+                                            child: SizedBox(
                                               height: 200.0,
                                               child: FlutterFlowLineChart(
                                                 data: [
@@ -493,7 +492,7 @@ class _AdminAnalyticsPortalWidgetState
                                                       4.0,
                                                       5.0,
                                                       6.0
-                                                    ])!,
+                                                    ]),
                                                     yData: ([
                                                       12000.0,
                                                       15000.0,
@@ -502,7 +501,7 @@ class _AdminAnalyticsPortalWidgetState
                                                       22000.0,
                                                       19000.0,
                                                       25000.0
-                                                    ])!,
+                                                    ]),
                                                     settings: LineChartBarData(
                                                       color:
                                                           FlutterFlowTheme.of(
@@ -521,18 +520,18 @@ class _AdminAnalyticsPortalWidgetState
                                                   )
                                                 ],
                                                 chartStylingInfo:
-                                                    ChartStylingInfo(
+                                                    const ChartStylingInfo(
                                                   backgroundColor:
                                                       Colors.transparent,
                                                   showBorder: false,
                                                 ),
-                                                axisBounds: AxisBounds(
+                                                axisBounds: const AxisBounds(
                                                   minX: 0.0,
                                                   minY: 0.0,
                                                   maxX: 6.0,
                                                   maxY: 30000.0,
                                                 ),
-                                                xLabels: ([
+                                                xLabels: (const [
                                                   'Mon',
                                                   'Tue',
                                                   'Wed',
@@ -540,7 +539,7 @@ class _AdminAnalyticsPortalWidgetState
                                                   'Fri',
                                                   'Sat',
                                                   'Sun'
-                                                ])!,
+                                                ]),
                                                 xAxisLabelInfo: AxisLabelInfo(
                                                   showLabels: true,
                                                   labelTextStyle:
@@ -580,7 +579,7 @@ class _AdminAnalyticsPortalWidgetState
                                                           ),
                                                   reservedSize: 28.0,
                                                 ),
-                                                yAxisLabelInfo: AxisLabelInfo(
+                                                yAxisLabelInfo: const AxisLabelInfo(
                                                   reservedSize: 0.0,
                                                 ),
                                               ),
@@ -588,7 +587,7 @@ class _AdminAnalyticsPortalWidgetState
                                           ),
                                         ),
                                       ),
-                                    ].divide(SizedBox(height: 16.0)),
+                                    ].divide(const SizedBox(height: 16.0)),
                                   ),
                                 ),
                               ),
@@ -643,7 +642,7 @@ class _AdminAnalyticsPortalWidgetState
                                           model: _model.zoneRowModel1,
                                           updateCallback: () =>
                                               safeSetState(() {}),
-                                          child: ZoneRowWidget(
+                                          child: const ZoneRowWidget(
                                             name: 'Degloor Main Market',
                                             orders: '420',
                                             status: 'High Demand',
@@ -653,7 +652,7 @@ class _AdminAnalyticsPortalWidgetState
                                           model: _model.zoneRowModel2,
                                           updateCallback: () =>
                                               safeSetState(() {}),
-                                          child: ZoneRowWidget(
+                                          child: const ZoneRowWidget(
                                             name: 'Ballur Area',
                                             orders: '185',
                                             status: 'Normal',
@@ -663,7 +662,7 @@ class _AdminAnalyticsPortalWidgetState
                                           model: _model.zoneRowModel3,
                                           updateCallback: () =>
                                               safeSetState(() {}),
-                                          child: ZoneRowWidget(
+                                          child: const ZoneRowWidget(
                                             name: 'Karadkhed Village',
                                             orders: '92',
                                             status: 'Growing',
@@ -673,7 +672,7 @@ class _AdminAnalyticsPortalWidgetState
                                           model: _model.zoneRowModel4,
                                           updateCallback: () =>
                                               safeSetState(() {}),
-                                          child: ZoneRowWidget(
+                                          child: const ZoneRowWidget(
                                             name: 'Shahapur Road',
                                             orders: '114',
                                             status: 'Normal',
@@ -683,7 +682,7 @@ class _AdminAnalyticsPortalWidgetState
                                     ),
                                   ),
                                 ),
-                              ].divide(SizedBox(height: 16.0)),
+                              ].divide(const SizedBox(height: 16.0)),
                             ),
                             Container(
                               decoration: BoxDecoration(
@@ -697,7 +696,7 @@ class _AdminAnalyticsPortalWidgetState
                                 ),
                               ),
                               child: Padding(
-                                padding: EdgeInsets.all(24.0),
+                                padding: const EdgeInsets.all(24.0),
                                 child: Container(
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
@@ -730,7 +729,7 @@ class _AdminAnalyticsPortalWidgetState
                                         model: _model.pieChartModel,
                                         updateCallback: () =>
                                             safeSetState(() {}),
-                                        child: PieChartWidget(
+                                        child: const PieChartWidget(
                                           centerValue: '',
                                           centerValuePresent: false,
                                           centerLabel: '',
@@ -750,14 +749,14 @@ class _AdminAnalyticsPortalWidgetState
                                           gap: 'normal',
                                         ),
                                       ),
-                                    ].divide(SizedBox(height: 16.0)),
+                                    ].divide(const SizedBox(height: 16.0)),
                                   ),
                                 ),
                               ),
                             ),
                             Container(
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     32.0, 0.0, 32.0, 0.0),
                                 child: Container(
                                   child: wrapWithModel(
@@ -783,7 +782,7 @@ class _AdminAnalyticsPortalWidgetState
                                 ),
                               ),
                             ),
-                          ].divide(SizedBox(height: 24.0)),
+                          ].divide(const SizedBox(height: 24.0)),
                         ),
                       ),
                     ),

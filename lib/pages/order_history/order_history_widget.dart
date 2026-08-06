@@ -53,7 +53,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                 fontSize: 22.0,
               ),
         ),
-        actions: [],
+        actions: const [],
         centerTitle: false,
         elevation: 0.5,
       ),
@@ -68,7 +68,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.shopping_bag_outlined, size: 64, color: FlutterFlowTheme.of(context).secondaryText),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         Text('No orders yet', style: FlutterFlowTheme.of(context).titleMedium),
                       ],
                     ),
@@ -76,7 +76,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                 }
 
                 return ListView.builder(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   itemCount: orderProvider.orders.length,
                   itemBuilder: (context, index) {
                     final order = orderProvider.orders[index];
@@ -91,7 +91,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
               model: BottomNavModel(),
               updateCallback: () => setState(() {}),
               child: BottomNavWidget(
-                child: () => BottomNavChildWidget(),
+                child: () => const BottomNavChildWidget(),
               ),
             ),
           ),
@@ -121,14 +121,14 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
         );
       },
       child: Container(
-        margin: EdgeInsets.only(bottom: 16),
+        margin: const EdgeInsets.only(bottom: 16),
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: FlutterFlowTheme.of(context).alternate),
         ),
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -142,9 +142,9 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                         ),
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: statusColor.withOpacity(0.1),
+                      color: statusColor.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text(
@@ -157,19 +157,19 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                   ),
                 ],
               ),
-              Divider(height: 24),
+              const Divider(height: 24),
               Text(
                 order.storeName,
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       font: GoogleFonts.inter(fontWeight: FontWeight.w600),
                     ),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 '${order.items.length} items • ₹${order.totalAmount.toStringAsFixed(0)}',
                 style: FlutterFlowTheme.of(context).labelSmall,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 dateTimeFormat('MMM d, hh:mm a', order.timestamp),
                 style: FlutterFlowTheme.of(context).labelSmall.override(

@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'support_bubble_model.dart';
 export 'support_bubble_model.dart';
 
@@ -14,10 +11,10 @@ class SupportBubbleWidget extends StatefulWidget {
     String? text,
     String? time,
     bool? isUser,
-  })  : this.text = text ??
+  })  : text = text ??
             'Hello! Welcome to Degloor Daily Needs. How can we help you today?',
-        this.time = time ?? '10:00 AM',
-        this.isUser = isUser ?? false;
+        time = time ?? '10:00 AM',
+        isUser = isUser ?? false;
 
   final String text;
   final String time;
@@ -64,7 +61,7 @@ class _SupportBubbleWidgetState extends State<SupportBubbleWidget> {
           decoration: BoxDecoration(
             color: valueOrDefault<Color>(
               valueOrDefault<bool>(
-                widget!.isUser,
+                widget.isUser,
                 false,
               )
                   ? FlutterFlowTheme.of(context).primary
@@ -72,8 +69,8 @@ class _SupportBubbleWidgetState extends State<SupportBubbleWidget> {
               FlutterFlowTheme.of(context).secondaryBackground,
             ),
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(12.0),
-              topRight: Radius.circular(12.0),
+              topLeft: const Radius.circular(12.0),
+              topRight: const Radius.circular(12.0),
               bottomLeft: Radius.circular(widget.isUser ? 12.0 : 0.0),
               bottomRight: Radius.circular(widget.isUser ? 0.0 : 12.0),
             ),
@@ -81,7 +78,7 @@ class _SupportBubbleWidgetState extends State<SupportBubbleWidget> {
             border: Border.all(
               color: valueOrDefault<Color>(
                 valueOrDefault<bool>(
-                  widget!.isUser,
+                  widget.isUser,
                   false,
                 )
                     ? FlutterFlowTheme.of(context).primary
@@ -90,7 +87,7 @@ class _SupportBubbleWidgetState extends State<SupportBubbleWidget> {
               ),
               width: valueOrDefault<double>(
                 valueOrDefault<bool>(
-                  widget!.isUser,
+                  widget.isUser,
                   false,
                 )
                     ? 1.0
@@ -100,7 +97,7 @@ class _SupportBubbleWidgetState extends State<SupportBubbleWidget> {
             ),
           ),
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Container(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -111,7 +108,7 @@ class _SupportBubbleWidgetState extends State<SupportBubbleWidget> {
                 children: [
                   Text(
                     valueOrDefault<String>(
-                      widget!.text,
+                      widget.text,
                       'Hello! Welcome to Degloor Daily Needs. How can we help you today?',
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -125,7 +122,7 @@ class _SupportBubbleWidgetState extends State<SupportBubbleWidget> {
                           ),
                           color: valueOrDefault<Color>(
                             valueOrDefault<bool>(
-                              widget!.isUser,
+                              widget.isUser,
                               false,
                             )
                                 ? FlutterFlowTheme.of(context).onPrimary
@@ -143,7 +140,7 @@ class _SupportBubbleWidgetState extends State<SupportBubbleWidget> {
                   ),
                   Text(
                     valueOrDefault<String>(
-                      widget!.time,
+                      widget.time,
                       '10:00 AM',
                     ),
                     style: FlutterFlowTheme.of(context).labelSmall.override(
@@ -157,7 +154,7 @@ class _SupportBubbleWidgetState extends State<SupportBubbleWidget> {
                           ),
                           color: valueOrDefault<Color>(
                             valueOrDefault<bool>(
-                              widget!.isUser,
+                              widget.isUser,
                               false,
                             )
                                 ? FlutterFlowTheme.of(context).onPrimary70
@@ -173,7 +170,7 @@ class _SupportBubbleWidgetState extends State<SupportBubbleWidget> {
                           lineHeight: 1.2,
                         ),
                   ),
-                ].divide(SizedBox(height: 4.0)),
+                ].divide(const SizedBox(height: 4.0)),
               ),
             ),
           ),

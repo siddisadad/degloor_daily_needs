@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'driver_metric_model.dart';
 export 'driver_metric_model.dart';
 
@@ -15,9 +12,9 @@ class DriverMetricWidget extends StatefulWidget {
     String? label,
     Color? tone,
     String? value,
-  })  : this.label = label ?? 'Orders',
-        this.tone = tone ?? const Color(0x00000000),
-        this.value = value ?? '12';
+  })  : label = label ?? 'Orders',
+        tone = tone ?? const Color(0x00000000),
+        value = value ?? '12';
 
   final Widget? icon;
   final String label;
@@ -63,24 +60,23 @@ class _DriverMetricWidgetState extends State<DriverMetricWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(24.0),
-        child: Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  widget!.icon!,
+                  widget.icon!,
                   Flexible(
                     flex: 1,
                     child: Text(
                       valueOrDefault<String>(
-                        widget!.value,
+                        widget.value,
                         '12',
                       ),
                       maxLines: 1,
@@ -106,7 +102,7 @@ class _DriverMetricWidgetState extends State<DriverMetricWidget> {
               ),
               Text(
                 valueOrDefault<String>(
-                  widget!.label,
+                  widget.label,
                   'Orders',
                 ),
                 style: FlutterFlowTheme.of(context).labelSmall.override(
@@ -125,8 +121,7 @@ class _DriverMetricWidgetState extends State<DriverMetricWidget> {
                       lineHeight: 1.2,
                     ),
               ),
-            ].divide(SizedBox(height: 4.0)),
-          ),
+            ].divide(const SizedBox(height: 4.0)),
         ),
       ),
     );

@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'faq_chip_model.dart';
 export 'faq_chip_model.dart';
 
@@ -14,7 +11,7 @@ class FaqChipWidget extends StatefulWidget {
     this.icon,
     String? label,
     this.onTap,
-  }) : this.label = label ?? 'Order Status';
+  }) : label = label ?? 'Order Status';
 
   final Widget? icon;
   final String label;
@@ -61,17 +58,16 @@ class _FaqChipWidgetState extends State<FaqChipWidget> {
           ),
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
-          child: Container(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                widget!.icon!,
-                Text(
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              widget.icon!,
+              Text(
                   valueOrDefault<String>(
-                    widget!.label,
+                    widget.label,
                     'Order Status',
                   ),
                   style: FlutterFlowTheme.of(context).labelLarge.override(
@@ -91,8 +87,7 @@ class _FaqChipWidgetState extends State<FaqChipWidget> {
                         lineHeight: 1.3,
                       ),
                 ),
-              ].divide(SizedBox(width: 8.0)),
-            ),
+              ].divide(const SizedBox(width: 8.0)),
           ),
         ),
       ),

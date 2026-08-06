@@ -1,11 +1,8 @@
 import '/components/button/button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'section_header_model.dart';
 export 'section_header_model.dart';
 
@@ -15,8 +12,8 @@ class SectionHeaderWidget extends StatefulWidget {
     String? actionLabel,
     String? title,
     this.onAction,
-  })  : this.actionLabel = actionLabel ?? 'Action Label',
-        this.title = title ?? 'Delivery Address';
+  })  : actionLabel = actionLabel ?? 'Action Label',
+        title = title ?? 'Delivery Address';
 
   final String actionLabel;
   final String title;
@@ -51,7 +48,7 @@ class _SectionHeaderWidgetState extends State<SectionHeaderWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -59,7 +56,7 @@ class _SectionHeaderWidgetState extends State<SectionHeaderWidget> {
         children: [
           Text(
             valueOrDefault<String>(
-              widget!.title,
+              widget.title,
               'Delivery Address',
             ),
             style: FlutterFlowTheme.of(context).titleMedium.override(
@@ -84,7 +81,7 @@ class _SectionHeaderWidgetState extends State<SectionHeaderWidget> {
                 iconPresent: false,
                 iconEndPresent: false,
                 content: valueOrDefault<String>(
-                  widget!.actionLabel,
+                  widget.actionLabel,
                   'Action Label',
                 ),
                 variant: 'ghost',

@@ -1,18 +1,12 @@
 import '/components/bottom_nav/bottom_nav_widget.dart';
-import '/components/bottom_nav_child2/bottom_nav_child2_widget.dart';
 import '/components/button/button_widget.dart';
 import '/components/driver_metric/driver_metric_widget.dart';
 import '/components/order_request/order_request_widget.dart';
 import '/components/switch_component/switch_component_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'delivery_partner_dashboard_widget.dart'
     show DeliveryPartnerDashboardWidget;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class DeliveryPartnerDashboardModel
     extends FlutterFlowModel<DeliveryPartnerDashboardWidget> {

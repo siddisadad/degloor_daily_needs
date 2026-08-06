@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'zone_row_model.dart';
 export 'zone_row_model.dart';
 
@@ -14,9 +11,9 @@ class ZoneRowWidget extends StatefulWidget {
     String? name,
     String? orders,
     String? status,
-  })  : this.name = name ?? 'Degloor Main Market',
-        this.orders = orders ?? '420',
-        this.status = status ?? 'High Demand';
+  })  : name = name ?? 'Degloor Main Market',
+        orders = orders ?? '420',
+        status = status ?? 'High Demand';
 
   final String name;
   final String orders;
@@ -51,7 +48,7 @@ class _ZoneRowWidgetState extends State<ZoneRowWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         shape: BoxShape.rectangle,
       ),
       child: Column(
@@ -59,7 +56,7 @@ class _ZoneRowWidgetState extends State<ZoneRowWidget> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Container(
               child: Row(
                 mainAxisSize: MainAxisSize.max,
@@ -75,7 +72,7 @@ class _ZoneRowWidgetState extends State<ZoneRowWidget> {
                       children: [
                         Text(
                           valueOrDefault<String>(
-                            widget!.name,
+                            widget.name,
                             'Degloor Main Market',
                           ),
                           style:
@@ -96,7 +93,7 @@ class _ZoneRowWidgetState extends State<ZoneRowWidget> {
                         ),
                         Text(
                           valueOrDefault<String>(
-                            '${widget!.orders} Orders Today',
+                            '${widget.orders} Orders Today',
                             '420 Orders Today',
                           ),
                           style: FlutterFlowTheme.of(context)
@@ -122,7 +119,7 @@ class _ZoneRowWidgetState extends State<ZoneRowWidget> {
                                 lineHeight: 1.2,
                               ),
                         ),
-                      ].divide(SizedBox(height: 4.0)),
+                      ].divide(const SizedBox(height: 4.0)),
                     ),
                   ),
                   Container(
@@ -133,11 +130,11 @@ class _ZoneRowWidgetState extends State<ZoneRowWidget> {
                     ),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
                       child: Container(
                         child: Text(
                           valueOrDefault<String>(
-                            widget!.status,
+                            widget.status,
                             'High Demand',
                           ),
                           style: FlutterFlowTheme.of(context)

@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'radio_model.dart';
 export 'radio_model.dart';
 
@@ -18,12 +15,12 @@ class RadioWidget extends StatefulWidget {
     bool? hasSubtitle,
     bool? disabled,
     this.onTap,
-  })  : this.label = label ?? 'PhonePe / Google Pay',
-        this.subtitle = subtitle ?? 'Pay securely via UPI',
-        this.color = color ?? const Color(0x00000000),
-        this.isSelected = isSelected ?? true,
-        this.hasSubtitle = hasSubtitle ?? true,
-        this.disabled = disabled ?? false;
+  })  : label = label ?? 'PhonePe / Google Pay',
+        subtitle = subtitle ?? 'Pay securely via UPI',
+        color = color ?? const Color(0x00000000),
+        isSelected = isSelected ?? true,
+        hasSubtitle = hasSubtitle ?? true,
+        disabled = disabled ?? false;
 
   final String label;
   final String subtitle;
@@ -66,7 +63,7 @@ class _RadioWidgetState extends State<RadioWidget> {
       child: Opacity(
         opacity: valueOrDefault<double>(
           valueOrDefault<bool>(
-            widget!.disabled,
+            widget.disabled,
             false,
           )
               ? 0.55
@@ -76,7 +73,7 @@ class _RadioWidgetState extends State<RadioWidget> {
         child: Container(
           child: Container(
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
               child: Container(
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
@@ -86,27 +83,27 @@ class _RadioWidgetState extends State<RadioWidget> {
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(
                           0.0,
-                          valueOrDefault<bool>(widget!.hasSubtitle, true) ? 3.0 : 0.0,
+                          valueOrDefault<bool>(widget.hasSubtitle, true) ? 3.0 : 0.0,
                           0.0,
                           0.0),
                       child: Container(
                         width: 20.0,
                         height: 20.0,
                         decoration: BoxDecoration(
-                          color: valueOrDefault<bool>(widget!.isSelected, true)
+                          color: valueOrDefault<bool>(widget.isSelected, true)
                               ? FlutterFlowTheme.of(context).primary
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(999.0),
                           border: Border.all(
-                            color: valueOrDefault<bool>(widget!.isSelected, true)
+                            color: valueOrDefault<bool>(widget.isSelected, true)
                                 ? Colors.transparent
                                 : FlutterFlowTheme.of(context).alternate,
                             width: 1.0,
                           ),
                         ),
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Visibility(
-                          visible: valueOrDefault<bool>(widget!.isSelected, true),
+                          visible: valueOrDefault<bool>(widget.isSelected, true),
                           child: Container(
                             width: 8.0,
                             height: 8.0,
@@ -127,7 +124,7 @@ class _RadioWidgetState extends State<RadioWidget> {
                         children: [
                           Text(
                             valueOrDefault<String>(
-                              widget!.label,
+                              widget.label,
                               'PhonePe / Google Pay',
                             ),
                             maxLines: 1,
@@ -154,10 +151,10 @@ class _RadioWidgetState extends State<RadioWidget> {
                                 ),
                             overflow: TextOverflow.ellipsis,
                           ),
-                          if (valueOrDefault<bool>(widget!.hasSubtitle, true))
+                          if (valueOrDefault<bool>(widget.hasSubtitle, true))
                             Text(
                               valueOrDefault<String>(
-                                widget!.subtitle,
+                                widget.subtitle,
                                 'Pay securely via UPI',
                               ),
                               maxLines: 3,

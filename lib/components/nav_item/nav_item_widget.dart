@@ -1,8 +1,6 @@
 import '../../providers/cart_provider.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -17,9 +15,9 @@ class NavItemWidget extends StatefulWidget {
     String? target,
     bool? selected,
     this.onTap,
-  })  : this.label = label ?? 'Home',
-        this.target = target ?? 'CustomerHomeFeed',
-        this.selected = selected ?? true;
+  })  : label = label ?? 'Home',
+        target = target ?? 'CustomerHomeFeed',
+        selected = selected ?? true;
 
   final String label;
   final Widget? icon;
@@ -58,7 +56,7 @@ class _NavItemWidgetState extends State<NavItemWidget> {
     return InkWell(
       onTap: widget.onTap,
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(8.0, 4.0, 8.0, 4.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(8.0, 4.0, 8.0, 4.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -67,21 +65,21 @@ class _NavItemWidgetState extends State<NavItemWidget> {
             Stack(
               clipBehavior: Clip.none,
               children: [
-                widget!.icon!,
+                widget.icon!,
                 if (widget.label == 'Cart')
                   Positioned(
                     top: -5,
                     right: -5,
                     child: Consumer<CartProvider>(
                       builder: (context, cart, child) {
-                        if (cart.itemCount == 0) return SizedBox.shrink();
+                        if (cart.itemCount == 0) return const SizedBox.shrink();
                         return Container(
-                          padding: EdgeInsets.all(4),
+                          padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).error,
                             shape: BoxShape.circle,
                           ),
-                          constraints: BoxConstraints(
+                          constraints: const BoxConstraints(
                             minWidth: 16,
                             minHeight: 16,
                           ),
@@ -102,7 +100,7 @@ class _NavItemWidgetState extends State<NavItemWidget> {
             ),
             Text(
               valueOrDefault<String>(
-                widget!.label,
+                widget.label,
                 'Home',
               ),
               style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -114,7 +112,7 @@ class _NavItemWidgetState extends State<NavItemWidget> {
                     ),
                     color: valueOrDefault<Color>(
                       valueOrDefault<bool>(
-                        widget!.selected,
+                        widget.selected,
                         true,
                       )
                           ? FlutterFlowTheme.of(context).primary
@@ -128,7 +126,7 @@ class _NavItemWidgetState extends State<NavItemWidget> {
                     lineHeight: 1.5,
                   ),
             ),
-          ].divide(SizedBox(height: 2.0)),
+          ].divide(const SizedBox(height: 2.0)),
         ),
       ),
     );

@@ -3,12 +3,8 @@ import '/components/login_header/login_header_widget.dart';
 import '/components/text_field/text_field_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'mobile_o_t_p_login_model.dart';
 export 'mobile_o_t_p_login_model.dart';
 
@@ -25,7 +21,6 @@ class MobileOTPLoginWidget extends StatefulWidget {
 class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
   late MobileOTPLoginModel _model;
   bool _showOTP = false;
-  final TextEditingController _otpController = TextEditingController();
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -53,7 +48,7 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: Padding(
-          padding: EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(24.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -65,7 +60,7 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
               wrapWithModel(
                 model: _model.loginHeaderModel,
                 updateCallback: () => safeSetState(() {}),
-                child: LoginHeaderWidget(
+                child: const LoginHeaderWidget(
                   subtitle:
                       'Enter your mobile number to get started with fast delivery in Degloor.',
                   title: 'Welcome to DDNDS',
@@ -88,7 +83,7 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
                         ),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(16.0),
                         child: Container(
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -132,14 +127,14 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
                                       shape: BoxShape.rectangle,
                                     ),
                                   ),
-                                ].divide(SizedBox(width: 4.0)),
+                                ].divide(const SizedBox(width: 4.0)),
                               ),
                               Expanded(
                                 flex: 1,
                                 child: wrapWithModel(
                                   model: _model.textFieldModel,
                                   updateCallback: () => safeSetState(() {}),
-                                  child: TextFieldWidget(
+                                  child: const TextFieldWidget(
                                     label: 'Mobile Number',
                                     labelPresent: true,
                                     helper:
@@ -161,7 +156,7 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
                         ),
                       ),
                     ),
-                  ].divide(SizedBox(height: 24.0)),
+                  ].divide(const SizedBox(height: 24.0)),
                 ),
               if (_showOTP)
                 Column(
@@ -172,7 +167,7 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
                       style: FlutterFlowTheme.of(context).bodyMedium,
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 24.0),
+                      padding: const EdgeInsets.symmetric(vertical: 24.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: List.generate(
@@ -278,7 +273,7 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
                           color: FlutterFlowTheme.of(context).alternate,
                         ),
                       ),
-                    ].divide(SizedBox(width: 16.0)),
+                    ].divide(const SizedBox(width: 16.0)),
                   ),
                   wrapWithModel(
                     model: _model.buttonModel2,
@@ -299,9 +294,9 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
                       disabled: false,
                     ),
                   ),
-                ].divide(SizedBox(height: 16.0)),
+                ].divide(const SizedBox(height: 16.0)),
               ),
-              Spacer(),
+              const Spacer(),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -401,15 +396,15 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
                               lineHeight: 1.2,
                             ),
                       ),
-                    ].divide(SizedBox(width: 4.0)),
+                    ].divide(const SizedBox(width: 4.0)),
                   ),
-                ].divide(SizedBox(height: 4.0)),
+                ].divide(const SizedBox(height: 4.0)),
               ),
               Container(
                 height: 20.0,
               ),
               Container(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).accent1,
                   borderRadius: BorderRadius.circular(8),
@@ -423,7 +418,7 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
                             color: Colors.white,
                           ),
                     ),
-                    SizedBox(height: 12),
+                    const SizedBox(height: 12),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -435,7 +430,7 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
                   ],
                 ),
               ),
-            ].divide(SizedBox(height: 32.0)),
+            ].divide(const SizedBox(height: 32.0)),
           ),
         ),
       ),
@@ -448,7 +443,7 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
       child: Column(
         children: [
           Icon(icon, color: Colors.white, size: 24),
-          Text(role, style: TextStyle(color: Colors.white, fontSize: 10)),
+          Text(role, style: const TextStyle(color: Colors.white, fontSize: 10)),
         ],
       ),
     );

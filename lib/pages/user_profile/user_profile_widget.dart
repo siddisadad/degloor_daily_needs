@@ -1,11 +1,9 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/providers/address_provider.dart';
-import '/flutter_flow/nav/nav.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'user_profile_model.dart';
 export 'user_profile_model.dart';
 
 class UserProfileWidget extends StatefulWidget {
@@ -19,13 +17,11 @@ class UserProfileWidget extends StatefulWidget {
 }
 
 class _UserProfileWidgetState extends State<UserProfileWidget> {
-  late UserProfileModel _model;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => UserProfileModel());
   }
 
   @override
@@ -59,22 +55,22 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
               Container(
                 width: double.infinity,
                 color: FlutterFlowTheme.of(context).secondaryBackground,
-                padding: EdgeInsets.all(24),
+                padding: const EdgeInsets.all(24),
                 child: Column(
                   children: [
                     CircleAvatar(
                       radius: 50,
                       backgroundColor: FlutterFlowTheme.of(context).primary,
-                      child: Text('R', style: TextStyle(fontSize: 40, color: Colors.white, fontWeight: FontWeight.bold)),
+                      child: const Text('R', style: TextStyle(fontSize: 40, color: Colors.white, fontWeight: FontWeight.bold)),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text('Rajesh Kumar', style: FlutterFlowTheme.of(context).titleLarge),
                     Text('+91 98765 43210', style: FlutterFlowTheme.of(context).bodySmall),
                   ],
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -83,12 +79,12 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                     _buildMenuItem(Icons.account_balance_wallet_outlined, 'Wallet & Rewards', onTap: () => context.pushNamed('UserWalletRewards')),
                     _buildMenuItem(Icons.location_on_outlined, 'Saved Addresses', subtitle: '${addressProvider.addresses.length} Addresses'),
 
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
                     _buildSectionHeader('Support & Feedback'),
                     _buildMenuItem(Icons.chat_bubble_outline_rounded, 'Help Center', onTap: () => context.pushNamed('CustomerSupportChat')),
                     _buildMenuItem(Icons.info_outline, 'About Degloor Daily Needs'),
 
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
                     _buildMenuItem(
                       Icons.logout_rounded,
                       'Logout',
@@ -97,11 +93,11 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                         final confirm = await showDialog<bool>(
                           context: context,
                           builder: (context) => AlertDialog(
-                            title: Text('Logout'),
-                            content: Text('Are you sure you want to logout?'),
+                            title: const Text('Logout'),
+                            content: const Text('Are you sure you want to logout?'),
                             actions: [
-                              TextButton(onPressed: () => Navigator.pop(context, false), child: Text('Cancel')),
-                              TextButton(onPressed: () => Navigator.pop(context, true), child: Text('Logout')),
+                              TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
+                              TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('Logout')),
                             ],
                           ),
                         );
@@ -120,7 +116,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
 
   Widget _buildSectionHeader(String title) {
     return Padding(
-      padding: EdgeInsets.only(left: 12, bottom: 8),
+      padding: const EdgeInsets.only(left: 12, bottom: 8),
       child: Text(
         title.toUpperCase(),
         style: FlutterFlowTheme.of(context).labelSmall.override(
@@ -134,7 +130,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
   Widget _buildMenuItem(IconData icon, String title, {String? subtitle, VoidCallback? onTap, Color? textColor}) {
     return Card(
       elevation: 0,
-      margin: EdgeInsets.symmetric(vertical: 4),
+      margin: const EdgeInsets.symmetric(vertical: 4),
       color: FlutterFlowTheme.of(context).secondaryBackground,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
@@ -142,7 +138,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
         leading: Icon(icon, color: textColor ?? FlutterFlowTheme.of(context).primary),
         title: Text(title, style: TextStyle(color: textColor, fontWeight: FontWeight.w500)),
         subtitle: subtitle != null ? Text(subtitle) : null,
-        trailing: Icon(Icons.chevron_right, size: 20),
+        trailing: const Icon(Icons.chevron_right, size: 20),
       ),
     );
   }

@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'switch_component_model.dart';
 export 'switch_component_model.dart';
 
@@ -15,10 +12,10 @@ class SwitchComponentWidget extends StatefulWidget {
     bool? labelPresent,
     String? variant,
     bool? active,
-  })  : this.label = label ?? 'Online',
-        this.labelPresent = labelPresent ?? true,
-        this.variant = variant ?? 'iOS',
-        this.active = active ?? true;
+  })  : label = label ?? 'Online',
+        labelPresent = labelPresent ?? true,
+        variant = variant ?? 'iOS',
+        active = active ?? true;
 
   final String label;
   final bool labelPresent;
@@ -45,7 +42,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
 
     _model.switchValue = valueOrDefault<bool>(
       valueOrDefault<bool>(
-        widget!.active,
+        widget.active,
         true,
       )
           ? true
@@ -64,7 +61,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -73,13 +70,13 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
           if (valueOrDefault<bool>(
             () {
               if (valueOrDefault<String>(
-                    widget!.variant,
+                    widget.variant,
                     'iOS',
                   ) ==
                   'iOS') {
                 return true;
               } else if (valueOrDefault<String>(
-                    widget!.variant,
+                    widget.variant,
                     'iOS',
                   ) ==
                   'iOS 26+') {
@@ -93,7 +90,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
             Switch.adaptive(
               value: _model.switchValue!,
               onChanged: (newValue) async {
-                safeSetState(() => _model.switchValue = newValue!);
+                safeSetState(() => _model.switchValue = newValue);
               },
               activeTrackColor: FlutterFlowTheme.of(context).primary,
               inactiveTrackColor: FlutterFlowTheme.of(context).alternate,
@@ -103,13 +100,13 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
           if (valueOrDefault<bool>(
             () {
               if (valueOrDefault<String>(
-                    widget!.variant,
+                    widget.variant,
                     'iOS',
                   ) ==
                   'iOS') {
                 return false;
               } else if (valueOrDefault<String>(
-                    widget!.variant,
+                    widget.variant,
                     'iOS',
                   ) ==
                   'iOS 26+') {
@@ -123,7 +120,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
             Container(
               width: valueOrDefault<double>(
                 valueOrDefault<String>(
-                          widget!.variant,
+                          widget.variant,
                           'iOS',
                         ) ==
                         'iOS 26+'
@@ -133,7 +130,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
               ),
               height: valueOrDefault<double>(
                 valueOrDefault<String>(
-                          widget!.variant,
+                          widget.variant,
                           'iOS',
                         ) ==
                         'iOS 26+'
@@ -144,7 +141,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
               decoration: BoxDecoration(
                 color: valueOrDefault<Color>(
                   valueOrDefault<bool>(
-                    widget!.active,
+                    widget.active,
                     true,
                   )
                       ? FlutterFlowTheme.of(context).primary
@@ -154,7 +151,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(valueOrDefault<double>(
                     valueOrDefault<String>(
-                              widget!.variant,
+                              widget.variant,
                               'iOS',
                             ) ==
                             'iOS 26+'
@@ -164,7 +161,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
                   )),
                   topRight: Radius.circular(valueOrDefault<double>(
                     valueOrDefault<String>(
-                              widget!.variant,
+                              widget.variant,
                               'iOS',
                             ) ==
                             'iOS 26+'
@@ -174,7 +171,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
                   )),
                   bottomLeft: Radius.circular(valueOrDefault<double>(
                     valueOrDefault<String>(
-                              widget!.variant,
+                              widget.variant,
                               'iOS',
                             ) ==
                             'iOS 26+'
@@ -184,7 +181,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
                   )),
                   bottomRight: Radius.circular(valueOrDefault<double>(
                     valueOrDefault<String>(
-                              widget!.variant,
+                              widget.variant,
                               'iOS',
                             ) ==
                             'iOS 26+'
@@ -199,7 +196,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(
                     valueOrDefault<double>(
                       valueOrDefault<String>(
-                                widget!.variant,
+                                widget.variant,
                                 'iOS',
                               ) ==
                               'iOS 26+'
@@ -209,7 +206,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
                     ),
                     valueOrDefault<double>(
                       valueOrDefault<String>(
-                                widget!.variant,
+                                widget.variant,
                                 'iOS',
                               ) ==
                               'iOS 26+'
@@ -219,7 +216,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
                     ),
                     valueOrDefault<double>(
                       valueOrDefault<String>(
-                                widget!.variant,
+                                widget.variant,
                                 'iOS',
                               ) ==
                               'iOS 26+'
@@ -229,7 +226,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
                     ),
                     valueOrDefault<double>(
                       valueOrDefault<String>(
-                                widget!.variant,
+                                widget.variant,
                                 'iOS',
                               ) ==
                               'iOS 26+'
@@ -241,7 +238,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
                   child: Container(
                     width: valueOrDefault<double>(
                       valueOrDefault<String>(
-                                widget!.variant,
+                                widget.variant,
                                 'iOS',
                               ) ==
                               'iOS 26+'
@@ -251,7 +248,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
                     ),
                     height: valueOrDefault<double>(
                       valueOrDefault<String>(
-                                widget!.variant,
+                                widget.variant,
                                 'iOS',
                               ) ==
                               'iOS 26+'
@@ -263,12 +260,12 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
                       color: valueOrDefault<Color>(
                         () {
                           if (valueOrDefault<bool>(
-                            widget!.active,
+                            widget.active,
                             true,
                           )) {
                             return FlutterFlowTheme.of(context).onPrimary;
                           } else if (valueOrDefault<String>(
-                                widget!.variant,
+                                widget.variant,
                                 'iOS',
                               ) ==
                               'iOS 26+') {
@@ -284,7 +281,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(valueOrDefault<double>(
                           valueOrDefault<String>(
-                                    widget!.variant,
+                                    widget.variant,
                                     'iOS',
                                   ) ==
                                   'iOS 26+'
@@ -294,7 +291,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
                         )),
                         topRight: Radius.circular(valueOrDefault<double>(
                           valueOrDefault<String>(
-                                    widget!.variant,
+                                    widget.variant,
                                     'iOS',
                                   ) ==
                                   'iOS 26+'
@@ -304,7 +301,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
                         )),
                         bottomLeft: Radius.circular(valueOrDefault<double>(
                           valueOrDefault<String>(
-                                    widget!.variant,
+                                    widget.variant,
                                     'iOS',
                                   ) ==
                                   'iOS 26+'
@@ -314,7 +311,7 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
                         )),
                         bottomRight: Radius.circular(valueOrDefault<double>(
                           valueOrDefault<String>(
-                                    widget!.variant,
+                                    widget.variant,
                                     'iOS',
                                   ) ==
                                   'iOS 26+'
@@ -330,15 +327,15 @@ class _SwitchComponentWidgetState extends State<SwitchComponentWidget> {
               ),
             ),
           if (valueOrDefault<bool>(
-            widget!.labelPresent,
+            widget.labelPresent,
             true,
           ))
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
               child: Container(
                 child: Text(
                   valueOrDefault<String>(
-                    widget!.label,
+                    widget.label,
                     'Online',
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(

@@ -9,9 +9,7 @@ import '/components/order_request/order_request_widget.dart';
 import '/components/switch_component/switch_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -75,7 +73,7 @@ class _DeliveryPartnerDashboardWidgetState
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(24.0),
+                    padding: const EdgeInsets.all(24.0),
                     child: Container(
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -131,7 +129,7 @@ class _DeliveryPartnerDashboardWidgetState
                                       lineHeight: 1.4,
                                     ),
                               ),
-                            ].divide(SizedBox(height: 4.0)),
+                            ].divide(const SizedBox(height: 4.0)),
                           ),
                           Row(
                             children: [
@@ -161,22 +159,22 @@ class _DeliveryPartnerDashboardWidgetState
                                   final confirm = await showDialog<bool>(
                                     context: context,
                                     builder: (context) => AlertDialog(
-                                      title: Text('Logout'),
-                                      content: Text('Are you sure?'),
+                                      title: const Text('Logout'),
+                                      content: const Text('Are you sure?'),
                                       actions: [
                                         TextButton(
                                             onPressed: () => Navigator.pop(context, false),
-                                            child: Text('Cancel')),
+                                            child: const Text('Cancel')),
                                         TextButton(
                                             onPressed: () => Navigator.pop(context, true),
-                                            child: Text('Logout')),
+                                            child: const Text('Logout')),
                                       ],
                                     ),
                                   );
                                   if (confirm == true) AppStateNotifier.instance.logout();
                                 },
                               ),
-                            ].divide(SizedBox(width: 8)),
+                            ].divide(const SizedBox(width: 8)),
                           ),
                         ],
                       ),
@@ -202,7 +200,7 @@ class _DeliveryPartnerDashboardWidgetState
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(24.0),
+                      padding: const EdgeInsets.all(24.0),
                       child: Container(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -214,17 +212,17 @@ class _DeliveryPartnerDashboardWidgetState
                                 gradient: LinearGradient(
                                   colors: [
                                     FlutterFlowTheme.of(context).primary,
-                                    Color(0xFF5A7A50)
+                                    const Color(0xFF5A7A50)
                                   ],
-                                  stops: [0.0, 1.0],
-                                  begin: AlignmentDirectional(0.0, -1.0),
-                                  end: AlignmentDirectional(0, 1.0),
+                                  stops: const [0.0, 1.0],
+                                  begin: const AlignmentDirectional(0.0, -1.0),
+                                  end: const AlignmentDirectional(0, 1.0),
                                 ),
                                 borderRadius: BorderRadius.circular(12.0),
                                 shape: BoxShape.rectangle,
                               ),
                               child: Padding(
-                                padding: EdgeInsets.all(24.0),
+                                padding: const EdgeInsets.all(24.0),
                                 child: Container(
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
@@ -300,7 +298,7 @@ class _DeliveryPartnerDashboardWidgetState
                                             model: _model.buttonModel,
                                             updateCallback: () =>
                                                 safeSetState(() {}),
-                                            child: ButtonWidget(
+                                            child: const ButtonWidget(
                                               iconPresent: false,
                                               iconEndPresent: false,
                                               content: 'Withdraw',
@@ -313,7 +311,7 @@ class _DeliveryPartnerDashboardWidgetState
                                           ),
                                         ],
                                       ),
-                                    ].divide(SizedBox(height: 8.0)),
+                                    ].divide(const SizedBox(height: 8.0)),
                                   ),
                                 ),
                               ),
@@ -380,7 +378,7 @@ class _DeliveryPartnerDashboardWidgetState
                                     ),
                                   ),
                                 ),
-                              ].divide(SizedBox(width: 16.0)),
+                              ].divide(const SizedBox(width: 16.0)),
                             ),
                             Column(
                               mainAxisSize: MainAxisSize.min,
@@ -448,8 +446,8 @@ class _DeliveryPartnerDashboardWidgetState
                                 if (delivery.currentDelivery != null)
                                   Container(
                                     width: double.infinity,
-                                    margin: EdgeInsets.symmetric(vertical: 8),
-                                    padding: EdgeInsets.all(16),
+                                    margin: const EdgeInsets.symmetric(vertical: 8),
+                                    padding: const EdgeInsets.all(16),
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context).primary10,
                                       borderRadius: BorderRadius.circular(12),
@@ -459,8 +457,8 @@ class _DeliveryPartnerDashboardWidgetState
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text('Ongoing Delivery: ${delivery.currentDelivery!.id}', style: FlutterFlowTheme.of(context).bodyMedium.override(font: GoogleFonts.inter(), fontWeight: FontWeight.bold)),
-                                        Text('${delivery.currentDelivery!.store}', style: FlutterFlowTheme.of(context).labelSmall),
-                                        SizedBox(height: 12),
+                                        Text(delivery.currentDelivery!.store, style: FlutterFlowTheme.of(context).labelSmall),
+                                        const SizedBox(height: 12),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
@@ -471,10 +469,10 @@ class _DeliveryPartnerDashboardWidgetState
                                                   Provider.of<OrderProvider>(context, listen: false).updateOrderStatus(delivery.currentDelivery!.id, OrderStatus.pickedUp);
                                                   showSnackbar(context, 'Order Picked Up');
                                                 },
-                                                child: Text('Picked Up', style: TextStyle(color: Colors.white)),
+                                                child: const Text('Picked Up', style: TextStyle(color: Colors.white)),
                                               ),
                                             ),
-                                            SizedBox(width: 8),
+                                            const SizedBox(width: 8),
                                             Expanded(
                                               child: ElevatedButton(
                                                 style: ElevatedButton.styleFrom(backgroundColor: FlutterFlowTheme.of(context).success),
@@ -483,7 +481,7 @@ class _DeliveryPartnerDashboardWidgetState
                                                   delivery.rejectOrder(delivery.currentDelivery!.id); // Use reject to clear it from current
                                                   showSnackbar(context, 'Order Delivered');
                                                 },
-                                                child: Text('Delivered', style: TextStyle(color: Colors.white)),
+                                                child: const Text('Delivered', style: TextStyle(color: Colors.white)),
                                               ),
                                             ),
                                           ],
@@ -508,7 +506,7 @@ class _DeliveryPartnerDashboardWidgetState
                                         showSnackbar(context, 'Order rejected.');
                                       },
                                     )),
-                              ].divide(SizedBox(height: 16.0)),
+                              ].divide(const SizedBox(height: 16.0)),
                             ),
                             Column(
                               mainAxisSize: MainAxisSize.min,
@@ -548,7 +546,7 @@ class _DeliveryPartnerDashboardWidgetState
                                     ),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.all(16.0),
+                                    padding: const EdgeInsets.all(16.0),
                                     child: Container(
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -569,7 +567,7 @@ class _DeliveryPartnerDashboardWidgetState
                                               shape: BoxShape.rectangle,
                                             ),
                                             alignment:
-                                                AlignmentDirectional(0.0, 0.0),
+                                                const AlignmentDirectional(0.0, 0.0),
                                             child: Icon(
                                               Icons.check_circle_rounded,
                                               color:
@@ -649,7 +647,7 @@ class _DeliveryPartnerDashboardWidgetState
                                                         lineHeight: 1.2,
                                                       ),
                                                 ),
-                                              ].divide(SizedBox(height: 4.0)),
+                                              ].divide(const SizedBox(height: 4.0)),
                                             ),
                                           ),
                                           Text(
@@ -678,7 +676,7 @@ class _DeliveryPartnerDashboardWidgetState
                                                   lineHeight: 1.5,
                                                 ),
                                           ),
-                                        ].divide(SizedBox(width: 16.0)),
+                                        ].divide(const SizedBox(width: 16.0)),
                                       ),
                                     ),
                                   ),
@@ -696,7 +694,7 @@ class _DeliveryPartnerDashboardWidgetState
                                     ),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.all(16.0),
+                                    padding: const EdgeInsets.all(16.0),
                                     child: Container(
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -717,7 +715,7 @@ class _DeliveryPartnerDashboardWidgetState
                                               shape: BoxShape.rectangle,
                                             ),
                                             alignment:
-                                                AlignmentDirectional(0.0, 0.0),
+                                                const AlignmentDirectional(0.0, 0.0),
                                             child: Icon(
                                               Icons.check_circle_rounded,
                                               color:
@@ -797,7 +795,7 @@ class _DeliveryPartnerDashboardWidgetState
                                                         lineHeight: 1.2,
                                                       ),
                                                 ),
-                                              ].divide(SizedBox(height: 4.0)),
+                                              ].divide(const SizedBox(height: 4.0)),
                                             ),
                                           ),
                                           Text(
@@ -826,14 +824,14 @@ class _DeliveryPartnerDashboardWidgetState
                                                   lineHeight: 1.5,
                                                 ),
                                           ),
-                                        ].divide(SizedBox(width: 16.0)),
+                                        ].divide(const SizedBox(width: 16.0)),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ].divide(SizedBox(height: 16.0)),
+                              ].divide(const SizedBox(height: 16.0)),
                             ),
-                          ].divide(SizedBox(height: 24.0)),
+                          ].divide(const SizedBox(height: 24.0)),
                         ),
                       ),
                     ),
@@ -842,13 +840,13 @@ class _DeliveryPartnerDashboardWidgetState
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, 1.0),
+              alignment: const AlignmentDirectional(0.0, 1.0),
               child: Container(
                 child: wrapWithModel(
                   model: _model.bottomNavModel,
                   updateCallback: () => safeSetState(() {}),
                   child: BottomNavWidget(
-                    child: () => BottomNavChild2Widget(),
+                    child: () => const BottomNavChild2Widget(),
                   ),
                 ),
               ),

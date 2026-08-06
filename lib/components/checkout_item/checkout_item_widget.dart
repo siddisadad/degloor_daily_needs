@@ -1,12 +1,9 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'checkout_item_model.dart';
 export 'checkout_item_model.dart';
 
@@ -19,11 +16,11 @@ class CheckoutItemWidget extends StatefulWidget {
     String? qty,
     this.onIncrement,
     this.onDecrement,
-  })  : this.imageDesc = imageDesc ??
+  })  : imageDesc = imageDesc ??
             'https://dimg.dreamflow.cloud/v1/image/fresh%20mangoes%20in%20a%20basket',
-        this.name = name ?? 'Fresh Alphonso Mangoes',
-        this.price = price ?? '₹450',
-        this.qty = qty ?? '1 kg';
+        name = name ?? 'Fresh Alphonso Mangoes',
+        price = price ?? '₹450',
+        qty = qty ?? '1 kg';
 
   final String imageDesc;
   final String name;
@@ -61,7 +58,7 @@ class _CheckoutItemWidgetState extends State<CheckoutItemWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         shape: BoxShape.rectangle,
       ),
       child: Column(
@@ -69,14 +66,13 @@ class _CheckoutItemWidgetState extends State<CheckoutItemWidget> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Container(
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  ClipRRect(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
                     child: Container(
                       width: 64.0,
@@ -87,14 +83,14 @@ class _CheckoutItemWidgetState extends State<CheckoutItemWidget> {
                         shape: BoxShape.rectangle,
                       ),
                       child: CachedNetworkImage(
-                        fadeInDuration: Duration(milliseconds: 0),
-                        fadeOutDuration: Duration(milliseconds: 0),
+                        fadeInDuration: const Duration(milliseconds: 0),
+                        fadeOutDuration: const Duration(milliseconds: 0),
                         imageUrl: valueOrDefault<String>(
-                          widget!.imageDesc,
+                          widget.imageDesc,
                           'https://dimg.dreamflow.cloud/v1/image/fresh%20mangoes%20in%20a%20basket',
                         ),
                         fit: BoxFit.cover,
-                        alignment: Alignment(0.0, 0.0),
+                        alignment: const Alignment(0.0, 0.0),
                       ),
                     ),
                   ),
@@ -107,7 +103,7 @@ class _CheckoutItemWidgetState extends State<CheckoutItemWidget> {
                       children: [
                         Text(
                           valueOrDefault<String>(
-                            widget!.name,
+                            widget.name,
                             'Fresh Alphonso Mangoes',
                           ),
                           style: FlutterFlowTheme.of(context)
@@ -130,7 +126,7 @@ class _CheckoutItemWidgetState extends State<CheckoutItemWidget> {
                         ),
                         Text(
                           valueOrDefault<String>(
-                            'Unit Price: ${widget!.price}',
+                            'Unit Price: ${widget.price}',
                             'Unit Price: ₹450',
                           ),
                           style: FlutterFlowTheme.of(context)
@@ -156,7 +152,7 @@ class _CheckoutItemWidgetState extends State<CheckoutItemWidget> {
                                 lineHeight: 1.4,
                               ),
                         ),
-                      ].divide(SizedBox(height: 4.0)),
+                      ].divide(const SizedBox(height: 4.0)),
                     ),
                   ),
                   Column(
@@ -179,10 +175,10 @@ class _CheckoutItemWidgetState extends State<CheckoutItemWidget> {
                             onPressed: widget.onDecrement,
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Text(
                               valueOrDefault<String>(
-                                widget!.qty,
+                                widget.qty,
                                 '1',
                               ).replaceAll('x', ''),
                               style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -206,7 +202,7 @@ class _CheckoutItemWidgetState extends State<CheckoutItemWidget> {
                       ),
                       Text(
                         valueOrDefault<String>(
-                          widget!.price,
+                          widget.price,
                           '₹450',
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -229,13 +225,12 @@ class _CheckoutItemWidgetState extends State<CheckoutItemWidget> {
                               lineHeight: 1.5,
                             ),
                       ),
-                    ].divide(SizedBox(height: 4.0)),
+                    ].divide(const SizedBox(height: 4.0)),
                   ),
-                ].divide(SizedBox(width: 16.0)),
+                ].divide(const SizedBox(width: 16.0)),
               ),
             ),
-          ),
-          Container(
+            Container(
             height: 1.0,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).alternate,

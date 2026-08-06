@@ -9,7 +9,6 @@ import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
@@ -39,10 +38,10 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
   late LiveOrderTrackingModel _model;
   Timer? _timer;
   double _progress = 0.0;
-  LatLng _currentPosition = LatLng(18.4140, 77.5860);
+  LatLng _currentPosition = const LatLng(18.4140, 77.5860);
 
-  final LatLng _storePos = LatLng(18.4140, 77.5860);
-  final LatLng _customerPos = LatLng(18.4100, 77.5820);
+  final LatLng _storePos = const LatLng(18.4140, 77.5860);
+  final LatLng _customerPos = const LatLng(18.4100, 77.5820);
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -51,7 +50,7 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
     super.initState();
     _model = createModel(context, () => LiveOrderTrackingModel());
 
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       final orderProvider = Provider.of<OrderProvider>(context, listen: false);
       final trackingOrder = widget.orderId != null
           ? orderProvider.orders.firstWhereOrNull((o) => o.id == widget.orderId)
@@ -95,14 +94,14 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
         resizeToAvoidBottomInset: false,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: Stack(
-          alignment: AlignmentDirectional(-1.0, -1.0),
+          alignment: const AlignmentDirectional(-1.0, -1.0),
           children: [
             Container(
               child: FlutterFlowGoogleMap(
                 controller: _model.mapGoogleMapsController,
                 onCameraIdle: (latLng) => _model.mapGoogleMapsCenter = latLng,
                 initialLocation: _model.mapGoogleMapsCenter ??=
-                    LatLng(18.4116, 77.5842),
+                    const LatLng(18.4116, 77.5842),
                 markers: [
                   FlutterFlowMarker('delivery_boy', _currentPosition),
                   FlutterFlowMarker('store', _storePos),
@@ -124,9 +123,9 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(24.0),
+              padding: const EdgeInsets.all(24.0),
               child: Container(
-                alignment: AlignmentDirectional(0.0, -1.0),
+                alignment: const AlignmentDirectional(0.0, -1.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
                   child: BackdropFilter(
@@ -145,7 +144,7 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
                         ),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(24.0),
+                        padding: const EdgeInsets.all(24.0),
                         child: Container(
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -255,9 +254,9 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(24.0),
+              padding: const EdgeInsets.all(24.0),
               child: Container(
-                alignment: AlignmentDirectional(0.0, 1.0),
+                alignment: const AlignmentDirectional(0.0, 1.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
                   child: Container(
@@ -284,7 +283,7 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
                               ),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(24.0),
+                              padding: const EdgeInsets.all(24.0),
                               child: Container(
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
@@ -307,7 +306,7 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
                                             shape: BoxShape.circle,
                                           ),
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             'RK',
                                             textAlign: TextAlign.center,
@@ -425,9 +424,9 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
                                                           lineHeight: 1.2,
                                                         ),
                                                   ),
-                                                ].divide(SizedBox(width: 4.0)),
+                                                ].divide(const SizedBox(width: 4.0)),
                                               ),
-                                            ].divide(SizedBox(height: 4.0)),
+                                            ].divide(const SizedBox(height: 4.0)),
                                           ),
                                         ),
                                         Row(
@@ -473,9 +472,9 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
                                                         .routeName);
                                               },
                                             ),
-                                          ].divide(SizedBox(width: 8.0)),
+                                          ].divide(const SizedBox(width: 8.0)),
                                         ),
-                                      ].divide(SizedBox(width: 16.0)),
+                                      ].divide(const SizedBox(width: 16.0)),
                                     ),
                                     Divider(
                                       height: 16.0,
@@ -516,9 +515,9 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
                                           completed: trackingOrder != null && trackingOrder.status.index >= OrderStatus.delivered.index,
                                           isLast: true,
                                         ),
-                                      ].divide(SizedBox(height: 0.0)),
+                                      ].divide(const SizedBox(height: 0.0)),
                                     ),
-                                  ].divide(SizedBox(height: 24.0)),
+                                  ].divide(const SizedBox(height: 24.0)),
                                 ),
                               ),
                             ),
@@ -526,7 +525,7 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
                           wrapWithModel(
                             model: _model.buttonModel,
                             updateCallback: () => safeSetState(() {}),
-                            child: ButtonWidget(
+                            child: const ButtonWidget(
                               iconPresent: false,
                               iconEndPresent: false,
                               content: 'Cancel Order',
@@ -537,7 +536,7 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
                               disabled: false,
                             ),
                           ),
-                        ].divide(SizedBox(height: 16.0)),
+                        ].divide(const SizedBox(height: 16.0)),
                       ),
                     ),
                   ),
@@ -545,13 +544,13 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, 1.0),
+              alignment: const AlignmentDirectional(0.0, 1.0),
               child: Container(
                 child: wrapWithModel(
                   model: _model.bottomNavModel,
                   updateCallback: () => safeSetState(() {}),
                   child: BottomNavWidget(
-                    child: () => BottomNavChildWidget(),
+                    child: () => const BottomNavChildWidget(),
                   ),
                 ),
               ),

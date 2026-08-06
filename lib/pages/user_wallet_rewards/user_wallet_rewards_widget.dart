@@ -7,8 +7,6 @@ import '/components/transaction_item/transaction_item_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -74,7 +72,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
+                        const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
                     child: Container(
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -113,7 +111,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                   lineHeight: 1.3,
                                 ),
                           ),
-                        ].divide(SizedBox(width: 16.0)),
+                        ].divide(const SizedBox(width: 16.0)),
                       ),
                     ),
                   ),
@@ -138,7 +136,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(24.0),
+                        padding: const EdgeInsets.all(24.0),
                         child: Container(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -152,15 +150,15 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                       FlutterFlowTheme.of(context).primary,
                                       FlutterFlowTheme.of(context).secondary
                                     ],
-                                    stops: [0.0, 1.0],
-                                    begin: AlignmentDirectional(0.0, -1.0),
-                                    end: AlignmentDirectional(0, 1.0),
+                                    stops: const [0.0, 1.0],
+                                    begin: const AlignmentDirectional(0.0, -1.0),
+                                    end: const AlignmentDirectional(0, 1.0),
                                   ),
                                   borderRadius: BorderRadius.circular(12.0),
                                   shape: BoxShape.rectangle,
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.all(32.0),
+                                  padding: const EdgeInsets.all(32.0),
                                   child: Container(
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
@@ -237,7 +235,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     24.0, 4.0, 24.0, 4.0),
                                             child: Container(
                                               child: Text(
@@ -279,7 +277,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                             ),
                                           ),
                                         ),
-                                      ].divide(SizedBox(height: 16.0)),
+                                      ].divide(const SizedBox(height: 16.0)),
                                     ),
                                   ),
                                 ),
@@ -315,7 +313,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                       value: '${userProvider.referralPoints}',
                                     ),
                                   ),
-                                ].divide(SizedBox(width: 16.0)),
+                                ].divide(const SizedBox(width: 16.0)),
                               ),
                               Container(
                                 decoration: BoxDecoration(
@@ -330,7 +328,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                   ),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.all(24.0),
+                                  padding: const EdgeInsets.all(24.0),
                                   child: Container(
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
@@ -408,7 +406,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                             ),
                                           ),
                                           child: Padding(
-                                            padding: EdgeInsets.all(16.0),
+                                            padding: const EdgeInsets.all(16.0),
                                             child: Container(
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
@@ -450,7 +448,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                                   ),
                                                   InkWell(
                                                     onTap: () {
-                                                      Clipboard.setData(ClipboardData(text: 'DDNDS50'));
+                                                      Clipboard.setData(const ClipboardData(text: 'DDNDS50'));
                                                       showSnackbar(context, 'Referral code copied to clipboard!');
                                                     },
                                                     child: Text(
@@ -517,7 +515,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                             ),
                                           ),
                                         ),
-                                      ].divide(SizedBox(height: 16.0)),
+                                      ].divide(const SizedBox(height: 16.0)),
                                     ),
                                   ),
                                 ),
@@ -613,7 +611,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                             model: _model.transactionItemModel1,
                                             updateCallback: () =>
                                                 safeSetState(() {}),
-                                            child: TransactionItemWidget(
+                                            child: const TransactionItemWidget(
                                               amount: '50.00',
                                               date: 'Oct 24, 2023 • 11:20 AM',
                                               title: 'Cashback Received',
@@ -624,7 +622,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                             model: _model.transactionItemModel2,
                                             updateCallback: () =>
                                                 safeSetState(() {}),
-                                            child: TransactionItemWidget(
+                                            child: const TransactionItemWidget(
                                               amount: '420.00',
                                               date: 'Oct 22, 2023 • 08:45 PM',
                                               title: 'Order #8821 Payment',
@@ -635,7 +633,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                             model: _model.transactionItemModel3,
                                             updateCallback: () =>
                                                 safeSetState(() {}),
-                                            child: TransactionItemWidget(
+                                            child: const TransactionItemWidget(
                                               amount: '150.00',
                                               date: 'Oct 20, 2023 • 02:15 PM',
                                               title: 'Refund for Order #8710',
@@ -646,7 +644,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                             model: _model.transactionItemModel4,
                                             updateCallback: () =>
                                                 safeSetState(() {}),
-                                            child: TransactionItemWidget(
+                                            child: const TransactionItemWidget(
                                               amount: '100.00',
                                               date: 'Oct 18, 2023 • 09:00 AM',
                                               title: 'Referral Bonus - Amit G.',
@@ -657,7 +655,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                             model: _model.transactionItemModel5,
                                             updateCallback: () =>
                                                 safeSetState(() {}),
-                                            child: TransactionItemWidget(
+                                            child: const TransactionItemWidget(
                                               amount: '850.00',
                                               date: 'Oct 15, 2023 • 07:30 PM',
                                               title: 'Order #8655 Payment',
@@ -668,9 +666,9 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                       ),
                                     ),
                                   ),
-                                ].divide(SizedBox(height: 16.0)),
+                                ].divide(const SizedBox(height: 16.0)),
                               ),
-                            ].divide(SizedBox(height: 24.0)),
+                            ].divide(const SizedBox(height: 24.0)),
                           ),
                         ),
                       ),
@@ -680,13 +678,13 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, 1.0),
+              alignment: const AlignmentDirectional(0.0, 1.0),
               child: Container(
                 child: wrapWithModel(
                   model: _model.bottomNavModel,
                   updateCallback: () => safeSetState(() {}),
                   child: BottomNavWidget(
-                    child: () => BottomNavChildWidget(),
+                    child: () => const BottomNavChildWidget(),
                   ),
                 ),
               ),

@@ -1,18 +1,11 @@
 import '/components/bottom_nav/bottom_nav_widget.dart';
-import '/components/bottom_nav_child/bottom_nav_child_widget.dart';
 import '/components/button/button_widget.dart';
 import '/components/category_item/category_item_widget.dart';
 import '/components/store_card/store_card_widget.dart';
 import '/components/text_field/text_field_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'customer_home_feed_widget.dart' show CustomerHomeFeedWidget;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class CustomerHomeFeedModel extends FlutterFlowModel<CustomerHomeFeedWidget> {
   ///  State fields for stateful widgets in this page.

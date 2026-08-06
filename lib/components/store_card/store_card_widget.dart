@@ -1,11 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'store_card_model.dart';
 export 'store_card_model.dart';
 
@@ -18,12 +15,12 @@ class StoreCardWidget extends StatefulWidget {
     String? rating,
     String? time,
     this.onTap,
-  })  : this.category = category ?? 'Grocery • Fruits • Vegetables',
-        this.imageDesc = imageDesc ??
+  })  : category = category ?? 'Grocery • Fruits • Vegetables',
+        imageDesc = imageDesc ??
             'https://dimg.dreamflow.cloud/v1/image/modern%20grocery%20store%20interior',
-        this.name = name ?? 'Degloor Fresh Mart',
-        this.rating = rating ?? '4.8',
-        this.time = time ?? '20-30 min';
+        name = name ?? 'Degloor Fresh Mart',
+        rating = rating ?? '4.8',
+        time = time ?? '20-30 min';
 
   final String category;
   final String imageDesc;
@@ -79,21 +76,21 @@ class _StoreCardWidgetState extends State<StoreCardWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Container(
+              SizedBox(
                 height: 140.0,
                 child: CachedNetworkImage(
-                  fadeInDuration: Duration(milliseconds: 0),
-                  fadeOutDuration: Duration(milliseconds: 0),
+                  fadeInDuration: const Duration(milliseconds: 0),
+                  fadeOutDuration: const Duration(milliseconds: 0),
                   imageUrl: valueOrDefault<String>(
-                    widget!.imageDesc,
+                    widget.imageDesc,
                     'https://dimg.dreamflow.cloud/v1/image/modern%20grocery%20store%20interior',
                   ),
                   fit: BoxFit.cover,
-                  alignment: Alignment(0.0, 0.0),
+                  alignment: const Alignment(0.0, 0.0),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -108,7 +105,7 @@ class _StoreCardWidgetState extends State<StoreCardWidget> {
                           flex: 1,
                           child: Text(
                             valueOrDefault<String>(
-                              widget!.name,
+                              widget.name,
                               'Degloor Fresh Mart',
                             ),
                             maxLines: 1,
@@ -139,7 +136,7 @@ class _StoreCardWidgetState extends State<StoreCardWidget> {
                             shape: BoxShape.rectangle,
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 8.0, 4.0, 8.0, 4.0),
                             child: Container(
                               child: Row(
@@ -154,7 +151,7 @@ class _StoreCardWidgetState extends State<StoreCardWidget> {
                                   ),
                                   Text(
                                     valueOrDefault<String>(
-                                      widget!.rating,
+                                      widget.rating,
                                       '4.8',
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -177,7 +174,7 @@ class _StoreCardWidgetState extends State<StoreCardWidget> {
                                           lineHeight: 1.2,
                                         ),
                                   ),
-                                ].divide(SizedBox(width: 4.0)),
+                                ].divide(const SizedBox(width: 4.0)),
                               ),
                             ),
                           ),
@@ -186,7 +183,7 @@ class _StoreCardWidgetState extends State<StoreCardWidget> {
                     ),
                     Text(
                       valueOrDefault<String>(
-                        widget!.category,
+                        widget.category,
                         'Grocery • Fruits • Vegetables',
                       ),
                       style: FlutterFlowTheme.of(context).bodySmall.override(
@@ -219,7 +216,7 @@ class _StoreCardWidgetState extends State<StoreCardWidget> {
                         ),
                         Text(
                           valueOrDefault<String>(
-                            widget!.time,
+                            widget.time,
                             '20-30 min',
                           ),
                           style: FlutterFlowTheme.of(context).labelSmall.override(
@@ -242,9 +239,9 @@ class _StoreCardWidgetState extends State<StoreCardWidget> {
                                 lineHeight: 1.2,
                               ),
                         ),
-                      ].divide(SizedBox(width: 8.0)),
+                      ].divide(const SizedBox(width: 8.0)),
                     ),
-                  ].divide(SizedBox(height: 4.0)),
+                  ].divide(const SizedBox(height: 4.0)),
                 ),
               ),
             ],

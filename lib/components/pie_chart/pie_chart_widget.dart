@@ -2,11 +2,8 @@ import '/components/chart_legend/chart_legend_widget.dart';
 import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'pie_chart_model.dart';
 export 'pie_chart_model.dart';
 
@@ -28,21 +25,21 @@ class PieChartWidget extends StatefulWidget {
     String? legendValue,
     String? ring,
     String? gap,
-  })  : this.centerValue = centerValue ?? '',
-        this.centerValuePresent = centerValuePresent ?? false,
-        this.centerLabel = centerLabel ?? '',
-        this.centerLabelPresent = centerLabelPresent ?? false,
-        this.data = data ?? '45,25,15,10,5',
-        this.labels = labels ?? 'Grocery,Restaurant,Pharmacy,Bakery,Other',
-        this.colors = colors ?? 'primary,success,warning,accent,divider',
-        this.animate = animate ?? false,
-        this.startAngle = startAngle ?? -90.0,
-        this.variant = variant ?? 'donut',
-        this.size = size ?? 'medium',
-        this.legend = legend ?? 'right',
-        this.legendValue = legendValue ?? 'percent',
-        this.ring = ring ?? 'thick',
-        this.gap = gap ?? 'normal';
+  })  : centerValue = centerValue ?? '',
+        centerValuePresent = centerValuePresent ?? false,
+        centerLabel = centerLabel ?? '',
+        centerLabelPresent = centerLabelPresent ?? false,
+        data = data ?? '45,25,15,10,5',
+        labels = labels ?? 'Grocery,Restaurant,Pharmacy,Bakery,Other',
+        colors = colors ?? 'primary,success,warning,accent,divider',
+        animate = animate ?? false,
+        startAngle = startAngle ?? -90.0,
+        variant = variant ?? 'donut',
+        size = size ?? 'medium',
+        legend = legend ?? 'right',
+        legendValue = legendValue ?? 'percent',
+        ring = ring ?? 'thick',
+        gap = gap ?? 'normal';
 
   final String centerValue;
   final bool centerValuePresent;
@@ -112,11 +109,11 @@ class _PieChartWidgetState extends State<PieChartWidget> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Stack(
-                  alignment: AlignmentDirectional(0.0, 0.0),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   children: [
                     if (valueOrDefault<bool>(
                       valueOrDefault<String>(
-                                widget!.variant,
+                                widget.variant,
                                 'donut',
                               ) ==
                               'pie'
@@ -124,23 +121,23 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                           : true,
                       true,
                     ))
-                      Container(
+                      SizedBox(
                         width: valueOrDefault<double>(
                           () {
                             if (valueOrDefault<String>(
-                                  widget!.size,
+                                  widget.size,
                                   'medium',
                                 ) ==
                                 'compact') {
                               return 120.0;
                             } else if (valueOrDefault<String>(
-                                  widget!.size,
+                                  widget.size,
                                   'medium',
                                 ) ==
                                 'large') {
                               return 200.0;
                             } else if (valueOrDefault<String>(
-                                  widget!.size,
+                                  widget.size,
                                   'medium',
                                 ) ==
                                 'expanded') {
@@ -154,19 +151,19 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                         height: valueOrDefault<double>(
                           () {
                             if (valueOrDefault<String>(
-                                  widget!.size,
+                                  widget.size,
                                   'medium',
                                 ) ==
                                 'compact') {
                               return 120.0;
                             } else if (valueOrDefault<String>(
-                                  widget!.size,
+                                  widget.size,
                                   'medium',
                                 ) ==
                                 'large') {
                               return 200.0;
                             } else if (valueOrDefault<String>(
-                                  widget!.size,
+                                  widget.size,
                                   'medium',
                                 ) ==
                                 'expanded') {
@@ -186,9 +183,9 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                                       double.tryParse(value.trim()) ?? 0)
                                   .toList();
                             }(valueOrDefault<String>(
-                              widget!.data,
+                              widget.data,
                               '45,25,15,10,5',
-                            )))!,
+                            ))),
                             colors: pieChartPieChartColorsList1,
                             radius: [50.0],
                           ),
@@ -214,19 +211,19 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                           sectionsSpace: valueOrDefault<double>(
                             () {
                               if (valueOrDefault<String>(
-                                    widget!.gap,
+                                    widget.gap,
                                     'normal',
                                   ) ==
                                   'none') {
                                 return 0.0;
                               } else if (valueOrDefault<String>(
-                                    widget!.gap,
+                                    widget.gap,
                                     'normal',
                                   ) ==
                                   'tight') {
                                 return 2.0;
                               } else if (valueOrDefault<String>(
-                                    widget!.gap,
+                                    widget.gap,
                                     'normal',
                                   ) ==
                                   'wide') {
@@ -238,7 +235,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                             4.0,
                           ),
                           startDegreeOffset: valueOrDefault<double>(
-                            widget!.startAngle,
+                            widget.startAngle,
                             -90.0,
                           ),
                           labelPositionOffset: 0.6,
@@ -246,7 +243,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                       ),
                     if (valueOrDefault<bool>(
                       valueOrDefault<String>(
-                                widget!.variant,
+                                widget.variant,
                                 'donut',
                               ) ==
                               'pie'
@@ -254,23 +251,23 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                           : false,
                       false,
                     ))
-                      Container(
+                      SizedBox(
                         width: valueOrDefault<double>(
                           () {
                             if (valueOrDefault<String>(
-                                  widget!.size,
+                                  widget.size,
                                   'medium',
                                 ) ==
                                 'compact') {
                               return 120.0;
                             } else if (valueOrDefault<String>(
-                                  widget!.size,
+                                  widget.size,
                                   'medium',
                                 ) ==
                                 'large') {
                               return 200.0;
                             } else if (valueOrDefault<String>(
-                                  widget!.size,
+                                  widget.size,
                                   'medium',
                                 ) ==
                                 'expanded') {
@@ -284,19 +281,19 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                         height: valueOrDefault<double>(
                           () {
                             if (valueOrDefault<String>(
-                                  widget!.size,
+                                  widget.size,
                                   'medium',
                                 ) ==
                                 'compact') {
                               return 120.0;
                             } else if (valueOrDefault<String>(
-                                  widget!.size,
+                                  widget.size,
                                   'medium',
                                 ) ==
                                 'large') {
                               return 200.0;
                             } else if (valueOrDefault<String>(
-                                  widget!.size,
+                                  widget.size,
                                   'medium',
                                 ) ==
                                 'expanded') {
@@ -316,9 +313,9 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                                       double.tryParse(value.trim()) ?? 0)
                                   .toList();
                             }(valueOrDefault<String>(
-                              widget!.data,
+                              widget.data,
                               '45,25,15,10,5',
-                            )))!,
+                            ))),
                             colors: pieChartPieChartColorsList2,
                             radius: [50.0],
                           ),
@@ -344,19 +341,19 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                           sectionsSpace: valueOrDefault<double>(
                             () {
                               if (valueOrDefault<String>(
-                                    widget!.gap,
+                                    widget.gap,
                                     'normal',
                                   ) ==
                                   'none') {
                                 return 0.0;
                               } else if (valueOrDefault<String>(
-                                    widget!.gap,
+                                    widget.gap,
                                     'normal',
                                   ) ==
                                   'tight') {
                                 return 2.0;
                               } else if (valueOrDefault<String>(
-                                    widget!.gap,
+                                    widget.gap,
                                     'normal',
                                   ) ==
                                   'wide') {
@@ -368,7 +365,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                             4.0,
                           ),
                           startDegreeOffset: valueOrDefault<double>(
-                            widget!.startAngle,
+                            widget.startAngle,
                             -90.0,
                           ),
                           labelPositionOffset: 0.6,
@@ -376,7 +373,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                       ),
                     if (valueOrDefault<bool>(
                       valueOrDefault<String>(
-                                widget!.variant,
+                                widget.variant,
                                 'donut',
                               ) ==
                               'pie'
@@ -390,11 +387,11 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           if (valueOrDefault<bool>(
-                            widget!.centerValuePresent,
+                            widget.centerValuePresent,
                             false,
                           ))
                             Text(
-                              widget!.centerValue,
+                              widget.centerValue,
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .titleMedium
@@ -420,11 +417,11 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                                   ),
                             ),
                           if (valueOrDefault<bool>(
-                            widget!.centerLabelPresent,
+                            widget.centerLabelPresent,
                             false,
                           ))
                             Text(
-                              widget!.centerLabel,
+                              widget.centerLabel,
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .labelSmall
@@ -449,20 +446,20 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                                     lineHeight: 1.2,
                                   ),
                             ),
-                        ].divide(SizedBox(height: 0.0)),
+                        ].divide(const SizedBox(height: 0.0)),
                       ),
                   ],
                 ),
                 if (valueOrDefault<bool>(
                   () {
                     if (valueOrDefault<String>(
-                          widget!.legend,
+                          widget.legend,
                           'right',
                         ) ==
                         'right') {
                       return true;
                     } else if (valueOrDefault<String>(
-                          widget!.legend,
+                          widget.legend,
                           'right',
                         ) ==
                         'hidden') {
@@ -478,15 +475,15 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                     updateCallback: () => safeSetState(() {}),
                     child: ChartLegendWidget(
                       data: valueOrDefault<String>(
-                        widget!.data,
+                        widget.data,
                         '45,25,15,10,5',
                       ),
                       labels: valueOrDefault<String>(
-                        widget!.labels,
+                        widget.labels,
                         'Grocery,Restaurant,Pharmacy,Bakery,Other',
                       ),
                       colors: valueOrDefault<String>(
-                        widget!.colors,
+                        widget.colors,
                         'primary,success,warning,accent,divider',
                       ),
                       markerSize: 8.0,
@@ -507,13 +504,13 @@ class _PieChartWidgetState extends State<PieChartWidget> {
           if (valueOrDefault<bool>(
             () {
               if (valueOrDefault<String>(
-                    widget!.legend,
+                    widget.legend,
                     'right',
                   ) ==
                   'right') {
                 return false;
               } else if (valueOrDefault<String>(
-                    widget!.legend,
+                    widget.legend,
                     'right',
                   ) ==
                   'hidden') {
@@ -529,15 +526,15 @@ class _PieChartWidgetState extends State<PieChartWidget> {
               updateCallback: () => safeSetState(() {}),
               child: ChartLegendWidget(
                 data: valueOrDefault<String>(
-                  widget!.data,
+                  widget.data,
                   '45,25,15,10,5',
                 ),
                 labels: valueOrDefault<String>(
-                  widget!.labels,
+                  widget.labels,
                   'Grocery,Restaurant,Pharmacy,Bakery,Other',
                 ),
                 colors: valueOrDefault<String>(
-                  widget!.colors,
+                  widget.colors,
                   'primary,success,warning,accent,divider',
                 ),
                 markerSize: 8.0,
@@ -552,7 +549,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                 valueMode: 'percent',
               ),
             ),
-        ].divide(SizedBox(height: 12.0)),
+        ].divide(const SizedBox(height: 12.0)),
       ),
     );
   }

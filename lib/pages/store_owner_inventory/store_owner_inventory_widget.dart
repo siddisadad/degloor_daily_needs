@@ -4,8 +4,6 @@ import '/components/inventory_item/inventory_item_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +24,7 @@ class StoreOwnerInventoryWidget extends StatefulWidget {
 class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
   late StoreOwnerInventoryModel _model;
   String _selectedCategory = 'All Products';
-  String _searchQuery = '';
+  final String _searchQuery = '';
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -104,7 +102,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(24.0),
+                    padding: const EdgeInsets.all(24.0),
                     child: Container(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -173,7 +171,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                           lineHeight: 1.4,
                                         ),
                                   ),
-                                ].divide(SizedBox(height: 4.0)),
+                                ].divide(const SizedBox(height: 4.0)),
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -183,7 +181,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                     buttonSize: 40.0,
                                     fillColor: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.search_rounded,
                                       size: 24.0,
                                     ),
@@ -205,22 +203,22 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                       final confirm = await showDialog<bool>(
                                         context: context,
                                         builder: (context) => AlertDialog(
-                                          title: Text('Logout'),
-                                          content: Text('Are you sure?'),
+                                          title: const Text('Logout'),
+                                          content: const Text('Are you sure?'),
                                           actions: [
                                             TextButton(
                                                 onPressed: () => Navigator.pop(context, false),
-                                                child: Text('Cancel')),
+                                                child: const Text('Cancel')),
                                             TextButton(
                                                 onPressed: () => Navigator.pop(context, true),
-                                                child: Text('Logout')),
+                                                child: const Text('Logout')),
                                           ],
                                         ),
                                       );
                                       if (confirm == true) AppStateNotifier.instance.logout();
                                     },
                                   ),
-                                ].divide(SizedBox(width: 8)),
+                                ].divide(const SizedBox(width: 8)),
                               ),
                             ],
                           ),
@@ -239,7 +237,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                     shape: BoxShape.rectangle,
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.all(16.0),
+                                    padding: const EdgeInsets.all(16.0),
                                     child: Container(
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
@@ -308,7 +306,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                                   lineHeight: 1.3,
                                                 ),
                                           ),
-                                        ].divide(SizedBox(height: 4.0)),
+                                        ].divide(const SizedBox(height: 4.0)),
                                       ),
                                     ),
                                   ),
@@ -324,7 +322,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                     shape: BoxShape.rectangle,
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.all(16.0),
+                                    padding: const EdgeInsets.all(16.0),
                                     child: Container(
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
@@ -393,15 +391,15 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                                   lineHeight: 1.3,
                                                 ),
                                           ),
-                                        ].divide(SizedBox(height: 4.0)),
+                                        ].divide(const SizedBox(height: 4.0)),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ].divide(SizedBox(width: 16.0)),
+                            ].divide(const SizedBox(width: 16.0)),
                           ),
-                        ].divide(SizedBox(height: 16.0)),
+                        ].divide(const SizedBox(height: 16.0)),
                       ),
                     ),
                   ),
@@ -426,7 +424,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
+                        const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
                     child: Container(
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
@@ -449,9 +447,9 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                     width: 1.0,
                                   ),
                                 ),
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 12.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -495,7 +493,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                               lineHeight: 1.3,
                                             ),
                                       ),
-                                    ].divide(SizedBox(width: 6.0)),
+                                    ].divide(const SizedBox(width: 6.0)),
                                   ),
                                 ),
                               ),
@@ -514,9 +512,9 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                     width: 1.0,
                                   ),
                                 ),
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 12.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -560,7 +558,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                               lineHeight: 1.3,
                                             ),
                                       ),
-                                    ].divide(SizedBox(width: 6.0)),
+                                    ].divide(const SizedBox(width: 6.0)),
                                   ),
                                 ),
                               ),
@@ -579,9 +577,9 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                     width: 1.0,
                                   ),
                                 ),
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 12.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -625,7 +623,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                               lineHeight: 1.3,
                                             ),
                                       ),
-                                    ].divide(SizedBox(width: 6.0)),
+                                    ].divide(const SizedBox(width: 6.0)),
                                   ),
                                 ),
                               ),
@@ -641,9 +639,9 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                   width: 1.0,
                                 ),
                               ),
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     12.0, 0.0, 12.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
@@ -680,7 +678,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                             lineHeight: 1.3,
                                           ),
                                     ),
-                                  ].divide(SizedBox(width: 6.0)),
+                                  ].divide(const SizedBox(width: 6.0)),
                                 ),
                               ),
                             ),
@@ -695,9 +693,9 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                   width: 1.0,
                                 ),
                               ),
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     12.0, 0.0, 12.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
@@ -734,11 +732,11 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                             lineHeight: 1.3,
                                           ),
                                     ),
-                                  ].divide(SizedBox(width: 6.0)),
+                                  ].divide(const SizedBox(width: 6.0)),
                                 ),
                               ),
                             ),
-                          ].divide(SizedBox(width: 8.0)),
+                          ].divide(const SizedBox(width: 8.0)),
                         ),
                       ),
                     ),
@@ -764,7 +762,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(24.0),
+                        padding: const EdgeInsets.all(24.0),
                         child: Container(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -784,7 +782,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                     showSnackbar(context, 'Edit functionality coming soon!');
                                   },
                                 );
-                              }).toList().divide(SizedBox(height: 16.0)),
+                              }).toList().divide(const SizedBox(height: 16.0)),
                           ),
                         ),
                       ),
@@ -810,7 +808,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(24.0),
+                    padding: const EdgeInsets.all(24.0),
                     child: Container(
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -845,7 +843,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                             buttonSize: 40.0,
                             fillColor: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.assessment_rounded,
                               size: 24.0,
                             ),
@@ -853,7 +851,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                               print('IconButton pressed ...');
                             },
                           ),
-                        ].divide(SizedBox(width: 16.0)),
+                        ].divide(const SizedBox(width: 16.0)),
                       ),
                     ),
                   ),

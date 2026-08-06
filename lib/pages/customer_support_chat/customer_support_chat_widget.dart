@@ -4,14 +4,10 @@ import '/components/text_field/text_field_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'customer_support_chat_model.dart';
 export 'customer_support_chat_model.dart';
 
@@ -53,7 +49,7 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
     _model.textFieldModel.inputTextController?.clear();
 
     // Mock bot response
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       if (mounted) {
         setState(() {
           _messages.add({
@@ -105,7 +101,7 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
+                        const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
                     child: Container(
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -205,11 +201,11 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                               lineHeight: 1.2,
                                             ),
                                       ),
-                                    ].divide(SizedBox(width: 4.0)),
+                                    ].divide(const SizedBox(width: 4.0)),
                                   ),
                                 ],
                               ),
-                            ].divide(SizedBox(width: 16.0)),
+                            ].divide(const SizedBox(width: 16.0)),
                           ),
                           FlutterFlowIconButton(
                             borderRadius: 8.0,
@@ -249,7 +245,7 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(24.0),
+                        padding: const EdgeInsets.all(24.0),
                         child: Container(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -257,7 +253,7 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Container(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
@@ -266,7 +262,7 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                     shape: BoxShape.rectangle,
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         16.0, 4.0, 16.0, 4.0),
                                     child: Container(
                                       child: Text(
@@ -315,7 +311,7 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 4.0),
                                       child: Container(
                                         child: Text(
@@ -416,9 +412,9 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                         ),
                                       ],
                                     ),
-                                  ].divide(SizedBox(height: 8.0)),
+                                  ].divide(const SizedBox(height: 8.0)),
                                 ),
-                            ].divide(SizedBox(height: 24.0)),
+                            ].divide(const SizedBox(height: 24.0)),
                           ),
                         ),
                       ),
@@ -444,7 +440,7 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Container(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -475,7 +471,7 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                 child: wrapWithModel(
                                   model: _model.textFieldModel,
                                   updateCallback: () => safeSetState(() {}),
-                                  child: TextFieldWidget(
+                                  child: const TextFieldWidget(
                                     label: '',
                                     labelPresent: false,
                                     helper: '',
@@ -502,16 +498,16 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                 ),
                                 onPressed: _sendMessage,
                               ),
-                            ].divide(SizedBox(width: 16.0)),
+                            ].divide(const SizedBox(width: 16.0)),
                           ),
                           Container(
                             decoration: BoxDecoration(
-                              color: Color(0xFFE8F5E9),
+                              color: const Color(0xFFE8F5E9),
                               borderRadius: BorderRadius.circular(8.0),
                               shape: BoxShape.rectangle,
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: Container(
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -539,7 +535,7 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                                       .labelMedium
                                                       .fontStyle,
                                             ),
-                                            color: Color(0xFF2E7D32),
+                                            color: const Color(0xFF2E7D32),
                                             letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
@@ -552,17 +548,17 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                             lineHeight: 1.3,
                                           ),
                                     ),
-                                    Icon(
+                                    const Icon(
                                       Icons.open_in_new_rounded,
                                       color: Color(0xFF2E7D32),
                                       size: 14.0,
                                     ),
-                                  ].divide(SizedBox(width: 8.0)),
+                                  ].divide(const SizedBox(width: 8.0)),
                                 ),
                               ),
                             ),
                           ),
-                        ].divide(SizedBox(height: 16.0)),
+                        ].divide(const SizedBox(height: 16.0)),
                       ),
                     ),
                   ),

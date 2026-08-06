@@ -1,11 +1,8 @@
 import '/components/button/button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'order_request_model.dart';
 export 'order_request_model.dart';
 
@@ -20,11 +17,11 @@ class OrderRequestWidget extends StatefulWidget {
     String? store,
     this.onAccept,
     this.onReject,
-  })  : this.distance = distance ?? '1.2 km',
-        this.items = items ?? '8 Items',
-        this.p = p ?? 'P',
-        this.payout = payout ?? '₹45.00',
-        this.store = store ?? 'Degloor Super Market';
+  })  : distance = distance ?? '1.2 km',
+        items = items ?? '8 Items',
+        p = p ?? 'P',
+        payout = payout ?? '₹45.00',
+        store = store ?? 'Degloor Super Market';
 
   final String distance;
   final String id;
@@ -70,7 +67,7 @@ class _OrderRequestWidgetState extends State<OrderRequestWidget> {
           BoxShadow(
             blurRadius: 4.0,
             color: FlutterFlowTheme.of(context).fullContrast,
-            offset: Offset(
+            offset: const Offset(
               0.0,
               2.0,
             ),
@@ -85,7 +82,7 @@ class _OrderRequestWidgetState extends State<OrderRequestWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(24.0),
         child: Container(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -106,7 +103,7 @@ class _OrderRequestWidgetState extends State<OrderRequestWidget> {
                       children: [
                         Text(
                           valueOrDefault<String>(
-                            widget!.store,
+                            widget.store,
                             'Degloor Super Market',
                           ),
                           style: FlutterFlowTheme.of(context)
@@ -139,7 +136,7 @@ class _OrderRequestWidgetState extends State<OrderRequestWidget> {
                             ),
                             Text(
                               valueOrDefault<String>(
-                                '${widget!.distance} • ${widget!.items}',
+                                '${widget.distance} • ${widget.items}',
                                 '1.2 km • 8 Items',
                               ),
                               style: FlutterFlowTheme.of(context)
@@ -165,9 +162,9 @@ class _OrderRequestWidgetState extends State<OrderRequestWidget> {
                                     lineHeight: 1.4,
                                   ),
                             ),
-                          ].divide(SizedBox(width: 4.0)),
+                          ].divide(const SizedBox(width: 4.0)),
                         ),
-                      ].divide(SizedBox(height: 4.0)),
+                      ].divide(const SizedBox(height: 4.0)),
                     ),
                   ),
                   Container(
@@ -178,11 +175,11 @@ class _OrderRequestWidgetState extends State<OrderRequestWidget> {
                     ),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
                       child: Container(
                         child: Text(
                           valueOrDefault<String>(
-                            widget!.p,
+                            widget.p,
                             'P',
                           ),
                           style:
@@ -229,7 +226,7 @@ class _OrderRequestWidgetState extends State<OrderRequestWidget> {
                       child: wrapWithModel(
                         model: _model.buttonModel1,
                         updateCallback: () => safeSetState(() {}),
-                        child: ButtonWidget(
+                        child: const ButtonWidget(
                           iconPresent: false,
                           iconEndPresent: false,
                           content: 'Reject',
@@ -249,7 +246,7 @@ class _OrderRequestWidgetState extends State<OrderRequestWidget> {
                       child: wrapWithModel(
                         model: _model.buttonModel2,
                         updateCallback: () => safeSetState(() {}),
-                        child: ButtonWidget(
+                        child: const ButtonWidget(
                           iconPresent: false,
                           iconEndPresent: false,
                           content: 'Accept Order',
@@ -262,9 +259,9 @@ class _OrderRequestWidgetState extends State<OrderRequestWidget> {
                       ),
                     ),
                   ),
-                ].divide(SizedBox(width: 16.0)),
+                ].divide(const SizedBox(width: 16.0)),
               ),
-            ].divide(SizedBox(height: 16.0)),
+            ].divide(const SizedBox(height: 16.0)),
           ),
         ),
       ),
