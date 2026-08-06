@@ -1,4 +1,7 @@
 import '/components/bottom_nav/bottom_nav_widget.dart';
+import '../../providers/delivery_provider.dart';
+import '../../providers/order_provider.dart';
+import '../../models/order_model.dart';
 import '/components/bottom_nav_child2/bottom_nav_child2_widget.dart';
 import '/components/button/button_widget.dart';
 import '/components/driver_metric/driver_metric_widget.dart';
@@ -7,6 +10,7 @@ import '/components/switch_component/switch_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -46,6 +50,8 @@ class _DeliveryPartnerDashboardWidgetState
 
   @override
   Widget build(BuildContext context) {
+    final delivery = Provider.of<DeliveryProvider>(context);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -127,15 +133,50 @@ class _DeliveryPartnerDashboardWidgetState
                               ),
                             ].divide(SizedBox(height: 4.0)),
                           ),
-                          wrapWithModel(
-                            model: _model.switchModel,
-                            updateCallback: () => safeSetState(() {}),
-                            child: SwitchComponentWidget(
-                              label: 'Online',
-                              labelPresent: true,
-                              variant: 'iOS',
-                              active: true,
-                            ),
+                          Row(
+                            children: [
+                              InkWell(
+                                onTap: () => delivery.toggleOnline(),
+                                child: wrapWithModel(
+                                  model: _model.switchModel,
+                                  updateCallback: () => safeSetState(() {}),
+                                  child: SwitchComponentWidget(
+                                    label: 'Online',
+                                    labelPresent: true,
+                                    variant: 'iOS',
+                                    active: delivery.isOnline,
+                                  ),
+                                ),
+                              ),
+                              FlutterFlowIconButton(
+                                borderRadius: 9999.0,
+                                buttonSize: 40.0,
+                                fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                                icon: Icon(
+                                  Icons.logout_rounded,
+                                  color: FlutterFlowTheme.of(context).error,
+                                  size: 24.0,
+                                ),
+                                onPressed: () async {
+                                  final confirm = await showDialog<bool>(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: Text('Logout'),
+                                      content: Text('Are you sure?'),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () => Navigator.pop(context, false),
+                                            child: Text('Cancel')),
+                                        TextButton(
+                                            onPressed: () => Navigator.pop(context, true),
+                                            child: Text('Logout')),
+                                      ],
+                                    ),
+                                  );
+                                  if (confirm == true) AppStateNotifier.instance.logout();
+                                },
+                              ),
+                            ].divide(SizedBox(width: 8)),
                           ),
                         ],
                       ),
@@ -229,7 +270,7 @@ class _DeliveryPartnerDashboardWidgetState
                                             CrossAxisAlignment.end,
                                         children: [
                                           Text(
-                                            '₹842.50',
+                                            '₹${delivery.todayEarnings.toStringAsFixed(2)}',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -297,7 +338,7 @@ class _DeliveryPartnerDashboardWidgetState
                                       label: 'Orders',
                                       tone:
                                           FlutterFlowTheme.of(context).primary,
-                                      value: '12',
+                                      value: '${delivery.ordersCompleted}',
                                     ),
                                   ),
                                 ),
@@ -316,7 +357,7 @@ class _DeliveryPartnerDashboardWidgetState
                                       label: 'Rating',
                                       tone:
                                           FlutterFlowTheme.of(context).tertiary,
-                                      value: '4.8',
+                                      value: '${delivery.rating}',
                                     ),
                                   ),
                                 ),
@@ -353,7 +394,7 @@ class _DeliveryPartnerDashboardWidgetState
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'Active Requests (2)',
+                                      'Active Requests (${delivery.activeRequests.length})',
                                       style: FlutterFlowTheme.of(context)
                                           .titleMedium
                                           .override(
@@ -404,28 +445,69 @@ class _DeliveryPartnerDashboardWidgetState
                                     ),
                                   ],
                                 ),
-                                wrapWithModel(
-                                  model: _model.orderRequestModel1,
-                                  updateCallback: () => safeSetState(() {}),
-                                  child: OrderRequestWidget(
-                                    distance: '1.2 km',
-                                    items: '8 Items',
-                                    p: 'P',
-                                    payout: '₹45.00',
-                                    store: 'Degloor Super Market',
+                                if (delivery.currentDelivery != null)
+                                  Container(
+                                    width: double.infinity,
+                                    margin: EdgeInsets.symmetric(vertical: 8),
+                                    padding: EdgeInsets.all(16),
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context).primary10,
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(color: FlutterFlowTheme.of(context).primary),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text('Ongoing Delivery: ${delivery.currentDelivery!.id}', style: FlutterFlowTheme.of(context).bodyMedium.override(font: GoogleFonts.inter(), fontWeight: FontWeight.bold)),
+                                        Text('${delivery.currentDelivery!.store}', style: FlutterFlowTheme.of(context).labelSmall),
+                                        SizedBox(height: 12),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Expanded(
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(backgroundColor: FlutterFlowTheme.of(context).primary),
+                                                onPressed: () {
+                                                  Provider.of<OrderProvider>(context, listen: false).updateOrderStatus(delivery.currentDelivery!.id, OrderStatus.pickedUp);
+                                                  showSnackbar(context, 'Order Picked Up');
+                                                },
+                                                child: Text('Picked Up', style: TextStyle(color: Colors.white)),
+                                              ),
+                                            ),
+                                            SizedBox(width: 8),
+                                            Expanded(
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(backgroundColor: FlutterFlowTheme.of(context).success),
+                                                onPressed: () {
+                                                  Provider.of<OrderProvider>(context, listen: false).updateOrderStatus(delivery.currentDelivery!.id, OrderStatus.delivered);
+                                                  delivery.rejectOrder(delivery.currentDelivery!.id); // Use reject to clear it from current
+                                                  showSnackbar(context, 'Order Delivered');
+                                                },
+                                                child: Text('Delivered', style: TextStyle(color: Colors.white)),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                wrapWithModel(
-                                  model: _model.orderRequestModel2,
-                                  updateCallback: () => safeSetState(() {}),
-                                  child: OrderRequestWidget(
-                                    distance: '0.8 km',
-                                    items: '2 Items',
-                                    p: 'P',
-                                    payout: '₹35.00',
-                                    store: 'Annapurna Restaurant',
-                                  ),
-                                ),
+                                ...delivery.activeRequests.map((req) => OrderRequestWidget(
+                                      id: req.id,
+                                      distance: req.distance,
+                                      items: req.items,
+                                      p: 'P',
+                                      payout: req.payout,
+                                      store: req.store,
+                                      onAccept: () {
+                                        delivery.acceptOrder(req.id);
+                                        Provider.of<OrderProvider>(context, listen: false).updateOrderStatus(req.id, OrderStatus.accepted);
+                                        showSnackbar(context, 'Order accepted!');
+                                      },
+                                      onReject: () {
+                                        delivery.rejectOrder(req.id);
+                                        showSnackbar(context, 'Order rejected.');
+                                      },
+                                    )),
                               ].divide(SizedBox(height: 16.0)),
                             ),
                             Column(

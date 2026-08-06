@@ -144,7 +144,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                                   'medium',
                                 ) ==
                                 'expanded') {
-                              return infinity;
+                              return double.infinity;
                             } else {
                               return 156.0;
                             }
@@ -170,7 +170,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                                   'medium',
                                 ) ==
                                 'expanded') {
-                              return infinity;
+                              return double.infinity;
                             } else {
                               return 156.0;
                             }
@@ -180,7 +180,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                         child: FlutterFlowPieChart(
                           data: FFPieChartData(
                             values: ((String? data) {
-                              return data
+                              return data!
                                   .split(',')
                                   .map((value) =>
                                       double.tryParse(value.trim()) ?? 0)
@@ -274,7 +274,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                                   'medium',
                                 ) ==
                                 'expanded') {
-                              return infinity;
+                              return double.infinity;
                             } else {
                               return 156.0;
                             }
@@ -300,7 +300,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                                   'medium',
                                 ) ==
                                 'expanded') {
-                              return infinity;
+                              return double.infinity;
                             } else {
                               return 156.0;
                             }
@@ -310,7 +310,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                         child: FlutterFlowPieChart(
                           data: FFPieChartData(
                             values: ((String? data) {
-                              return data
+                              return data!
                                   .split(',')
                                   .map((value) =>
                                       double.tryParse(value.trim()) ?? 0)

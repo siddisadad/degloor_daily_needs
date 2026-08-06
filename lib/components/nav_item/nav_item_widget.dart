@@ -1,3 +1,4 @@
+import '../../providers/cart_provider.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -15,6 +16,7 @@ class NavItemWidget extends StatefulWidget {
     this.icon,
     String? target,
     bool? selected,
+    this.onTap,
   })  : this.label = label ?? 'Home',
         this.target = target ?? 'CustomerHomeFeed',
         this.selected = selected ?? true;
@@ -23,6 +25,7 @@ class NavItemWidget extends StatefulWidget {
   final Widget? icon;
   final String target;
   final bool selected;
+  final VoidCallback? onTap;
 
   @override
   State<NavItemWidget> createState() => _NavItemWidgetState();
@@ -52,43 +55,81 @@ class _NavItemWidgetState extends State<NavItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(8.0, 4.0, 8.0, 4.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          widget!.icon!,
-          Text(
-            valueOrDefault<String>(
-              widget!.label,
-              'Home',
+    return InkWell(
+      onTap: widget.onTap,
+      child: Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(8.0, 4.0, 8.0, 4.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                widget!.icon!,
+                if (widget.label == 'Cart')
+                  Positioned(
+                    top: -5,
+                    right: -5,
+                    child: Consumer<CartProvider>(
+                      builder: (context, cart, child) {
+                        if (cart.itemCount == 0) return SizedBox.shrink();
+                        return Container(
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).error,
+                            shape: BoxShape.circle,
+                          ),
+                          constraints: BoxConstraints(
+                            minWidth: 16,
+                            minHeight: 16,
+                          ),
+                          child: Text(
+                            '${cart.itemCount}',
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context).labelSmall.override(
+                                  font: GoogleFonts.inter(),
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+              ],
             ),
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  font: GoogleFonts.inter(
+            Text(
+              valueOrDefault<String>(
+                widget!.label,
+                'Home',
+              ),
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    font: GoogleFonts.inter(
+                      fontWeight:
+                          FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                    ),
+                    color: valueOrDefault<Color>(
+                      valueOrDefault<bool>(
+                        widget!.selected,
+                        true,
+                      )
+                          ? FlutterFlowTheme.of(context).primary
+                          : FlutterFlowTheme.of(context).secondaryText,
+                      FlutterFlowTheme.of(context).primary,
+                    ),
+                    letterSpacing: 0.0,
                     fontWeight:
                         FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                    fontStyle:
-                        FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                    lineHeight: 1.5,
                   ),
-                  color: valueOrDefault<Color>(
-                    valueOrDefault<bool>(
-                      widget!.selected,
-                      true,
-                    )
-                        ? FlutterFlowTheme.of(context).primary
-                        : FlutterFlowTheme.of(context).secondaryText,
-                    FlutterFlowTheme.of(context).primary,
-                  ),
-                  letterSpacing: 0.0,
-                  fontWeight:
-                      FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                  lineHeight: 1.5,
-                ),
-          ),
-        ].divide(SizedBox(height: 2.0)),
+            ),
+          ].divide(SizedBox(height: 2.0)),
+        ),
       ),
     );
   }

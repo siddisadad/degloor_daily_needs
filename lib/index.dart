@@ -18,3 +18,7 @@ export '/pages/user_wallet_rewards/user_wallet_rewards_widget.dart'
     show UserWalletRewardsWidget;
 export '/pages/customer_support_chat/customer_support_chat_widget.dart'
     show CustomerSupportChatWidget;
+export '/pages/order_history/order_history_widget.dart'
+    show OrderHistoryWidget;
+export '/pages/user_profile/user_profile_widget.dart'
+    show UserProfileWidget;

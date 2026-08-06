@@ -1,5 +1,6 @@
 import '/components/button/button_widget.dart';
 import '/components/tracking_step/tracking_step_widget.dart';
+import '/components/bottom_nav/bottom_nav_widget.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -28,6 +29,8 @@ class LiveOrderTrackingModel extends FlutterFlowModel<LiveOrderTrackingWidget> {
   late TrackingStepModel trackingStepModel4;
   // Model for Button.
   late ButtonModel buttonModel;
+  // Model for BottomNav.
+  late BottomNavModel bottomNavModel;
 
   @override
   void initState(BuildContext context) {
@@ -36,6 +39,7 @@ class LiveOrderTrackingModel extends FlutterFlowModel<LiveOrderTrackingWidget> {
     trackingStepModel3 = createModel(context, () => TrackingStepModel());
     trackingStepModel4 = createModel(context, () => TrackingStepModel());
     buttonModel = createModel(context, () => ButtonModel());
+    bottomNavModel = createModel(context, () => BottomNavModel());
   }
 
   @override
@@ -45,5 +49,6 @@ class LiveOrderTrackingModel extends FlutterFlowModel<LiveOrderTrackingWidget> {
     trackingStepModel3.dispose();
     trackingStepModel4.dispose();
     buttonModel.dispose();
+    bottomNavModel.dispose();
   }
 }

@@ -1,3 +1,4 @@
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -16,6 +17,8 @@ class CheckoutItemWidget extends StatefulWidget {
     String? name,
     String? price,
     String? qty,
+    this.onIncrement,
+    this.onDecrement,
   })  : this.imageDesc = imageDesc ??
             'https://dimg.dreamflow.cloud/v1/image/fresh%20mangoes%20in%20a%20basket',
         this.name = name ?? 'Fresh Alphonso Mangoes',
@@ -26,6 +29,8 @@ class CheckoutItemWidget extends StatefulWidget {
   final String name;
   final String price;
   final String qty;
+  final VoidCallback? onIncrement;
+  final VoidCallback? onDecrement;
 
   @override
   State<CheckoutItemWidget> createState() => _CheckoutItemWidgetState();
@@ -159,26 +164,45 @@ class _CheckoutItemWidgetState extends State<CheckoutItemWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
-                        valueOrDefault<String>(
-                          'Qty: ${widget!.qty}',
-                          'Qty: 1 kg',
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              font: GoogleFonts.inter(
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .fontStyle,
-                              ),
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontStyle,
-                              lineHeight: 1.5,
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          FlutterFlowIconButton(
+                            borderRadius: 4.0,
+                            buttonSize: 28.0,
+                            fillColor: FlutterFlowTheme.of(context).primaryBackground,
+                            icon: Icon(
+                              Icons.remove,
+                              color: FlutterFlowTheme.of(context).primary,
+                              size: 14.0,
                             ),
+                            onPressed: widget.onDecrement,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text(
+                              valueOrDefault<String>(
+                                widget!.qty,
+                                '1',
+                              ).replaceAll('x', ''),
+                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.inter(fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                          ),
+                          FlutterFlowIconButton(
+                            borderRadius: 4.0,
+                            buttonSize: 28.0,
+                            fillColor: FlutterFlowTheme.of(context).primaryBackground,
+                            icon: Icon(
+                              Icons.add,
+                              color: FlutterFlowTheme.of(context).primary,
+                              size: 14.0,
+                            ),
+                            onPressed: widget.onIncrement,
+                          ),
+                        ],
                       ),
                       Text(
                         valueOrDefault<String>(

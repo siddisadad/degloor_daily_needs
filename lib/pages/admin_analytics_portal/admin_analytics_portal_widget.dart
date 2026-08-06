@@ -1,4 +1,5 @@
 import '/components/analytic_stat/analytic_stat_widget.dart';
+import '../../providers/admin_provider.dart';
 import '/components/button/button_widget.dart';
 import '/components/pie_chart/pie_chart_widget.dart';
 import '/components/zone_row/zone_row_widget.dart';
@@ -46,6 +47,8 @@ class _AdminAnalyticsPortalWidgetState
 
   @override
   Widget build(BuildContext context) {
+    final admin = Provider.of<AdminProvider>(context);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -157,13 +160,45 @@ class _AdminAnalyticsPortalWidgetState
                                   print('IconButton pressed ...');
                                 },
                               ),
-                              Container(
-                                width: 32.0,
-                                height: 32.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  shape: BoxShape.circle,
-                                ),
+                                  FlutterFlowIconButton(
+                                    borderRadius: 9999.0,
+                                    buttonSize: 40.0,
+                                    fillColor: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    icon: Icon(
+                                      Icons.logout_rounded,
+                                      color: FlutterFlowTheme.of(context).error,
+                                      size: 24.0,
+                                    ),
+                                    onPressed: () async {
+                                      final confirm = await showDialog<bool>(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                          title: Text('Logout'),
+                                          content: Text('Are you sure?'),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () =>
+                                                    Navigator.pop(context, false),
+                                                child: Text('Cancel')),
+                                            TextButton(
+                                                onPressed: () =>
+                                                    Navigator.pop(context, true),
+                                                child: Text('Logout')),
+                                          ],
+                                        ),
+                                      );
+                                      if (confirm == true)
+                                        AppStateNotifier.instance.logout();
+                                    },
+                                  ),
+                                  Container(
+                                    width: 32.0,
+                                    height: 32.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context).primary,
+                                      shape: BoxShape.circle,
+                                    ),
                                 alignment: AlignmentDirectional(0.0, 0.0),
                                 child: Text(
                                   'AD',
@@ -244,8 +279,8 @@ class _AdminAnalyticsPortalWidgetState
                                       ),
                                       label: 'Total Revenue',
                                       trend: '12.5%',
-                                      value: '₹42.8k',
-                                      isUp: false,
+                                      value: '₹${(admin.totalRevenue / 1000).toStringAsFixed(1)}k',
+                                      isUp: true,
                                     ),
                                   ),
                                 ),
@@ -263,8 +298,8 @@ class _AdminAnalyticsPortalWidgetState
                                       ),
                                       label: 'Total Orders',
                                       trend: '8.2%',
-                                      value: '1,240',
-                                      isUp: false,
+                                      value: '${admin.totalOrders}',
+                                      isUp: true,
                                     ),
                                   ),
                                 ),
@@ -289,8 +324,8 @@ class _AdminAnalyticsPortalWidgetState
                                       ),
                                       label: 'Active Partners',
                                       trend: '4.1%',
-                                      value: '48',
-                                      isUp: false,
+                                      value: '${admin.activePartners}',
+                                      isUp: true,
                                     ),
                                   ),
                                 ),
@@ -308,8 +343,8 @@ class _AdminAnalyticsPortalWidgetState
                                       ),
                                       label: 'New Customers',
                                       trend: '2.4%',
-                                      value: '156',
-                                      isUp: false,
+                                      value: '${admin.newCustomers}',
+                                      isUp: true,
                                     ),
                                   ),
                                 ),

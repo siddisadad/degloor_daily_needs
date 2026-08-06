@@ -28,8 +28,43 @@ class CustomerSupportChatWidget extends StatefulWidget {
 
 class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
   late CustomerSupportChatModel _model;
+  final List<Map<String, dynamic>> _messages = [
+    {
+      'text': 'Hello! Welcome to Degloor Daily Needs. How can we help you today?',
+      'time': '10:00 AM',
+      'isUser': false,
+    },
+  ];
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _sendMessage() {
+    final text = _model.textFieldModel.inputTextController?.text.trim();
+    if (text == null || text.isEmpty) return;
+
+    setState(() {
+      _messages.add({
+        'text': text,
+        'time': DateFormat('hh:mm a').format(DateTime.now()),
+        'isUser': true,
+      });
+    });
+
+    _model.textFieldModel.inputTextController?.clear();
+
+    // Mock bot response
+    Future.delayed(Duration(seconds: 1), () {
+      if (mounted) {
+        setState(() {
+          _messages.add({
+            'text': 'Thank you for your message. An agent will be with you shortly.',
+            'time': DateFormat('hh:mm a').format(DateTime.now()),
+            'isUser': false,
+          });
+        });
+      }
+    });
+  }
 
   @override
   void initState() {
@@ -268,31 +303,40 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                   ),
                                 ),
                               ),
-                              wrapWithModel(
-                                model: _model.supportBubbleModel1,
-                                updateCallback: () => safeSetState(() {}),
-                                child: SupportBubbleWidget(
-                                  text:
-                                      'Hello! Welcome to Degloor Daily Needs. How can we help you today?',
-                                  time: '10:00 AM',
-                                  isUser: false,
-                                ),
-                              ),
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 4.0),
-                                    child: Container(
-                                      child: Text(
-                                        'Common Topics',
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelSmall
-                                            .override(
-                                              font: GoogleFonts.inter(
+                              ..._messages.map((msg) => SupportBubbleWidget(
+                                    text: msg['text'],
+                                    time: msg['time'],
+                                    isUser: msg['isUser'],
+                                  )),
+                              if (_messages.length < 2)
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 4.0),
+                                      child: Container(
+                                        child: Text(
+                                          'Common Topics',
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelSmall
+                                              .override(
+                                                font: GoogleFonts.inter(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(context)
+                                                          .labelSmall
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(context)
+                                                          .labelSmall
+                                                          .fontStyle,
+                                                ),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                letterSpacing: 0.0,
                                                 fontWeight:
                                                     FlutterFlowTheme.of(context)
                                                         .labelSmall
@@ -301,40 +345,23 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .labelSmall
                                                         .fontStyle,
+                                                lineHeight: 1.2,
                                               ),
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              letterSpacing: 0.0,
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelSmall
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelSmall
-                                                      .fontStyle,
-                                              lineHeight: 1.2,
-                                            ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Wrap(
-                                    spacing: 8.0,
-                                    runSpacing: 8.0,
-                                    alignment: WrapAlignment.start,
-                                    crossAxisAlignment:
-                                        WrapCrossAlignment.start,
-                                    direction: Axis.horizontal,
-                                    runAlignment: WrapAlignment.start,
-                                    verticalDirection: VerticalDirection.down,
-                                    clipBehavior: Clip.none,
-                                    children: [
-                                      wrapWithModel(
-                                        model: _model.faqChipModel1,
-                                        updateCallback: () =>
-                                            safeSetState(() {}),
-                                        child: FaqChipWidget(
+                                    Wrap(
+                                      spacing: 8.0,
+                                      runSpacing: 8.0,
+                                      alignment: WrapAlignment.start,
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.start,
+                                      direction: Axis.horizontal,
+                                      runAlignment: WrapAlignment.start,
+                                      verticalDirection: VerticalDirection.down,
+                                      clipBehavior: Clip.none,
+                                      children: [
+                                        FaqChipWidget(
                                           icon: Icon(
                                             Icons.local_shipping_rounded,
                                             color: FlutterFlowTheme.of(context)
@@ -342,13 +369,12 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                             size: 16.0,
                                           ),
                                           label: 'Order Status',
+                                          onTap: () {
+                                            _model.textFieldModel.inputTextController?.text = 'What is my order status?';
+                                            _sendMessage();
+                                          },
                                         ),
-                                      ),
-                                      wrapWithModel(
-                                        model: _model.faqChipModel2,
-                                        updateCallback: () =>
-                                            safeSetState(() {}),
-                                        child: FaqChipWidget(
+                                        FaqChipWidget(
                                           icon: Icon(
                                             Icons
                                                 .account_balance_wallet_rounded,
@@ -357,13 +383,12 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                             size: 16.0,
                                           ),
                                           label: 'Payment Issue',
+                                          onTap: () {
+                                            _model.textFieldModel.inputTextController?.text = 'I have a payment issue.';
+                                            _sendMessage();
+                                          },
                                         ),
-                                      ),
-                                      wrapWithModel(
-                                        model: _model.faqChipModel3,
-                                        updateCallback: () =>
-                                            safeSetState(() {}),
-                                        child: FaqChipWidget(
+                                        FaqChipWidget(
                                           icon: Icon(
                                             Icons.history_rounded,
                                             color: FlutterFlowTheme.of(context)
@@ -371,13 +396,12 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                             size: 16.0,
                                           ),
                                           label: 'Refund Request',
+                                          onTap: () {
+                                            _model.textFieldModel.inputTextController?.text = 'I want to request a refund.';
+                                            _sendMessage();
+                                          },
                                         ),
-                                      ),
-                                      wrapWithModel(
-                                        model: _model.faqChipModel4,
-                                        updateCallback: () =>
-                                            safeSetState(() {}),
-                                        child: FaqChipWidget(
+                                        FaqChipWidget(
                                           icon: Icon(
                                             Icons.inventory_2_rounded,
                                             color: FlutterFlowTheme.of(context)
@@ -385,115 +409,15 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                             size: 16.0,
                                           ),
                                           label: 'Missing Item',
+                                          onTap: () {
+                                            _model.textFieldModel.inputTextController?.text = 'An item is missing from my order.';
+                                            _sendMessage();
+                                          },
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ].divide(SizedBox(height: 8.0)),
-                              ),
-                              wrapWithModel(
-                                model: _model.supportBubbleModel2,
-                                updateCallback: () => safeSetState(() {}),
-                                child: SupportBubbleWidget(
-                                  text:
-                                      'I haven\'t received my order #DDN-8821 yet. The app shows it\'s delivered.',
-                                  time: '10:05 AM',
-                                  isUser: true,
-                                ),
-                              ),
-                              wrapWithModel(
-                                model: _model.supportBubbleModel3,
-                                updateCallback: () => safeSetState(() {}),
-                                child: SupportBubbleWidget(
-                                  text:
-                                      'I\'m sorry to hear that. Let me connect you with a live agent to check with the delivery partner immediately.',
-                                  time: '10:05 AM',
-                                  isUser: false,
-                                ),
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 24.0,
-                                    height: 24.0,
-                                    decoration: BoxDecoration(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      shape: BoxShape.circle,
+                                      ],
                                     ),
-                                    alignment: AlignmentDirectional(0.0, 0.0),
-                                    child: Text(
-                                      'SK',
-                                      textAlign: TextAlign.center,
-                                      maxLines: 1,
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            font: GoogleFonts.inter(
-                                              fontWeight: FontWeight.w600,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .fontStyle,
-                                            ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .onPrimary,
-                                            fontSize: 12.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w600,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .fontStyle,
-                                            lineHeight: 1.3,
-                                          ),
-                                      overflow: TextOverflow.clip,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Sameer K. joined the chat',
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelSmall
-                                        .override(
-                                          font: GoogleFonts.inter(
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelSmall
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelSmall
-                                                    .fontStyle,
-                                          ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelSmall
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelSmall
-                                                  .fontStyle,
-                                          lineHeight: 1.2,
-                                        ),
-                                  ),
-                                ].divide(SizedBox(width: 8.0)),
-                              ),
-                              wrapWithModel(
-                                model: _model.supportBubbleModel4,
-                                updateCallback: () => safeSetState(() {}),
-                                child: SupportBubbleWidget(
-                                  text:
-                                      'Hi there, I\'m Sameer. I\'m checking the GPS logs for your delivery partner right now. One moment please.',
-                                  time: '10:06 AM',
-                                  isUser: false,
+                                  ].divide(SizedBox(height: 8.0)),
                                 ),
-                              ),
                             ].divide(SizedBox(height: 24.0)),
                           ),
                         ),
@@ -576,9 +500,7 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                   color: FlutterFlowTheme.of(context).primary,
                                   size: 24.0,
                                 ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
-                                },
+                                onPressed: _sendMessage,
                               ),
                             ].divide(SizedBox(width: 16.0)),
                           ),

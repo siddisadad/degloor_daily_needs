@@ -12,11 +12,13 @@ class CategoryTabWidget extends StatefulWidget {
     super.key,
     String? label,
     bool? selected,
+    this.onTap,
   })  : this.label = label ?? 'All Items',
         this.selected = selected ?? true;
 
   final String label;
   final bool selected;
+  final VoidCallback? onTap;
 
   @override
   State<CategoryTabWidget> createState() => _CategoryTabWidgetState();
@@ -46,40 +48,42 @@ class _CategoryTabWidgetState extends State<CategoryTabWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.rectangle,
-      ),
-      child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(8.0, 16.0, 8.0, 16.0),
-        child: Container(
-          child: Text(
-            valueOrDefault<String>(
-              widget!.label,
-              'All Items',
+    return InkWell(
+      onTap: widget.onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          border: widget.selected ? Border(bottom: BorderSide(color: FlutterFlowTheme.of(context).primary, width: 2.0)) : null,
+        ),
+        child: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(8.0, 16.0, 8.0, 16.0),
+          child: Container(
+            child: Text(
+              valueOrDefault<String>(
+                widget!.label,
+                'All Items',
+              ),
+              style: FlutterFlowTheme.of(context).labelLarge.override(
+                    font: GoogleFonts.inter(
+                      fontWeight: widget.selected ? FontWeight.bold : FontWeight.normal,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).labelLarge.fontStyle,
+                    ),
+                    color: valueOrDefault<Color>(
+                      valueOrDefault<bool>(
+                        widget!.selected,
+                        true,
+                      )
+                          ? FlutterFlowTheme.of(context).primary
+                          : FlutterFlowTheme.of(context).secondaryText,
+                      FlutterFlowTheme.of(context).primary,
+                    ),
+                    letterSpacing: 0.0,
+                    fontWeight: widget.selected ? FontWeight.bold : FontWeight.normal,
+                    fontStyle: FlutterFlowTheme.of(context).labelLarge.fontStyle,
+                    lineHeight: 1.3,
+                  ),
             ),
-            style: FlutterFlowTheme.of(context).labelLarge.override(
-                  font: GoogleFonts.inter(
-                    fontWeight:
-                        FlutterFlowTheme.of(context).labelLarge.fontWeight,
-                    fontStyle:
-                        FlutterFlowTheme.of(context).labelLarge.fontStyle,
-                  ),
-                  color: valueOrDefault<Color>(
-                    valueOrDefault<bool>(
-                      widget!.selected,
-                      true,
-                    )
-                        ? FlutterFlowTheme.of(context).primary
-                        : FlutterFlowTheme.of(context).secondaryText,
-                    FlutterFlowTheme.of(context).primary,
-                  ),
-                  letterSpacing: 0.0,
-                  fontWeight:
-                      FlutterFlowTheme.of(context).labelLarge.fontWeight,
-                  fontStyle: FlutterFlowTheme.of(context).labelLarge.fontStyle,
-                  lineHeight: 1.3,
-                ),
           ),
         ),
       ),

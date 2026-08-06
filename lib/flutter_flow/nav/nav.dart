@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -28,6 +29,33 @@ class AppStateNotifier extends ChangeNotifier {
   static AppStateNotifier get instance => _instance ??= AppStateNotifier._();
 
   bool showSplashImage = true;
+  bool isLoggedIn = false;
+  String userRole = 'Customer'; // Customer, Store, Delivery, Admin
+
+  Future<void> initialize() async {
+    final prefs = await SharedPreferences.getInstance();
+    isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    userRole = prefs.getString('userRole') ?? 'Customer';
+    notifyListeners();
+  }
+
+  void login({String role = 'Customer'}) async {
+    isLoggedIn = true;
+    userRole = role;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isLoggedIn', true);
+    await prefs.setString('userRole', role);
+    notifyListeners();
+  }
+
+  void logout() async {
+    isLoggedIn = false;
+    userRole = 'Customer';
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isLoggedIn', false);
+    await prefs.remove('userRole');
+    notifyListeners();
+  }
 
   void stopShowingSplashImage() {
     showSplashImage = false;
@@ -36,10 +64,30 @@ class AppStateNotifier extends ChangeNotifier {
 }
 
 GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
-      initialLocation: '/',
+      initialLocation: appStateNotifier.isLoggedIn
+          ? (appStateNotifier.userRole == 'Store'
+              ? '/storeOwnerInventory'
+              : appStateNotifier.userRole == 'Delivery'
+                  ? '/deliveryPartnerDashboard'
+                  : appStateNotifier.userRole == 'Admin'
+                      ? '/adminAnalyticsPortal'
+                      : '/customerHomeFeed')
+          : '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
+      redirect: (context, state) {
+        final loggedIn = appStateNotifier.isLoggedIn;
+        final isLoggingIn = state.uri.path == '/';
+        if (!loggedIn && !isLoggingIn) return '/';
+        if (loggedIn && isLoggingIn) {
+          if (appStateNotifier.userRole == 'Store') return '/storeOwnerInventory';
+          if (appStateNotifier.userRole == 'Delivery') return '/deliveryPartnerDashboard';
+          if (appStateNotifier.userRole == 'Admin') return '/adminAnalyticsPortal';
+          return '/customerHomeFeed';
+        }
+        return null;
+      },
       errorBuilder: (context, state) => MobileOTPLoginWidget(),
       routes: [
         FFRoute(
@@ -60,7 +108,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: StoreStorefrontWidget.routeName,
           path: StoreStorefrontWidget.routePath,
-          builder: (context, params) => StoreStorefrontWidget(),
+          builder: (context, params) => StoreStorefrontWidget(
+            name: params.getParam('name', ParamType.String),
+            rating: params.getParam('rating', ParamType.String),
+            time: params.getParam('time', ParamType.String),
+            image: params.getParam('image', ParamType.String),
+            category: params.getParam('category', ParamType.String),
+          ),
         ),
         FFRoute(
           name: CartCheckoutWidget.routeName,
@@ -70,7 +124,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: LiveOrderTrackingWidget.routeName,
           path: LiveOrderTrackingWidget.routePath,
-          builder: (context, params) => LiveOrderTrackingWidget(),
+          builder: (context, params) => LiveOrderTrackingWidget(
+            orderId: params.getParam('orderId', ParamType.String),
+          ),
         ),
         FFRoute(
           name: DeliveryPartnerDashboardWidget.routeName,
@@ -96,6 +152,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: CustomerSupportChatWidget.routeName,
           path: CustomerSupportChatWidget.routePath,
           builder: (context, params) => CustomerSupportChatWidget(),
+        ),
+        FFRoute(
+          name: OrderHistoryWidget.routeName,
+          path: OrderHistoryWidget.routePath,
+          builder: (context, params) => OrderHistoryWidget(),
+        ),
+        FFRoute(
+          name: UserProfileWidget.routeName,
+          path: UserProfileWidget.routePath,
+          builder: (context, params) => UserProfileWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

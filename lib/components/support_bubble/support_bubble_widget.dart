@@ -53,12 +53,13 @@ class _SupportBubbleWidgetState extends State<SupportBubbleWidget> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment:
+          widget.isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
           constraints: BoxConstraints(
-            maxWidth: 300.0,
+            maxWidth: MediaQuery.of(context).size.width * 0.75,
           ),
           decoration: BoxDecoration(
             color: valueOrDefault<Color>(
@@ -73,6 +74,8 @@ class _SupportBubbleWidgetState extends State<SupportBubbleWidget> {
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(12.0),
               topRight: Radius.circular(12.0),
+              bottomLeft: Radius.circular(widget.isUser ? 12.0 : 0.0),
+              bottomRight: Radius.circular(widget.isUser ? 0.0 : 12.0),
             ),
             shape: BoxShape.rectangle,
             border: Border.all(
@@ -102,7 +105,9 @@ class _SupportBubbleWidgetState extends State<SupportBubbleWidget> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: widget.isUser
+                    ? CrossAxisAlignment.end
+                    : CrossAxisAlignment.start,
                 children: [
                   Text(
                     valueOrDefault<String>(

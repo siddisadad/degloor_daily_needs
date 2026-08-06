@@ -1,4 +1,5 @@
 import '/components/button/button_widget.dart';
+import '../../providers/cart_provider.dart';
 import '/components/category_tab/category_tab_widget.dart';
 import '/components/product_card/product_card_widget.dart';
 import '/components/text_field/text_field_widget.dart';
@@ -15,7 +16,20 @@ import 'store_storefront_model.dart';
 export 'store_storefront_model.dart';
 
 class StoreStorefrontWidget extends StatefulWidget {
-  const StoreStorefrontWidget({super.key});
+  const StoreStorefrontWidget({
+    super.key,
+    this.name,
+    this.rating,
+    this.time,
+    this.image,
+    this.category,
+  });
+
+  final String? name;
+  final String? rating;
+  final String? time;
+  final String? image;
+  final String? category;
 
   static String routeName = 'StoreStorefront';
   static String routePath = '/storeStorefront';
@@ -26,13 +40,89 @@ class StoreStorefrontWidget extends StatefulWidget {
 
 class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
   late StoreStorefrontModel _model;
+  String _selectedCategory = 'All Items';
+  final List<Map<String, dynamic>> allProducts = [
+    {
+      'name': 'Premium Basmati Rice',
+      'price': '₹110',
+      'weight': '1 kg',
+      'image': 'https://dimg.dreamflow.cloud/v1/image/bag%20of%20long%20grain%20rice',
+      'category': 'Grocery',
+      'inStock': true,
+    },
+    {
+      'name': 'Sunflower Oil',
+      'price': '₹145',
+      'weight': '1 L',
+      'image': 'https://dimg.dreamflow.cloud/v1/image/bottle%20of%20cooking%20oil',
+      'category': 'Grocery',
+      'inStock': true,
+    },
+    {
+      'name': 'Organic Turmeric',
+      'price': '₹45',
+      'weight': '200g',
+      'image': 'https://dimg.dreamflow.cloud/v1/image/yellow%20turmeric%20powder',
+      'category': 'Grocery',
+      'inStock': true,
+    },
+    {
+      'name': 'Fresh Alphonso Mangoes',
+      'price': '₹550',
+      'weight': '1 kg',
+      'image': 'https://dimg.dreamflow.cloud/v1/image/Fresh%20Alphonso%20Mangoes',
+      'category': 'Fruits',
+      'inStock': true,
+    },
+    {
+      'name': 'Toor Dal',
+      'price': '₹160',
+      'weight': '1 kg',
+      'image': 'https://dimg.dreamflow.cloud/v1/image/yellow%20split%20peas',
+      'category': 'Grocery',
+      'inStock': true,
+    },
+    {
+      'name': 'Refined Sugar',
+      'price': '₹42',
+      'weight': '1 kg',
+      'image': 'https://dimg.dreamflow.cloud/v1/image/white%20sugar%20crystals',
+      'category': 'Grocery',
+      'inStock': true,
+    },
+    {
+      'name': 'Whole Wheat Atta',
+      'price': '₹320',
+      'weight': '5 kg',
+      'image': 'https://dimg.dreamflow.cloud/v1/image/flour%20bag',
+      'category': 'Grocery',
+      'inStock': true,
+    },
+  ];
+  List<Map<String, dynamic>> filteredProducts = [];
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _filterProducts() {
+    final query = _model.textFieldModel.inputTextController?.text.toLowerCase() ?? '';
+    safeSetState(() {
+      filteredProducts = allProducts.where((product) {
+        final matchesQuery = product['name']!.toLowerCase().contains(query);
+        final matchesCategory = _selectedCategory == 'All Items' || product['category'] == _selectedCategory;
+        return matchesQuery && matchesCategory;
+      }).toList();
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => StoreStorefrontModel());
+    filteredProducts = allProducts;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _model.textFieldModel.inputTextController?.addListener(_filterProducts);
+    });
   }
 
   @override
@@ -100,7 +190,10 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'Degloor Super Market',
+                                      valueOrDefault<String>(
+                                        widget.name,
+                                        'Degloor Super Market',
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .titleLarge
                                           .override(
@@ -194,7 +287,10 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                           size: 16.0,
                                         ),
                                         Text(
-                                          '4.8',
+                                          valueOrDefault<String>(
+                                            widget.rating,
+                                            '4.8',
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .labelMedium
                                               .override(
@@ -240,7 +336,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                               ),
                               leadingIconPresent: true,
                               trailingIconPresent: false,
-                              hint: 'Search in Degloor Super Market',
+                              hint: 'Search in ${valueOrDefault<String>(widget.name, 'Store')}',
                               value: '',
                               onChange: '',
                               onSubmit: '',
@@ -265,7 +361,10 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                     size: 16.0,
                                   ),
                                   Text(
-                                    '25-30 mins',
+                                    valueOrDefault<String>(
+                                      widget.time,
+                                      '25-30 mins',
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .labelSmall
                                         .override(
@@ -378,55 +477,22 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                wrapWithModel(
-                                  model: _model.categoryTabModel1,
-                                  updateCallback: () => safeSetState(() {}),
-                                  child: CategoryTabWidget(
-                                    label: 'All Items',
-                                    selected: true,
-                                  ),
-                                ),
-                                wrapWithModel(
-                                  model: _model.categoryTabModel2,
-                                  updateCallback: () => safeSetState(() {}),
-                                  child: CategoryTabWidget(
-                                    label: 'Grocery',
-                                    selected: true,
-                                  ),
-                                ),
-                                wrapWithModel(
-                                  model: _model.categoryTabModel3,
-                                  updateCallback: () => safeSetState(() {}),
-                                  child: CategoryTabWidget(
-                                    label: 'Fruits',
-                                    selected: true,
-                                  ),
-                                ),
-                                wrapWithModel(
-                                  model: _model.categoryTabModel4,
-                                  updateCallback: () => safeSetState(() {}),
-                                  child: CategoryTabWidget(
-                                    label: 'Vegetables',
-                                    selected: true,
-                                  ),
-                                ),
-                                wrapWithModel(
-                                  model: _model.categoryTabModel5,
-                                  updateCallback: () => safeSetState(() {}),
-                                  child: CategoryTabWidget(
-                                    label: 'Bakery',
-                                    selected: true,
-                                  ),
-                                ),
-                                wrapWithModel(
-                                  model: _model.categoryTabModel6,
-                                  updateCallback: () => safeSetState(() {}),
-                                  child: CategoryTabWidget(
-                                    label: 'Dairy',
-                                    selected: true,
-                                  ),
-                                ),
-                              ].divide(SizedBox(width: 24.0)),
+                                'All Items',
+                                'Grocery',
+                                'Fruits',
+                                'Vegetables',
+                                'Bakery',
+                                'Dairy',
+                              ].map((label) {
+                                return CategoryTabWidget(
+                                  label: label,
+                                  selected: _selectedCategory == label,
+                                  onTap: () {
+                                    _selectedCategory = label;
+                                    _filterProducts();
+                                  },
+                                );
+                              }).toList().divide(SizedBox(width: 24.0)),
                             ),
                           ),
                         ),
@@ -651,86 +717,15 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                     primary: false,
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
-                                    children: [
-                                      wrapWithModel(
-                                        model: _model.productCardModel1,
-                                        updateCallback: () =>
-                                            safeSetState(() {}),
-                                        child: ProductCardWidget(
-                                          imageDesc:
-                                              'https://dimg.dreamflow.cloud/v1/image/bag%20of%20long%20grain%20rice',
-                                          name: 'Premium Basmati Rice',
-                                          price: '₹110',
-                                          weight: '1 kg',
-                                          inStock: false,
-                                        ),
-                                      ),
-                                      wrapWithModel(
-                                        model: _model.productCardModel2,
-                                        updateCallback: () =>
-                                            safeSetState(() {}),
-                                        child: ProductCardWidget(
-                                          imageDesc:
-                                              'https://dimg.dreamflow.cloud/v1/image/bottle%20of%20cooking%20oil',
-                                          name: 'Sunflower Oil',
-                                          price: '₹145',
-                                          weight: '1 L',
-                                          inStock: false,
-                                        ),
-                                      ),
-                                      wrapWithModel(
-                                        model: _model.productCardModel3,
-                                        updateCallback: () =>
-                                            safeSetState(() {}),
-                                        child: ProductCardWidget(
-                                          imageDesc:
-                                              'https://dimg.dreamflow.cloud/v1/image/yellow%20turmeric%20powder',
-                                          name: 'Organic Turmeric',
-                                          price: '₹45',
-                                          weight: '200g',
-                                          inStock: false,
-                                        ),
-                                      ),
-                                      wrapWithModel(
-                                        model: _model.productCardModel4,
-                                        updateCallback: () =>
-                                            safeSetState(() {}),
-                                        child: ProductCardWidget(
-                                          imageDesc:
-                                              'https://dimg.dreamflow.cloud/v1/image/yellow%20split%20peas',
-                                          name: 'Toor Dal',
-                                          price: '₹160',
-                                          weight: '1 kg',
-                                          inStock: false,
-                                        ),
-                                      ),
-                                      wrapWithModel(
-                                        model: _model.productCardModel5,
-                                        updateCallback: () =>
-                                            safeSetState(() {}),
-                                        child: ProductCardWidget(
-                                          imageDesc:
-                                              'https://dimg.dreamflow.cloud/v1/image/white%20sugar%20crystals',
-                                          name: 'Refined Sugar',
-                                          price: '₹42',
-                                          weight: '1 kg',
-                                          inStock: false,
-                                        ),
-                                      ),
-                                      wrapWithModel(
-                                        model: _model.productCardModel6,
-                                        updateCallback: () =>
-                                            safeSetState(() {}),
-                                        child: ProductCardWidget(
-                                          imageDesc:
-                                              'https://dimg.dreamflow.cloud/v1/image/flour%20bag',
-                                          name: 'Whole Wheat Atta',
-                                          price: '₹320',
-                                          weight: '5 kg',
-                                          inStock: false,
-                                        ),
-                                      ),
-                                    ],
+                                    children: filteredProducts.map((product) {
+                                      return ProductCardWidget(
+                                        imageDesc: product['image'],
+                                        name: product['name'],
+                                        price: product['price'],
+                                        weight: product['weight'],
+                                        inStock: product['inStock'],
+                                      );
+                                    }).toList(),
                                   ),
                                 ].divide(SizedBox(height: 16.0)),
                               ),
@@ -745,136 +740,151 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
             ),
             Align(
               alignment: AlignmentDirectional(0.0, 1.0),
-              child: Container(
-                child: Padding(
-                  padding: EdgeInsets.all(24.0),
-                  child: Container(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primary,
-                        borderRadius: BorderRadius.circular(9999.0),
-                        shape: BoxShape.rectangle,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 16.0, 24.0, 16.0),
+              child: Consumer<CartProvider>(
+                builder: (context, cart, child) {
+                  if (cart.items.isEmpty) return SizedBox.shrink();
+                  return Container(
+                    child: Padding(
+                      padding: EdgeInsets.all(24.0),
+                      child: Container(
                         child: Container(
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Row(
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).primary,
+                            borderRadius: BorderRadius.circular(9999.0),
+                            shape: BoxShape.rectangle,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                24.0, 16.0, 24.0, 16.0),
+                            child: Container(
+                              child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Icon(
-                                    Icons.shopping_cart_rounded,
-                                    color:
-                                        FlutterFlowTheme.of(context).onPrimary,
-                                    size: 24.0,
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.min,
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                        CrossAxisAlignment.center,
                                     children: [
-                                      Text(
-                                        '2 Items',
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelMedium
-                                            .override(
-                                              font: GoogleFonts.inter(
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .fontStyle,
-                                              ),
-                                              color:
-                                                  FlutterFlowTheme.of(context)
+                                      Icon(
+                                        Icons.shopping_cart_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .onPrimary,
+                                        size: 24.0,
+                                      ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '${cart.itemCount} Items',
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelMedium
+                                                .override(
+                                                  font: GoogleFonts.inter(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .onPrimary,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .fontStyle,
-                                              lineHeight: 1.3,
-                                            ),
-                                      ),
-                                      Text(
-                                        '₹255.00 plus taxes',
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelSmall
-                                            .override(
-                                              font: GoogleFonts.inter(
-                                                fontWeight:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelSmall
-                                                        .fontWeight,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelSmall
-                                                        .fontStyle,
-                                              ),
-                                              color:
-                                                  FlutterFlowTheme.of(context)
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                  lineHeight: 1.3,
+                                                ),
+                                          ),
+                                          Text(
+                                            '₹${cart.totalAmount.toStringAsFixed(2)} plus taxes',
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelSmall
+                                                .override(
+                                                  font: GoogleFonts.inter(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelSmall
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelSmall
+                                                            .fontStyle,
+                                                  ),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .onPrimary80,
-                                              letterSpacing: 0.0,
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelSmall
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelSmall
-                                                      .fontStyle,
-                                              lineHeight: 1.2,
-                                            ),
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelSmall
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelSmall
+                                                          .fontStyle,
+                                                  lineHeight: 1.2,
+                                                ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                    ].divide(SizedBox(width: 16.0)),
                                   ),
-                                ].divide(SizedBox(width: 16.0)),
-                              ),
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  context.goNamed(CartCheckoutWidget.routeName);
-                                },
-                                child: wrapWithModel(
-                                  model: _model.buttonModel,
-                                  updateCallback: () => safeSetState(() {}),
-                                  child: ButtonWidget(
-                                    iconPresent: false,
-                                    iconEnd: Icon(
-                                      Icons.arrow_forward_rounded,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      size: 24.0,
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.goNamed(
+                                          CartCheckoutWidget.routeName);
+                                    },
+                                    child: wrapWithModel(
+                                      model: _model.buttonModel,
+                                      updateCallback: () => safeSetState(() {}),
+                                      child: ButtonWidget(
+                                        iconPresent: false,
+                                        iconEnd: Icon(
+                                          Icons.arrow_forward_rounded,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          size: 24.0,
+                                        ),
+                                        iconEndPresent: true,
+                                        content: 'View Cart',
+                                        variant: 'ghost',
+                                        size: 'medium',
+                                        fullWidth: false,
+                                        loading: false,
+                                        disabled: false,
+                                      ),
                                     ),
-                                    iconEndPresent: true,
-                                    content: 'View Cart',
-                                    variant: 'ghost',
-                                    size: 'medium',
-                                    fullWidth: false,
-                                    loading: false,
-                                    disabled: false,
                                   ),
-                                ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
             ),
           ],

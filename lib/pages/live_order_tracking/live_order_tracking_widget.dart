@@ -1,3 +1,8 @@
+import 'package:collection/collection.dart';
+import '../../providers/order_provider.dart';
+import '../../models/order_model.dart';
+import '/components/bottom_nav/bottom_nav_widget.dart';
+import '/components/bottom_nav_child/bottom_nav_child_widget.dart';
 import '/components/button/button_widget.dart';
 import '/components/tracking_step/tracking_step_widget.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
@@ -8,13 +13,19 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'live_order_tracking_model.dart';
 export 'live_order_tracking_model.dart';
 
 class LiveOrderTrackingWidget extends StatefulWidget {
-  const LiveOrderTrackingWidget({super.key});
+  const LiveOrderTrackingWidget({
+    super.key,
+    this.orderId,
+  });
+
+  final String? orderId;
 
   static String routeName = 'LiveOrderTracking';
   static String routePath = '/liveOrderTracking';
@@ -26,6 +37,12 @@ class LiveOrderTrackingWidget extends StatefulWidget {
 
 class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
   late LiveOrderTrackingModel _model;
+  Timer? _timer;
+  double _progress = 0.0;
+  LatLng _currentPosition = LatLng(18.4140, 77.5860);
+
+  final LatLng _storePos = LatLng(18.4140, 77.5860);
+  final LatLng _customerPos = LatLng(18.4100, 77.5820);
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -33,17 +50,41 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => LiveOrderTrackingModel());
+
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      final orderProvider = Provider.of<OrderProvider>(context, listen: false);
+      final trackingOrder = widget.orderId != null
+          ? orderProvider.orders.firstWhereOrNull((o) => o.id == widget.orderId)
+          : (orderProvider.orders.isNotEmpty ? orderProvider.orders.first : null);
+
+      if (trackingOrder != null && trackingOrder.status == OrderStatus.pickedUp) {
+        setState(() {
+          _progress += 0.05;
+          if (_progress > 1.0) _progress = 1.0;
+
+          _currentPosition = LatLng(
+            _storePos.latitude + (_customerPos.latitude - _storePos.latitude) * _progress,
+            _storePos.longitude + (_customerPos.longitude - _storePos.longitude) * _progress,
+          );
+        });
+      }
+    });
   }
 
   @override
   void dispose() {
     _model.dispose();
-
+    _timer?.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final orderProvider = Provider.of<OrderProvider>(context);
+    final trackingOrder = widget.orderId != null
+        ? orderProvider.orders.firstWhereOrNull((o) => o.id == widget.orderId)
+        : (orderProvider.orders.isNotEmpty ? orderProvider.orders.first : null);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -62,6 +103,11 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
                 onCameraIdle: (latLng) => _model.mapGoogleMapsCenter = latLng,
                 initialLocation: _model.mapGoogleMapsCenter ??=
                     LatLng(18.4116, 77.5842),
+                markers: [
+                  FlutterFlowMarker('delivery_boy', _currentPosition),
+                  FlutterFlowMarker('store', _storePos),
+                  FlutterFlowMarker('customer', _customerPos),
+                ],
                 markerColor: GoogleMarkerColor.violet,
                 mapType: MapType.normal,
                 style: GoogleMapStyle.standard,
@@ -127,7 +173,7 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Order #DDN-8821',
+                                    trackingOrder != null ? 'Order #${trackingOrder.id}' : 'No Active Order',
                                     style: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
@@ -148,7 +194,13 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
                                         ),
                                   ),
                                   Text(
-                                    'Arriving in 12 mins',
+                                    trackingOrder != null
+                                        ? (trackingOrder.status == OrderStatus.delivered
+                                            ? 'Delivered'
+                                            : (trackingOrder.status == OrderStatus.pickedUp
+                                                ? 'Arriving in ${(12 * (1 - _progress)).toStringAsFixed(0)} mins'
+                                                : 'Arriving in 12 mins'))
+                                        : 'Check back later',
                                     style: FlutterFlowTheme.of(context)
                                         .bodySmall
                                         .override(
@@ -440,50 +492,29 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        wrapWithModel(
-                                          model: _model.trackingStepModel1,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: TrackingStepWidget(
-                                            label: 'Order Confirmed',
-                                            time: '11:30 AM',
-                                            completed: true,
-                                            isLast: false,
-                                          ),
+                                        TrackingStepWidget(
+                                          label: 'Order Confirmed',
+                                          time: trackingOrder != null ? dateTimeFormat('hh:mm a', trackingOrder.timestamp) : '11:30 AM',
+                                          completed: trackingOrder != null && trackingOrder.status.index >= OrderStatus.pending.index,
+                                          isLast: false,
                                         ),
-                                        wrapWithModel(
-                                          model: _model.trackingStepModel2,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: TrackingStepWidget(
-                                            label: 'Picked up from Store',
-                                            time: '11:42 AM',
-                                            completed: true,
-                                            isLast: false,
-                                          ),
+                                        TrackingStepWidget(
+                                          label: 'Order Accepted',
+                                          time: 'Pending',
+                                          completed: trackingOrder != null && trackingOrder.status.index >= OrderStatus.accepted.index,
+                                          isLast: false,
                                         ),
-                                        wrapWithModel(
-                                          model: _model.trackingStepModel3,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: TrackingStepWidget(
-                                            label:
-                                                'On the way to your location',
-                                            time: 'Live',
-                                            completed: true,
-                                            isLast: false,
-                                          ),
+                                        TrackingStepWidget(
+                                          label: 'Picked up from Store',
+                                          time: 'In Progress',
+                                          completed: trackingOrder != null && trackingOrder.status.index >= OrderStatus.pickedUp.index,
+                                          isLast: false,
                                         ),
-                                        wrapWithModel(
-                                          model: _model.trackingStepModel4,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: TrackingStepWidget(
-                                            label: 'Delivered',
-                                            time: 'Expected by 11:58 AM',
-                                            completed: false,
-                                            isLast: true,
-                                          ),
+                                        TrackingStepWidget(
+                                          label: 'Delivered',
+                                          time: 'Expected',
+                                          completed: trackingOrder != null && trackingOrder.status.index >= OrderStatus.delivered.index,
+                                          isLast: true,
                                         ),
                                       ].divide(SizedBox(height: 0.0)),
                                     ),
@@ -509,6 +540,18 @@ class _LiveOrderTrackingWidgetState extends State<LiveOrderTrackingWidget> {
                         ].divide(SizedBox(height: 16.0)),
                       ),
                     ),
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: AlignmentDirectional(0.0, 1.0),
+              child: Container(
+                child: wrapWithModel(
+                  model: _model.bottomNavModel,
+                  updateCallback: () => safeSetState(() {}),
+                  child: BottomNavWidget(
+                    child: () => BottomNavChildWidget(),
                   ),
                 ),
               ),

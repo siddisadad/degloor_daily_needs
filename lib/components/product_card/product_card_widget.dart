@@ -1,7 +1,10 @@
 import '/components/button/button_widget.dart';
+import '../../models/product_model.dart';
+import '../../providers/cart_provider.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -175,27 +178,106 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                           lineHeight: 1.4,
                         ),
                   ),
-                  wrapWithModel(
-                    model: _model.buttonModel,
-                    updateCallback: () => safeSetState(() {}),
-                    child: ButtonWidget(
-                      iconPresent: false,
-                      iconEndPresent: false,
-                      content: 'Add',
-                      variant: 'outline',
-                      size: 'small',
-                      fullWidth: false,
-                      loading: false,
-                      disabled: valueOrDefault<bool>(
-                        valueOrDefault<bool>(
+                  Consumer<CartProvider>(
+                    builder: (context, cart, child) {
+                      final cartItemIndex = cart.items.indexWhere((item) => item.product.id == widget!.name);
+                      final isInCart = cartItemIndex >= 0;
+                      final quantity = isInCart ? cart.items[cartItemIndex].quantity : 0;
+
+                      if (isInCart) {
+                        return Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            FlutterFlowIconButton(
+                              borderRadius: 4.0,
+                              buttonSize: 32.0,
+                              fillColor: FlutterFlowTheme.of(context).primaryBackground,
+                              icon: Icon(
+                                Icons.remove,
+                                color: FlutterFlowTheme.of(context).primary,
+                                size: 16.0,
+                              ),
+                              onPressed: () => cart.decrementItem(widget!.name),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
+                                '$quantity',
+                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                      font: GoogleFonts.inter(fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                            ),
+                            FlutterFlowIconButton(
+                              borderRadius: 4.0,
+                              buttonSize: 32.0,
+                              fillColor: FlutterFlowTheme.of(context).primaryBackground,
+                              icon: Icon(
+                                Icons.add,
+                                color: FlutterFlowTheme.of(context).primary,
+                                size: 16.0,
+                              ),
+                              onPressed: () {
+                                final product = Product(
+                                  id: widget!.name,
+                                  name: widget!.name,
+                                  description: widget!.weight,
+                                  price: double.tryParse(widget!.price.replaceAll('₹', '').replaceAll(',', '')) ?? 0.0,
+                                  imageUrl: widget!.imageDesc,
+                                  category: '',
+                                );
+                                cart.addItem(product);
+                              },
+                            ),
+                          ],
+                        );
+                      }
+
+                      return InkWell(
+                        onTap: valueOrDefault<bool>(
                           widget!.inStock,
                           false,
                         )
-                            ? false
-                            : true,
-                        true,
-                      ),
-                    ),
+                            ? () {
+                                final product = Product(
+                                  id: widget!.name,
+                                  name: widget!.name,
+                                  description: widget!.weight,
+                                  price: double.tryParse(widget!.price
+                                          .replaceAll('₹', '')
+                                          .replaceAll(',', '')) ??
+                                      0.0,
+                                  imageUrl: widget!.imageDesc,
+                                  category: '',
+                                );
+                                cart.addItem(product);
+                              }
+                            : null,
+                        child: wrapWithModel(
+                          model: _model.buttonModel,
+                          updateCallback: () => safeSetState(() {}),
+                          child: ButtonWidget(
+                            iconPresent: false,
+                            iconEndPresent: false,
+                            content: 'Add',
+                            variant: 'outline',
+                            size: 'small',
+                            fullWidth: false,
+                            loading: false,
+                            disabled: valueOrDefault<bool>(
+                              valueOrDefault<bool>(
+                                widget!.inStock,
+                                false,
+                              )
+                                  ? false
+                                  : true,
+                              true,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

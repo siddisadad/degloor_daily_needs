@@ -12,11 +12,14 @@ export 'order_request_model.dart';
 class OrderRequestWidget extends StatefulWidget {
   const OrderRequestWidget({
     super.key,
+    required this.id,
     String? distance,
     String? items,
     String? p,
     String? payout,
     String? store,
+    this.onAccept,
+    this.onReject,
   })  : this.distance = distance ?? '1.2 km',
         this.items = items ?? '8 Items',
         this.p = p ?? 'P',
@@ -24,10 +27,13 @@ class OrderRequestWidget extends StatefulWidget {
         this.store = store ?? 'Degloor Super Market';
 
   final String distance;
+  final String id;
   final String items;
   final String p;
   final String payout;
   final String store;
+  final VoidCallback? onAccept;
+  final VoidCallback? onReject;
 
   @override
   State<OrderRequestWidget> createState() => _OrderRequestWidgetState();
@@ -218,35 +224,41 @@ class _OrderRequestWidgetState extends State<OrderRequestWidget> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: wrapWithModel(
-                      model: _model.buttonModel1,
-                      updateCallback: () => safeSetState(() {}),
-                      child: ButtonWidget(
-                        iconPresent: false,
-                        iconEndPresent: false,
-                        content: 'Reject',
-                        variant: 'ghost',
-                        size: 'small',
-                        fullWidth: false,
-                        loading: false,
-                        disabled: false,
+                    child: InkWell(
+                      onTap: widget.onReject,
+                      child: wrapWithModel(
+                        model: _model.buttonModel1,
+                        updateCallback: () => safeSetState(() {}),
+                        child: ButtonWidget(
+                          iconPresent: false,
+                          iconEndPresent: false,
+                          content: 'Reject',
+                          variant: 'ghost',
+                          size: 'small',
+                          fullWidth: false,
+                          loading: false,
+                          disabled: false,
+                        ),
                       ),
                     ),
                   ),
                   Expanded(
                     flex: 1,
-                    child: wrapWithModel(
-                      model: _model.buttonModel2,
-                      updateCallback: () => safeSetState(() {}),
-                      child: ButtonWidget(
-                        iconPresent: false,
-                        iconEndPresent: false,
-                        content: 'Accept Order',
-                        variant: 'primary',
-                        size: 'small',
-                        fullWidth: false,
-                        loading: false,
-                        disabled: false,
+                    child: InkWell(
+                      onTap: widget.onAccept,
+                      child: wrapWithModel(
+                        model: _model.buttonModel2,
+                        updateCallback: () => safeSetState(() {}),
+                        child: ButtonWidget(
+                          iconPresent: false,
+                          iconEndPresent: false,
+                          content: 'Accept Order',
+                          variant: 'primary',
+                          size: 'small',
+                          fullWidth: false,
+                          loading: false,
+                          disabled: false,
+                        ),
                       ),
                     ),
                   ),

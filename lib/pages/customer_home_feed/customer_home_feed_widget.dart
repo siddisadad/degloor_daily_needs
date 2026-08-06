@@ -1,4 +1,6 @@
 import '/components/bottom_nav/bottom_nav_widget.dart';
+import '../../providers/address_provider.dart';
+import '../../models/address_model.dart';
 import '/components/bottom_nav_child/bottom_nav_child_widget.dart';
 import '/components/button/button_widget.dart';
 import '/components/category_item/category_item_widget.dart';
@@ -27,13 +29,104 @@ class CustomerHomeFeedWidget extends StatefulWidget {
 
 class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
   late CustomerHomeFeedModel _model;
+  final List<Map<String, String>> allStores = [
+    {
+      'name': 'Degloor Fresh Mart',
+      'category': 'Grocery • Fruits • Vegetables',
+      'image':
+          'https://dimg.dreamflow.cloud/v1/image/modern%20grocery%20store%20interior',
+      'rating': '4.8',
+      'time': '20-30 min',
+    },
+    {
+      'name': 'City Bakery & Sweets',
+      'category': 'Bakery • Snacks • Desserts',
+      'image':
+          'https://dimg.dreamflow.cloud/v1/image/delicious%20pastries%20in%20a%20display%20case',
+      'rating': '4.5',
+      'time': '15-25 min',
+    },
+    {
+      'name': 'Nanded Pharma',
+      'category': 'Medicines • Wellness',
+      'image':
+          'https://dimg.dreamflow.cloud/v1/image/clean%20pharmacy%20shelves',
+      'rating': '4.9',
+      'time': '10-15 min',
+    },
+  ];
+  List<Map<String, String>> filteredStores = [];
+  String? selectedCategory;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _showAddAddressDialog(BuildContext context) {
+    final labelController = TextEditingController();
+    final addressController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Add New Address'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: labelController,
+              decoration: InputDecoration(labelText: 'Label (e.g. Home, Office)'),
+            ),
+            TextField(
+              controller: addressController,
+              decoration: InputDecoration(labelText: 'Full Address'),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context), child: Text('Cancel')),
+          TextButton(
+            onPressed: () {
+              if (labelController.text.isNotEmpty && addressController.text.isNotEmpty) {
+                final newAddress = Address(
+                  id: DateTime.now().millisecondsSinceEpoch.toString(),
+                  label: labelController.text,
+                  fullAddress: addressController.text,
+                );
+                Provider.of<AddressProvider>(context, listen: false).addAddress(newAddress);
+                Navigator.pop(context);
+                showSnackbar(context, 'Address added successfully!');
+              }
+            },
+            child: Text('Add'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _filterStores() {
+    final query =
+        _model.textFieldModel.inputTextController?.text.toLowerCase() ?? '';
+    safeSetState(() {
+      filteredStores = allStores.where((store) {
+        final matchesQuery = store['name']!.toLowerCase().contains(query) ||
+            store['category']!.toLowerCase().contains(query);
+        final matchesCategory = selectedCategory == null ||
+            selectedCategory == 'More' ||
+            store['category']!.contains(selectedCategory!);
+        return matchesQuery && matchesCategory;
+      }).toList();
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => CustomerHomeFeedModel());
+    filteredStores = allStores;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _model.textFieldModel.inputTextController?.addListener(_filterStores);
+    });
   }
 
   @override
@@ -86,40 +179,88 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.location_on_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        size: 18.0,
-                                      ),
-                                      Text(
-                                        'Degloor, Nanded',
-                                        style: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              font: GoogleFonts.inter(
-                                                fontWeight: FontWeight.bold,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .fontStyle,
+                                  InkWell(
+                                    onTap: () async {
+                                      final addressProvider = Provider.of<AddressProvider>(context, listen: false);
+                                      await showModalBottomSheet(
+                                        context: context,
+                                        builder: (context) => Container(
+                                          padding: EdgeInsets.all(24.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                                'Select Delivery Address',
+                                                style: FlutterFlowTheme.of(context).titleMedium,
                                               ),
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.bold,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontStyle,
-                                              lineHeight: 1.4,
-                                            ),
-                                      ),
-                                    ].divide(SizedBox(width: 4.0)),
+                                              SizedBox(height: 16.0),
+                                              ...addressProvider.addresses.asMap().entries.map((entry) {
+                                                final index = entry.key;
+                                                final address = entry.value;
+                                                return ListTile(
+                                                  title: Text(address.label),
+                                                  subtitle: Text(address.fullAddress),
+                                                  trailing: addressProvider.selectedIndex == index
+                                                      ? Icon(Icons.check_circle, color: FlutterFlowTheme.of(context).primary)
+                                                      : null,
+                                                  onTap: () {
+                                                    addressProvider.selectAddress(index);
+                                                    Navigator.pop(context);
+                                                  },
+                                                );
+                                              }).toList(),
+                                              Divider(),
+                                              ListTile(
+                                                leading: Icon(Icons.add, color: FlutterFlowTheme.of(context).primary),
+                                                title: Text('Add New Address', style: TextStyle(color: FlutterFlowTheme.of(context).primary, fontWeight: FontWeight.bold)),
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                  _showAddAddressDialog(context);
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.location_on_rounded,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          size: 18.0,
+                                        ),
+                                        Consumer<AddressProvider>(
+                                          builder: (context, ap, _) => Text(
+                                            ap.selectedAddress.label == 'Home' ? 'Degloor, Nanded' : ap.selectedAddress.label,
+                                            style: FlutterFlowTheme.of(context)
+                                                .titleSmall
+                                                .override(
+                                                  font: GoogleFonts.inter(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(context)
+                                                            .titleSmall
+                                                            .fontStyle,
+                                                  ),
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(context)
+                                                          .titleSmall
+                                                          .fontStyle,
+                                                  lineHeight: 1.4,
+                                                ),
+                                          ),
+                                        ),
+                                        Icon(Icons.keyboard_arrow_down, size: 18.0),
+                                      ].divide(SizedBox(width: 4.0)),
+                                    ),
                                   ),
                                   Text(
                                     'Delivering to your doorstep',
@@ -161,8 +302,8 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                   Icons.person_outline_rounded,
                                   size: 24.0,
                                 ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
+                                onPressed: () async {
+                                  context.pushNamed('UserProfile');
                                 },
                               ),
                             ],
@@ -550,143 +691,61 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                       shrinkWrap: true,
                                       scrollDirection: Axis.vertical,
                                       children: [
-                                        wrapWithModel(
-                                          model: _model.categoryItemModel1,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: CategoryItemWidget(
-                                            icon: Icon(
-                                              Icons.shopping_basket_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 28.0,
-                                            ),
-                                            label: 'Grocery',
-                                            tone: FlutterFlowTheme.of(context)
-                                                .primary,
+                                        {
+                                          'label': 'Grocery',
+                                          'icon': Icons.shopping_basket_rounded,
+                                          'tone': FlutterFlowTheme.of(context).primary,
+                                        },
+                                        {
+                                          'label': 'Fruits',
+                                          'icon': Icons.help,
+                                          'tone': FlutterFlowTheme.of(context).tertiary,
+                                        },
+                                        {
+                                          'label': 'Pharmacy',
+                                          'icon': Icons.medical_services_rounded,
+                                          'tone': FlutterFlowTheme.of(context).secondary,
+                                        },
+                                        {
+                                          'label': 'Restaurant',
+                                          'icon': Icons.restaurant_rounded,
+                                          'tone': FlutterFlowTheme.of(context).primary,
+                                        },
+                                        {
+                                          'label': 'Bakery',
+                                          'icon': Icons.cake_rounded,
+                                          'tone': FlutterFlowTheme.of(context).tertiary,
+                                        },
+                                        {
+                                          'label': 'Water',
+                                          'icon': Icons.water_drop_rounded,
+                                          'tone': FlutterFlowTheme.of(context).secondary,
+                                        },
+                                        {
+                                          'label': 'Hardware',
+                                          'icon': Icons.home_repair_service_rounded,
+                                          'tone': FlutterFlowTheme.of(context).primary,
+                                        },
+                                        {
+                                          'label': 'More',
+                                          'icon': Icons.apps_rounded,
+                                          'tone': FlutterFlowTheme.of(context).secondaryText,
+                                        },
+                                      ].map((cat) {
+                                        return CategoryItemWidget(
+                                          icon: Icon(
+                                            cat['icon'] as IconData,
+                                            color: FlutterFlowTheme.of(context).primary,
+                                            size: 28.0,
                                           ),
-                                        ),
-                                        wrapWithModel(
-                                          model: _model.categoryItemModel2,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: CategoryItemWidget(
-                                            icon: Icon(
-                                              Icons.help,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 28.0,
-                                            ),
-                                            label: 'Fruits',
-                                            tone: FlutterFlowTheme.of(context)
-                                                .tertiary,
-                                          ),
-                                        ),
-                                        wrapWithModel(
-                                          model: _model.categoryItemModel3,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: CategoryItemWidget(
-                                            icon: Icon(
-                                              Icons.medical_services_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 28.0,
-                                            ),
-                                            label: 'Pharmacy',
-                                            tone: FlutterFlowTheme.of(context)
-                                                .secondary,
-                                          ),
-                                        ),
-                                        wrapWithModel(
-                                          model: _model.categoryItemModel4,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: CategoryItemWidget(
-                                            icon: Icon(
-                                              Icons.restaurant_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 28.0,
-                                            ),
-                                            label: 'Restaurant',
-                                            tone: FlutterFlowTheme.of(context)
-                                                .primary,
-                                          ),
-                                        ),
-                                        wrapWithModel(
-                                          model: _model.categoryItemModel5,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: CategoryItemWidget(
-                                            icon: Icon(
-                                              Icons.cake_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 28.0,
-                                            ),
-                                            label: 'Bakery',
-                                            tone: FlutterFlowTheme.of(context)
-                                                .tertiary,
-                                          ),
-                                        ),
-                                        wrapWithModel(
-                                          model: _model.categoryItemModel6,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: CategoryItemWidget(
-                                            icon: Icon(
-                                              Icons.water_drop_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 28.0,
-                                            ),
-                                            label: 'Water',
-                                            tone: FlutterFlowTheme.of(context)
-                                                .secondary,
-                                          ),
-                                        ),
-                                        wrapWithModel(
-                                          model: _model.categoryItemModel7,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: CategoryItemWidget(
-                                            icon: Icon(
-                                              Icons.home_repair_service_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 28.0,
-                                            ),
-                                            label: 'Hardware',
-                                            tone: FlutterFlowTheme.of(context)
-                                                .primary,
-                                          ),
-                                        ),
-                                        wrapWithModel(
-                                          model: _model.categoryItemModel8,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: CategoryItemWidget(
-                                            icon: Icon(
-                                              Icons.apps_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 28.0,
-                                            ),
-                                            label: 'More',
-                                            tone: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                          ),
-                                        ),
-                                      ],
+                                          label: cat['label'] as String,
+                                          tone: cat['tone'] as Color,
+                                          onTap: () {
+                                            selectedCategory = cat['label'] as String;
+                                            _filterStores();
+                                          },
+                                        );
+                                      }).toList(),
                                     ),
                                   ].divide(SizedBox(height: 16.0)),
                                 ),
@@ -751,49 +810,27 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                           MainAxisAlignment.start,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.stretch,
-                                      children: [
-                                        wrapWithModel(
-                                          model: _model.storeCardModel1,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: StoreCardWidget(
-                                            category:
-                                                'Grocery • Fruits • Vegetables',
-                                            imageDesc:
-                                                'https://dimg.dreamflow.cloud/v1/image/modern%20grocery%20store%20interior',
-                                            name: 'Degloor Fresh Mart',
-                                            rating: '4.8',
-                                            time: '20-30 min',
-                                          ),
-                                        ),
-                                        wrapWithModel(
-                                          model: _model.storeCardModel2,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: StoreCardWidget(
-                                            category:
-                                                'Bakery • Snacks • Desserts',
-                                            imageDesc:
-                                                'https://dimg.dreamflow.cloud/v1/image/delicious%20pastries%20in%20a%20display%20case',
-                                            name: 'City Bakery & Sweets',
-                                            rating: '4.5',
-                                            time: '15-25 min',
-                                          ),
-                                        ),
-                                        wrapWithModel(
-                                          model: _model.storeCardModel3,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: StoreCardWidget(
-                                            category: 'Medicines • Wellness',
-                                            imageDesc:
-                                                'https://dimg.dreamflow.cloud/v1/image/clean%20pharmacy%20shelves',
-                                            name: 'Nanded Pharma',
-                                            rating: '4.9',
-                                            time: '10-15 min',
-                                          ),
-                                        ),
-                                      ].divide(SizedBox(height: 16.0)),
+                                      children: filteredStores.map((store) {
+                                        return StoreCardWidget(
+                                          category: store['category']!,
+                                          imageDesc: store['image']!,
+                                          name: store['name']!,
+                                          rating: store['rating']!,
+                                          time: store['time']!,
+                                          onTap: () {
+                                            context.pushNamed(
+                                              'StoreStorefront',
+                                              queryParameters: {
+                                                'name': store['name'],
+                                                'rating': store['rating'],
+                                                'time': store['time'],
+                                                'image': store['image'],
+                                                'category': store['category'],
+                                              }.withoutNulls,
+                                            );
+                                          },
+                                        );
+                                      }).toList().divide(SizedBox(height: 16.0)),
                                     ),
                                   ].divide(SizedBox(height: 16.0)),
                                 ),

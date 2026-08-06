@@ -14,12 +14,14 @@ class CategoryItemWidget extends StatefulWidget {
     this.icon,
     String? label,
     Color? tone,
+    this.onTap,
   })  : this.label = label ?? 'Grocery',
         this.tone = tone ?? const Color(0x00000000);
 
   final Widget? icon;
   final String label;
   final Color tone;
+  final VoidCallback? onTap;
 
   @override
   State<CategoryItemWidget> createState() => _CategoryItemWidgetState();
@@ -49,42 +51,46 @@ class _CategoryItemWidgetState extends State<CategoryItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          width: 64.0,
-          height: 64.0,
-          decoration: BoxDecoration(
-            color: valueOrDefault<Color>(
-              widget!.tone,
-              FlutterFlowTheme.of(context).primary,
+    return InkWell(
+      onTap: widget.onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            width: 64.0,
+            height: 64.0,
+            decoration: BoxDecoration(
+              color: valueOrDefault<Color>(
+                widget!.tone,
+                FlutterFlowTheme.of(context).primary,
+              ).withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12.0),
+              shape: BoxShape.rectangle,
             ),
-            shape: BoxShape.rectangle,
+            child: widget!.icon!,
           ),
-          child: widget!.icon!,
-        ),
-        Text(
-          valueOrDefault<String>(
-            widget!.label,
-            'Grocery',
-          ),
-          style: FlutterFlowTheme.of(context).labelMedium.override(
-                font: GoogleFonts.inter(
-                  fontWeight:
-                      FlutterFlowTheme.of(context).labelMedium.fontWeight,
+          Text(
+            valueOrDefault<String>(
+              widget!.label,
+              'Grocery',
+            ),
+            style: FlutterFlowTheme.of(context).labelMedium.override(
+                  font: GoogleFonts.inter(
+                    fontWeight:
+                        FlutterFlowTheme.of(context).labelMedium.fontWeight,
+                    fontStyle: FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                  ),
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  letterSpacing: 0.0,
+                  fontWeight: FlutterFlowTheme.of(context).labelMedium.fontWeight,
                   fontStyle: FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                  lineHeight: 1.3,
                 ),
-                color: FlutterFlowTheme.of(context).primaryText,
-                letterSpacing: 0.0,
-                fontWeight: FlutterFlowTheme.of(context).labelMedium.fontWeight,
-                fontStyle: FlutterFlowTheme.of(context).labelMedium.fontStyle,
-                lineHeight: 1.3,
-              ),
-        ),
-      ].divide(SizedBox(height: 4.0)),
+          ),
+        ].divide(SizedBox(height: 4.0)),
+      ),
     );
   }
 }

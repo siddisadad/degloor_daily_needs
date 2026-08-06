@@ -40,10 +40,12 @@ class _BottomNavChildWidgetState extends State<BottomNavChildWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    final String currentRoute = GoRouterState.of(context).name ?? '';
+
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         wrapWithModel(
           model: _model.navItemModel1,
@@ -52,11 +54,14 @@ class _BottomNavChildWidgetState extends State<BottomNavChildWidget> {
             label: 'Home',
             icon: Icon(
               Icons.home_rounded,
-              color: FlutterFlowTheme.of(context).primaryText,
+              color: currentRoute == 'CustomerHomeFeed'
+                  ? FlutterFlowTheme.of(context).primary
+                  : FlutterFlowTheme.of(context).secondaryText,
               size: 24.0,
             ),
             target: 'CustomerHomeFeed',
-            selected: true,
+            selected: currentRoute == 'CustomerHomeFeed',
+            onTap: () => context.goNamed('CustomerHomeFeed'),
           ),
         ),
         wrapWithModel(
@@ -66,11 +71,14 @@ class _BottomNavChildWidgetState extends State<BottomNavChildWidget> {
             label: 'Stores',
             icon: Icon(
               Icons.store_rounded,
-              color: FlutterFlowTheme.of(context).primaryText,
+              color: currentRoute == 'StoreStorefront'
+                  ? FlutterFlowTheme.of(context).primary
+                  : FlutterFlowTheme.of(context).secondaryText,
               size: 24.0,
             ),
             target: 'StoreStorefront',
-            selected: false,
+            selected: currentRoute == 'StoreStorefront',
+            onTap: () => context.goNamed('StoreStorefront'),
           ),
         ),
         wrapWithModel(
@@ -80,11 +88,14 @@ class _BottomNavChildWidgetState extends State<BottomNavChildWidget> {
             label: 'Cart',
             icon: Icon(
               Icons.shopping_cart_rounded,
-              color: FlutterFlowTheme.of(context).primaryText,
+              color: currentRoute == 'CartCheckout'
+                  ? FlutterFlowTheme.of(context).primary
+                  : FlutterFlowTheme.of(context).secondaryText,
               size: 24.0,
             ),
             target: 'CartCheckout',
-            selected: false,
+            selected: currentRoute == 'CartCheckout',
+            onTap: () => context.goNamed('CartCheckout'),
           ),
         ),
         wrapWithModel(
@@ -94,12 +105,28 @@ class _BottomNavChildWidgetState extends State<BottomNavChildWidget> {
             label: 'Orders',
             icon: Icon(
               Icons.local_shipping_rounded,
-              color: FlutterFlowTheme.of(context).primaryText,
+              color: currentRoute == 'OrderHistory' || currentRoute == 'LiveOrderTracking'
+                  ? FlutterFlowTheme.of(context).primary
+                  : FlutterFlowTheme.of(context).secondaryText,
               size: 24.0,
             ),
-            target: 'LiveOrderTracking',
-            selected: false,
+            target: 'OrderHistory',
+            selected: currentRoute == 'OrderHistory' || currentRoute == 'LiveOrderTracking',
+            onTap: () => context.goNamed('OrderHistory'),
           ),
+        ),
+        NavItemWidget(
+          label: 'Wallet',
+          icon: Icon(
+            Icons.account_balance_wallet_rounded,
+            color: currentRoute == 'UserWalletRewards'
+                ? FlutterFlowTheme.of(context).primary
+                : FlutterFlowTheme.of(context).secondaryText,
+            size: 24.0,
+          ),
+          target: 'UserWalletRewards',
+          selected: currentRoute == 'UserWalletRewards',
+          onTap: () => context.goNamed('UserWalletRewards'),
         ),
       ],
     );

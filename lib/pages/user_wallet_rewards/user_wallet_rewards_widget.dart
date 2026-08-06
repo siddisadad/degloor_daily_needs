@@ -1,5 +1,6 @@
 import '/components/bottom_nav/bottom_nav_widget.dart';
-import '/components/bottom_nav_child3/bottom_nav_child3_widget.dart';
+import '../../providers/user_provider.dart';
+import '/components/bottom_nav_child/bottom_nav_child_widget.dart';
 import '/components/button/button_widget.dart';
 import '/components/reward_badge/reward_badge_widget.dart';
 import '/components/transaction_item/transaction_item_widget.dart';
@@ -10,6 +11,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'user_wallet_rewards_model.dart';
@@ -46,6 +48,8 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -198,7 +202,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                               ),
                                         ),
                                         Text(
-                                          '₹1,240.50',
+                                          '₹${userProvider.balance.toStringAsFixed(2)}',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -287,36 +291,28 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                 children: [
                                   Expanded(
                                     flex: 1,
-                                    child: wrapWithModel(
-                                      model: _model.rewardBadgeModel1,
-                                      updateCallback: () => safeSetState(() {}),
-                                      child: RewardBadgeWidget(
-                                        icon: Icon(
-                                          Icons.payments_rounded,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 24.0,
-                                        ),
-                                        label: 'Cashback Earned',
-                                        value: '₹450',
+                                    child: RewardBadgeWidget(
+                                      icon: Icon(
+                                        Icons.payments_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        size: 24.0,
                                       ),
+                                      label: 'Cashback Earned',
+                                      value: '₹${userProvider.cashbackEarned.toStringAsFixed(0)}',
                                     ),
                                   ),
                                   Expanded(
                                     flex: 1,
-                                    child: wrapWithModel(
-                                      model: _model.rewardBadgeModel2,
-                                      updateCallback: () => safeSetState(() {}),
-                                      child: RewardBadgeWidget(
-                                        icon: Icon(
-                                          Icons.stars_rounded,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 24.0,
-                                        ),
-                                        label: 'Referral Points',
-                                        value: '1,200',
+                                    child: RewardBadgeWidget(
+                                      icon: Icon(
+                                        Icons.stars_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        size: 24.0,
                                       ),
+                                      label: 'Referral Points',
+                                      value: '${userProvider.referralPoints}',
                                     ),
                                   ),
                                 ].divide(SizedBox(width: 16.0)),
@@ -452,14 +448,31 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                                           lineHeight: 1.4,
                                                         ),
                                                   ),
-                                                  Text(
-                                                    'Copy Code',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelLarge
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Clipboard.setData(ClipboardData(text: 'DDNDS50'));
+                                                      showSnackbar(context, 'Referral code copied to clipboard!');
+                                                    },
+                                                    child: Text(
+                                                      'Copy Code',
+                                                      style: FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelLarge
+                                                          .override(
+                                                            font:
+                                                                GoogleFonts.inter(
+                                                              fontWeight:
+                                                                  FontWeight.bold,
+                                                              fontStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .labelLarge
+                                                                      .fontStyle,
+                                                            ),
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primary,
+                                                            letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             fontStyle:
@@ -467,46 +480,41 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                                                         context)
                                                                     .labelLarge
                                                                     .fontStyle,
+                                                            lineHeight: 1.3,
                                                           ),
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelLarge
-                                                                  .fontStyle,
-                                                          lineHeight: 1.3,
-                                                        ),
+                                                    ),
                                                   ),
                                                 ],
                                               ),
                                             ),
                                           ),
                                         ),
-                                        wrapWithModel(
-                                          model: _model.buttonModel,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: ButtonWidget(
-                                            icon: Icon(
-                                              Icons.share_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              size: 24.0,
+                                        InkWell(
+                                          onTap: () async {
+                                            await launchURL(
+                                                'https://wa.me/?text=Use%20my%20referral%20code%20DDNDS50%20to%20get%20₹50%20cashback%20on%20your%20first%20order%20at%20Degloor%20Daily%20Needs!');
+                                          },
+                                          child: wrapWithModel(
+                                            model: _model.buttonModel,
+                                            updateCallback: () =>
+                                                safeSetState(() {}),
+                                            child: ButtonWidget(
+                                              icon: Icon(
+                                                Icons.share_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                size: 24.0,
+                                              ),
+                                              iconPresent: true,
+                                              iconEndPresent: false,
+                                              content: 'Share Referral Link',
+                                              variant: 'primary',
+                                              size: 'medium',
+                                              fullWidth: true,
+                                              loading: false,
+                                              disabled: false,
                                             ),
-                                            iconPresent: true,
-                                            iconEndPresent: false,
-                                            content: 'Share Referral Link',
-                                            variant: 'primary',
-                                            size: 'medium',
-                                            fullWidth: true,
-                                            loading: false,
-                                            disabled: false,
                                           ),
                                         ),
                                       ].divide(SizedBox(height: 16.0)),
@@ -678,7 +686,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                   model: _model.bottomNavModel,
                   updateCallback: () => safeSetState(() {}),
                   child: BottomNavWidget(
-                    child: () => BottomNavChild3Widget(),
+                    child: () => BottomNavChildWidget(),
                   ),
                 ),
               ),

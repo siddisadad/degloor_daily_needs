@@ -17,20 +17,28 @@ class InventoryItemWidget extends StatefulWidget {
     bool? available,
     String? category,
     String? name,
+    String? imageUrl,
     String? price,
     String? stock,
+    this.onToggle,
+    this.onEdit,
+    this.onDelete,
   })  : this.available = available ?? false,
         this.category = category ?? 'Grocery',
-        this.name = name ??
-            'https://dimg.dreamflow.cloud/v1/image/Sona%20Masoori%20Rice%20(5kg)',
+        this.name = name ?? 'Product Name',
+        this.imageUrl = imageUrl ?? 'https://dimg.dreamflow.cloud/v1/image/placeholder',
         this.price = price ?? '345',
         this.stock = stock ?? '24';
 
   final bool available;
   final String category;
   final String name;
+  final String imageUrl;
   final String price;
   final String stock;
+  final VoidCallback? onToggle;
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
 
   @override
   State<InventoryItemWidget> createState() => _InventoryItemWidgetState();
@@ -92,7 +100,7 @@ class _InventoryItemWidgetState extends State<InventoryItemWidget> {
                     fadeInDuration: Duration(milliseconds: 0),
                     fadeOutDuration: Duration(milliseconds: 0),
                     imageUrl: valueOrDefault<String>(
-                      widget!.name,
+                      widget!.imageUrl,
                       'https://dimg.dreamflow.cloud/v1/image/Sona%20Masoori%20Rice%20(5kg)',
                     ),
                     fit: BoxFit.cover,
@@ -110,7 +118,7 @@ class _InventoryItemWidgetState extends State<InventoryItemWidget> {
                     Text(
                       valueOrDefault<String>(
                         widget!.name,
-                        'https://dimg.dreamflow.cloud/v1/image/Sona%20Masoori%20Rice%20(5kg)',
+                        'Product Name',
                       ),
                       style: FlutterFlowTheme.of(context).titleMedium.override(
                             font: GoogleFonts.inter(
@@ -218,16 +226,19 @@ class _InventoryItemWidgetState extends State<InventoryItemWidget> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  wrapWithModel(
-                    model: _model.switchModel,
-                    updateCallback: () => safeSetState(() {}),
-                    child: SwitchComponentWidget(
-                      label: 'In Stock',
-                      labelPresent: true,
-                      variant: 'iOS',
-                      active: valueOrDefault<bool>(
-                        widget!.available,
-                        false,
+                  InkWell(
+                    onTap: widget.onToggle,
+                    child: wrapWithModel(
+                      model: _model.switchModel,
+                      updateCallback: () => safeSetState(() {}),
+                      child: SwitchComponentWidget(
+                        label: 'In Stock',
+                        labelPresent: true,
+                        variant: 'iOS',
+                        active: valueOrDefault<bool>(
+                          widget!.available,
+                          false,
+                        ),
                       ),
                     ),
                   ),
@@ -246,9 +257,7 @@ class _InventoryItemWidgetState extends State<InventoryItemWidget> {
                           color: FlutterFlowTheme.of(context).secondaryText,
                           size: 20.0,
                         ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
-                        },
+                        onPressed: widget.onEdit,
                       ),
                       FlutterFlowIconButton(
                         borderRadius: 6.0,
@@ -260,9 +269,7 @@ class _InventoryItemWidgetState extends State<InventoryItemWidget> {
                           color: FlutterFlowTheme.of(context).error,
                           size: 20.0,
                         ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
-                        },
+                        onPressed: widget.onDelete,
                       ),
                     ].divide(SizedBox(width: 4.0)),
                   ),

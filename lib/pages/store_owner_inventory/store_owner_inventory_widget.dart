@@ -1,4 +1,5 @@
 import '/components/button/button_widget.dart';
+import '../../providers/inventory_provider.dart';
 import '/components/inventory_item/inventory_item_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -24,6 +25,8 @@ class StoreOwnerInventoryWidget extends StatefulWidget {
 
 class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
   late StoreOwnerInventoryModel _model;
+  String _selectedCategory = 'All Products';
+  String _searchQuery = '';
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -42,6 +45,13 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final inventory = Provider.of<InventoryProvider>(context);
+    final filteredProducts = inventory.products.where((p) {
+      final matchesCategory = _selectedCategory == 'All Products' || p.category == _selectedCategory;
+      final matchesSearch = p.name.toLowerCase().contains(_searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    }).toList();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -165,18 +175,52 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                   ),
                                 ].divide(SizedBox(height: 4.0)),
                               ),
-                              FlutterFlowIconButton(
-                                borderRadius: 9999.0,
-                                buttonSize: 40.0,
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                icon: Icon(
-                                  Icons.search_rounded,
-                                  size: 24.0,
-                                ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
-                                },
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  FlutterFlowIconButton(
+                                    borderRadius: 9999.0,
+                                    buttonSize: 40.0,
+                                    fillColor: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    icon: Icon(
+                                      Icons.search_rounded,
+                                      size: 24.0,
+                                    ),
+                                    onPressed: () {
+                                      print('IconButton pressed ...');
+                                    },
+                                  ),
+                                  FlutterFlowIconButton(
+                                    borderRadius: 9999.0,
+                                    buttonSize: 40.0,
+                                    fillColor: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    icon: Icon(
+                                      Icons.logout_rounded,
+                                      color: FlutterFlowTheme.of(context).error,
+                                      size: 24.0,
+                                    ),
+                                    onPressed: () async {
+                                      final confirm = await showDialog<bool>(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                          title: Text('Logout'),
+                                          content: Text('Are you sure?'),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () => Navigator.pop(context, false),
+                                                child: Text('Cancel')),
+                                            TextButton(
+                                                onPressed: () => Navigator.pop(context, true),
+                                                child: Text('Logout')),
+                                          ],
+                                        ),
+                                      );
+                                      if (confirm == true) AppStateNotifier.instance.logout();
+                                    },
+                                  ),
+                                ].divide(SizedBox(width: 8)),
                               ),
                             ],
                           ),
@@ -239,7 +283,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                                 ),
                                           ),
                                           Text(
-                                            '142',
+                                            '${inventory.totalItems}',
                                             style: FlutterFlowTheme.of(context)
                                                 .titleLarge
                                                 .override(
@@ -324,7 +368,7 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                                 ),
                                           ),
                                           Text(
-                                            '12',
+                                            '${inventory.lowStockCount}',
                                             style: FlutterFlowTheme.of(context)
                                                 .titleLarge
                                                 .override(
@@ -391,38 +435,55 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                              height: 34.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                borderRadius: BorderRadius.circular(8.0),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                  width: 1.0,
+                            InkWell(
+                              onTap: () => setState(() => _selectedCategory = 'All Products'),
+                              child: Container(
+                                height: 34.0,
+                                decoration: BoxDecoration(
+                                  color: _selectedCategory == 'All Products'
+                                      ? FlutterFlowTheme.of(context).primary
+                                      : FlutterFlowTheme.of(context).secondaryBackground,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  border: Border.all(
+                                    color: FlutterFlowTheme.of(context).alternate,
+                                    width: 1.0,
+                                  ),
                                 ),
-                              ),
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 12.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.check_rounded,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      size: 16.0,
-                                    ),
-                                    Text(
-                                      'All Products',
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            font: GoogleFonts.inter(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      12.0, 0.0, 12.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      if (_selectedCategory == 'All Products')
+                                        Icon(
+                                          Icons.check_rounded,
+                                          color: FlutterFlowTheme.of(context).onPrimary,
+                                          size: 16.0,
+                                        ),
+                                      Text(
+                                        'All Products',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: _selectedCategory == 'All Products'
+                                                  ? FlutterFlowTheme.of(context).onPrimary
+                                                  : FlutterFlowTheme.of(context).primaryText,
+                                              fontSize: 14.0,
+                                              letterSpacing: 0.0,
                                               fontWeight:
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
@@ -431,52 +492,63 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
                                                       .fontStyle,
+                                              lineHeight: 1.3,
                                             ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 14.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .fontStyle,
-                                            lineHeight: 1.3,
-                                          ),
-                                    ),
-                                  ].divide(SizedBox(width: 6.0)),
+                                      ),
+                                    ].divide(SizedBox(width: 6.0)),
+                                  ),
                                 ),
                               ),
                             ),
-                            Container(
-                              height: 34.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                borderRadius: BorderRadius.circular(8.0),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                  width: 1.0,
+                            InkWell(
+                              onTap: () => setState(() => _selectedCategory = 'Grocery'),
+                              child: Container(
+                                height: 34.0,
+                                decoration: BoxDecoration(
+                                  color: _selectedCategory == 'Grocery'
+                                      ? FlutterFlowTheme.of(context).primary
+                                      : FlutterFlowTheme.of(context).secondaryBackground,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  border: Border.all(
+                                    color: FlutterFlowTheme.of(context).alternate,
+                                    width: 1.0,
+                                  ),
                                 ),
-                              ),
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 12.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Grocery',
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            font: GoogleFonts.inter(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      12.0, 0.0, 12.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      if (_selectedCategory == 'Grocery')
+                                        Icon(
+                                          Icons.check_rounded,
+                                          color: FlutterFlowTheme.of(context).onPrimary,
+                                          size: 16.0,
+                                        ),
+                                      Text(
+                                        'Grocery',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: _selectedCategory == 'Grocery'
+                                                  ? FlutterFlowTheme.of(context).onPrimary
+                                                  : FlutterFlowTheme.of(context).primaryText,
+                                              fontSize: 14.0,
+                                              letterSpacing: 0.0,
                                               fontWeight:
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
@@ -485,52 +557,63 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
                                                       .fontStyle,
+                                              lineHeight: 1.3,
                                             ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 14.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .fontStyle,
-                                            lineHeight: 1.3,
-                                          ),
-                                    ),
-                                  ].divide(SizedBox(width: 6.0)),
+                                      ),
+                                    ].divide(SizedBox(width: 6.0)),
+                                  ),
                                 ),
                               ),
                             ),
-                            Container(
-                              height: 34.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                borderRadius: BorderRadius.circular(8.0),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                  width: 1.0,
+                            InkWell(
+                              onTap: () => setState(() => _selectedCategory = 'Vegetables'),
+                              child: Container(
+                                height: 34.0,
+                                decoration: BoxDecoration(
+                                  color: _selectedCategory == 'Vegetables'
+                                      ? FlutterFlowTheme.of(context).primary
+                                      : FlutterFlowTheme.of(context).secondaryBackground,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  border: Border.all(
+                                    color: FlutterFlowTheme.of(context).alternate,
+                                    width: 1.0,
+                                  ),
                                 ),
-                              ),
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 12.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Vegetables',
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            font: GoogleFonts.inter(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      12.0, 0.0, 12.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      if (_selectedCategory == 'Vegetables')
+                                        Icon(
+                                          Icons.check_rounded,
+                                          color: FlutterFlowTheme.of(context).onPrimary,
+                                          size: 16.0,
+                                        ),
+                                      Text(
+                                        'Vegetables',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: _selectedCategory == 'Vegetables'
+                                                  ? FlutterFlowTheme.of(context).onPrimary
+                                                  : FlutterFlowTheme.of(context).primaryText,
+                                              fontSize: 14.0,
+                                              letterSpacing: 0.0,
                                               fontWeight:
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
@@ -539,23 +622,11 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium
                                                       .fontStyle,
+                                              lineHeight: 1.3,
                                             ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 14.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .fontStyle,
-                                            lineHeight: 1.3,
-                                          ),
-                                    ),
-                                  ].divide(SizedBox(width: 6.0)),
+                                      ),
+                                    ].divide(SizedBox(width: 6.0)),
+                                  ),
                                 ),
                               ),
                             ),
@@ -699,92 +770,21 @@ class _StoreOwnerInventoryWidgetState extends State<StoreOwnerInventoryWidget> {
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              wrapWithModel(
-                                model: _model.inventoryItemModel1,
-                                updateCallback: () => safeSetState(() {}),
-                                child: InventoryItemWidget(
-                                  available: false,
-                                  category: 'Grocery',
-                                  name:
-                                      'https://dimg.dreamflow.cloud/v1/image/Sona%20Masoori%20Rice%20(5kg)',
-                                  price: '345',
-                                  stock: '24',
-                                ),
-                              ),
-                              wrapWithModel(
-                                model: _model.inventoryItemModel2,
-                                updateCallback: () => safeSetState(() {}),
-                                child: InventoryItemWidget(
-                                  available: false,
-                                  category: 'Fruits',
-                                  name:
-                                      'https://dimg.dreamflow.cloud/v1/image/Fresh%20Alphonso%20Mangoes',
-                                  price: '550',
-                                  stock: '5',
-                                ),
-                              ),
-                              wrapWithModel(
-                                model: _model.inventoryItemModel3,
-                                updateCallback: () => safeSetState(() {}),
-                                child: InventoryItemWidget(
-                                  available: false,
-                                  category: 'Dairy',
-                                  name:
-                                      'https://dimg.dreamflow.cloud/v1/image/Amul%20Butter%20500g',
-                                  price: '275',
-                                  stock: '18',
-                                ),
-                              ),
-                              wrapWithModel(
-                                model: _model.inventoryItemModel4,
-                                updateCallback: () => safeSetState(() {}),
-                                child: InventoryItemWidget(
-                                  available: false,
-                                  category: 'Grocery',
-                                  name:
-                                      'https://dimg.dreamflow.cloud/v1/image/Aashirvaad%20Atta%20(10kg)',
-                                  price: '420',
-                                  stock: '45',
-                                ),
-                              ),
-                              wrapWithModel(
-                                model: _model.inventoryItemModel5,
-                                updateCallback: () => safeSetState(() {}),
-                                child: InventoryItemWidget(
-                                  available: false,
-                                  category: 'Dairy',
-                                  name:
-                                      'https://dimg.dreamflow.cloud/v1/image/Nandini%20Full%20Cream%20Milk',
-                                  price: '28',
-                                  stock: '60',
-                                ),
-                              ),
-                              wrapWithModel(
-                                model: _model.inventoryItemModel6,
-                                updateCallback: () => safeSetState(() {}),
-                                child: InventoryItemWidget(
-                                  available: false,
-                                  category: 'Grocery',
-                                  name:
-                                      'https://dimg.dreamflow.cloud/v1/image/Refined%20Sunflower%20Oil',
-                                  price: '145',
-                                  stock: '3',
-                                ),
-                              ),
-                              wrapWithModel(
-                                model: _model.inventoryItemModel7,
-                                updateCallback: () => safeSetState(() {}),
-                                child: InventoryItemWidget(
-                                  available: false,
-                                  category: 'Bakery',
-                                  name:
-                                      'https://dimg.dreamflow.cloud/v1/image/Britannia%20Marie%20Gold',
-                                  price: '35',
-                                  stock: '112',
-                                ),
-                              ),
-                            ].divide(SizedBox(height: 16.0)),
+                            children: filteredProducts.map((p) {
+                                return InventoryItemWidget(
+                                  available: p.available,
+                                  category: p.category,
+                                  name: p.name,
+                                  imageUrl: p.imageUrl,
+                                  price: p.price.toStringAsFixed(0),
+                                  stock: p.stock.toString(),
+                                  onToggle: () => inventory.toggleAvailability(p.id),
+                                  onDelete: () => inventory.deleteProduct(p.id),
+                                  onEdit: () {
+                                    showSnackbar(context, 'Edit functionality coming soon!');
+                                  },
+                                );
+                              }).toList().divide(SizedBox(height: 16.0)),
                           ),
                         ),
                       ),

@@ -24,6 +24,8 @@ class MobileOTPLoginWidget extends StatefulWidget {
 
 class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
   late MobileOTPLoginModel _model;
+  bool _showOTP = false;
+  final TextEditingController _otpController = TextEditingController();
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -69,103 +71,145 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
                   title: 'Welcome to DDNDS',
                 ),
               ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      borderRadius: BorderRadius.circular(12.0),
-                      shape: BoxShape.rectangle,
-                      border: Border.all(
-                        color: FlutterFlowTheme.of(context).alternate,
-                        width: 1.0,
+              if (!_showOTP)
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        borderRadius: BorderRadius.circular(12.0),
+                        shape: BoxShape.rectangle,
+                        border: Border.all(
+                          color: FlutterFlowTheme.of(context).alternate,
+                          width: 1.0,
+                        ),
                       ),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Container(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '+91',
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleMedium
-                                      .override(
-                                        font: GoogleFonts.inter(
+                      child: Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Container(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    '+91',
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleMedium
+                                                    .fontStyle,
+                                          ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
                                           fontStyle:
                                               FlutterFlowTheme.of(context)
                                                   .titleMedium
                                                   .fontStyle,
+                                          lineHeight: 1.4,
                                         ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w600,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .titleMedium
-                                            .fontStyle,
-                                        lineHeight: 1.4,
-                                      ),
-                                ),
-                                Container(
-                                  width: 1.0,
-                                  height: 24.0,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    shape: BoxShape.rectangle,
+                                  ),
+                                  Container(
+                                    width: 1.0,
+                                    height: 24.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      shape: BoxShape.rectangle,
+                                    ),
+                                  ),
+                                ].divide(SizedBox(width: 4.0)),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: wrapWithModel(
+                                  model: _model.textFieldModel,
+                                  updateCallback: () => safeSetState(() {}),
+                                  child: TextFieldWidget(
+                                    label: 'Mobile Number',
+                                    labelPresent: true,
+                                    helper:
+                                        'We\'ll send a 6-digit OTP for verification',
+                                    helperPresent: true,
+                                    leadingIconPresent: false,
+                                    trailingIconPresent: false,
+                                    hint: '98765 43210',
+                                    value: '',
+                                    onChange: '',
+                                    onSubmit: '',
+                                    variant: 'ghost',
+                                    error: false,
                                   ),
                                 ),
-                              ].divide(SizedBox(width: 4.0)),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: wrapWithModel(
-                                model: _model.textFieldModel,
-                                updateCallback: () => safeSetState(() {}),
-                                child: TextFieldWidget(
-                                  label: 'Mobile Number',
-                                  labelPresent: true,
-                                  helper:
-                                      'We\'ll send a 6-digit OTP for verification',
-                                  helperPresent: true,
-                                  leadingIconPresent: false,
-                                  trailingIconPresent: false,
-                                  hint: '98765 43210',
-                                  value: '',
-                                  onChange: '',
-                                  onSubmit: '',
-                                  variant: 'ghost',
-                                  error: false,
-                                ),
                               ),
-                            ),
-                          ].divide(SizedBox(width: 16.0)),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ].divide(SizedBox(height: 24.0)),
-              ),
+                  ].divide(SizedBox(height: 24.0)),
+                ),
+              if (_showOTP)
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Enter the 6-digit code sent to your mobile',
+                      style: FlutterFlowTheme.of(context).bodyMedium,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 24.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: List.generate(
+                            6,
+                            (index) => Container(
+                                  width: 45,
+                                  height: 55,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .alternate),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '0', // Placeholder
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleLarge,
+                                    ),
+                                  ),
+                                )),
+                      ),
+                    ),
+                  ],
+                ),
               InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  context.goNamed(CustomerHomeFeedWidget.routeName);
+                  if (!_showOTP) {
+                    setState(() => _showOTP = true);
+                    showSnackbar(context, 'OTP sent to your mobile number');
+                  } else {
+                    AppStateNotifier.instance.login();
+                  }
                 },
                 child: wrapWithModel(
                   model: _model.buttonModel1,
@@ -173,7 +217,7 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
                   child: ButtonWidget(
                     iconPresent: false,
                     iconEndPresent: false,
-                    content: 'Send OTP',
+                    content: _showOTP ? 'Verify OTP' : 'Send OTP',
                     variant: 'primary',
                     size: 'large',
                     fullWidth: true,
@@ -364,9 +408,48 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
               Container(
                 height: 20.0,
               ),
+              Container(
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).accent1,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      'DEVELOPER QUICK ACCESS',
+                      style: FlutterFlowTheme.of(context).labelSmall.override(
+                            font: GoogleFonts.inter(fontWeight: FontWeight.bold),
+                            color: Colors.white,
+                          ),
+                    ),
+                    SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _buildRoleButton(context, 'Store', Icons.storefront),
+                        _buildRoleButton(context, 'Delivery', Icons.delivery_dining),
+                        _buildRoleButton(context, 'Admin', Icons.admin_panel_settings),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ].divide(SizedBox(height: 32.0)),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildRoleButton(BuildContext context, String role, IconData icon) {
+    return InkWell(
+      onTap: () => AppStateNotifier.instance.login(role: role),
+      child: Column(
+        children: [
+          Icon(icon, color: Colors.white, size: 24),
+          Text(role, style: TextStyle(color: Colors.white, fontSize: 10)),
+        ],
       ),
     );
   }

@@ -14,11 +14,13 @@ class SectionHeaderWidget extends StatefulWidget {
     super.key,
     String? actionLabel,
     String? title,
+    this.onAction,
   })  : this.actionLabel = actionLabel ?? 'Action Label',
         this.title = title ?? 'Delivery Address';
 
   final String actionLabel;
   final String title;
+  final VoidCallback? onAction;
 
   @override
   State<SectionHeaderWidget> createState() => _SectionHeaderWidgetState();
@@ -73,21 +75,24 @@ class _SectionHeaderWidgetState extends State<SectionHeaderWidget> {
                   lineHeight: 1.4,
                 ),
           ),
-          wrapWithModel(
-            model: _model.buttonModel,
-            updateCallback: () => safeSetState(() {}),
-            child: ButtonWidget(
-              iconPresent: false,
-              iconEndPresent: false,
-              content: valueOrDefault<String>(
-                widget!.actionLabel,
-                'Action Label',
+          InkWell(
+            onTap: widget.onAction,
+            child: wrapWithModel(
+              model: _model.buttonModel,
+              updateCallback: () => safeSetState(() {}),
+              child: ButtonWidget(
+                iconPresent: false,
+                iconEndPresent: false,
+                content: valueOrDefault<String>(
+                  widget!.actionLabel,
+                  'Action Label',
+                ),
+                variant: 'ghost',
+                size: 'small',
+                fullWidth: false,
+                loading: false,
+                disabled: false,
               ),
-              variant: 'ghost',
-              size: 'small',
-              fullWidth: false,
-              loading: false,
-              disabled: false,
             ),
           ),
         ],
