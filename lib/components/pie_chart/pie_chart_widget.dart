@@ -95,13 +95,12 @@ class _PieChartWidgetState extends State<PieChartWidget> {
       FlutterFlowTheme.of(context).secondary,
       FlutterFlowTheme.of(context).tertiary
     ];
-    return Container(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
             flex: 1,
             child: Row(
               mainAxisSize: MainAxisSize.max,
@@ -550,7 +549,6 @@ class _PieChartWidgetState extends State<PieChartWidget> {
               ),
             ),
         ].divide(const SizedBox(height: 12.0)),
-      ),
     );
   }
 }

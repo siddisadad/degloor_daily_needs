@@ -72,13 +72,12 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
                 borderRadius: BorderRadius.circular(6.0),
                 child: Container(
                   height: 100.0,
@@ -280,7 +279,6 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                 ],
               ),
             ].divide(const SizedBox(height: 8.0)),
-          ),
         ),
       ),
     );

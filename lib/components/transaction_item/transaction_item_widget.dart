@@ -60,13 +60,12 @@ class _TransactionItemWidgetState extends State<TransactionItemWidget> {
         children: [
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
-            child: Container(
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
                     width: 40.0,
                     height: 40.0,
                     decoration: BoxDecoration(
@@ -231,7 +230,6 @@ class _TransactionItemWidgetState extends State<TransactionItemWidget> {
                 ].divide(const SizedBox(width: 16.0)),
               ),
             ),
-          ),
           Container(
             height: 1.0,
             decoration: BoxDecoration(

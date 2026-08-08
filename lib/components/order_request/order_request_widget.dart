@@ -83,13 +83,12 @@ class _OrderRequestWidgetState extends State<OrderRequestWidget> {
       ),
       child: Padding(
         padding: const EdgeInsets.all(24.0),
-        child: Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -176,32 +175,30 @@ class _OrderRequestWidgetState extends State<OrderRequestWidget> {
                     child: Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
-                      child: Container(
-                        child: Text(
-                          valueOrDefault<String>(
-                            widget.p,
-                            'P',
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
-                                    letterSpacing: 0.0,
+                      child: Text(
+                        valueOrDefault<String>(
+                          widget.p,
+                          'P',
+                        ),
+                        style:
+                            FlutterFlowTheme.of(context).bodyMedium.override(
+                                  font: GoogleFonts.inter(
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .fontWeight,
                                     fontStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .fontStyle,
-                                    lineHeight: 1.5,
                                   ),
-                        ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                  lineHeight: 1.5,
+                                ),
                       ),
                     ),
                   ),
@@ -262,7 +259,6 @@ class _OrderRequestWidgetState extends State<OrderRequestWidget> {
                 ].divide(const SizedBox(width: 16.0)),
               ),
             ].divide(const SizedBox(height: 16.0)),
-          ),
         ),
       ),
     );

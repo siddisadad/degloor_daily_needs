@@ -74,8 +74,7 @@ class _DeliveryPartnerDashboardWidgetState
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(24.0),
-                    child: Container(
-                      child: Row(
+                    child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -178,7 +177,6 @@ class _DeliveryPartnerDashboardWidgetState
                           ),
                         ],
                       ),
-                    ),
                   ),
                   Container(
                     height: 1.0,
@@ -201,8 +199,7 @@ class _DeliveryPartnerDashboardWidgetState
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(24.0),
-                      child: Container(
-                        child: Column(
+                      child: Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -223,8 +220,7 @@ class _DeliveryPartnerDashboardWidgetState
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(24.0),
-                                child: Container(
-                                  child: Column(
+                                child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
@@ -312,7 +308,6 @@ class _DeliveryPartnerDashboardWidgetState
                                         ],
                                       ),
                                     ].divide(const SizedBox(height: 8.0)),
-                                  ),
                                 ),
                               ),
                             ),
@@ -547,7 +542,6 @@ class _DeliveryPartnerDashboardWidgetState
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(16.0),
-                                    child: Container(
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -678,7 +672,6 @@ class _DeliveryPartnerDashboardWidgetState
                                           ),
                                         ].divide(const SizedBox(width: 16.0)),
                                       ),
-                                    ),
                                   ),
                                 ),
                                 Container(
@@ -695,7 +688,6 @@ class _DeliveryPartnerDashboardWidgetState
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(16.0),
-                                    child: Container(
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -826,14 +818,12 @@ class _DeliveryPartnerDashboardWidgetState
                                           ),
                                         ].divide(const SizedBox(width: 16.0)),
                                       ),
-                                    ),
                                   ),
                                 ),
                               ].divide(const SizedBox(height: 16.0)),
                             ),
                           ].divide(const SizedBox(height: 24.0)),
                         ),
-                      ),
                     ),
                   ],
                 ),
@@ -841,7 +831,6 @@ class _DeliveryPartnerDashboardWidgetState
             ),
             Align(
               alignment: const AlignmentDirectional(0.0, 1.0),
-              child: Container(
                 child: wrapWithModel(
                   model: _model.bottomNavModel,
                   updateCallback: () => safeSetState(() {}),
@@ -849,7 +838,6 @@ class _DeliveryPartnerDashboardWidgetState
                     child: () => const BottomNavChild2Widget(),
                   ),
                 ),
-              ),
             ),
           ],
         ),

@@ -86,13 +86,11 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
               },
             ),
           ),
-          Container(
-            child: wrapWithModel(
-              model: BottomNavModel(),
-              updateCallback: () => setState(() {}),
-              child: BottomNavWidget(
-                child: () => const BottomNavChildWidget(),
-              ),
+          wrapWithModel(
+            model: BottomNavModel(),
+            updateCallback: () => setState(() {}),
+            child: BottomNavWidget(
+              child: () => const BottomNavChildWidget(),
             ),
           ),
         ],

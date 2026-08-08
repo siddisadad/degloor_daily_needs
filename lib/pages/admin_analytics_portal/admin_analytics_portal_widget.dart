@@ -72,8 +72,7 @@ class _AdminAnalyticsPortalWidgetState
                   Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
-                    child: Container(
-                      child: Row(
+                    child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -140,9 +139,7 @@ class _AdminAnalyticsPortalWidgetState
                                       .secondaryText,
                                   size: 24.0,
                                 ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
-                                },
+                                onPressed: () {},
                               ),
                               FlutterFlowIconButton(
                                 borderRadius: 8.0,
@@ -154,9 +151,7 @@ class _AdminAnalyticsPortalWidgetState
                                       .secondaryText,
                                   size: 24.0,
                                 ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
-                                },
+                                onPressed: () {},
                               ),
                                   FlutterFlowIconButton(
                                     borderRadius: 9999.0,
@@ -230,7 +225,6 @@ class _AdminAnalyticsPortalWidgetState
                           ),
                         ],
                       ),
-                    ),
                   ),
                   Container(
                     height: 1.0,
@@ -253,8 +247,7 @@ class _AdminAnalyticsPortalWidgetState
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(24.0),
-                      child: Container(
-                        child: Column(
+                      child: Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -362,8 +355,7 @@ class _AdminAnalyticsPortalWidgetState
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(24.0),
-                                child: Container(
-                                  child: Column(
+                                child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
@@ -478,8 +470,7 @@ class _AdminAnalyticsPortalWidgetState
                                           padding:
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 16.0, 0.0),
-                                          child: Container(
-                                            child: SizedBox(
+                                          child: SizedBox(
                                               height: 200.0,
                                               child: FlutterFlowLineChart(
                                                 data: [
@@ -584,12 +575,10 @@ class _AdminAnalyticsPortalWidgetState
                                                 ),
                                               ),
                                             ),
-                                          ),
                                         ),
                                       ),
                                     ].divide(const SizedBox(height: 16.0)),
                                   ),
-                                ),
                               ),
                             ),
                             Column(
@@ -697,8 +686,7 @@ class _AdminAnalyticsPortalWidgetState
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(24.0),
-                                child: Container(
-                                  child: Column(
+                                child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
@@ -751,14 +739,11 @@ class _AdminAnalyticsPortalWidgetState
                                       ),
                                     ].divide(const SizedBox(height: 16.0)),
                                   ),
-                                ),
                               ),
                             ),
-                            Container(
-                              child: Padding(
+                            Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     32.0, 0.0, 32.0, 0.0),
-                                child: Container(
                                   child: wrapWithModel(
                                     model: _model.buttonModel2,
                                     updateCallback: () => safeSetState(() {}),
@@ -779,12 +764,9 @@ class _AdminAnalyticsPortalWidgetState
                                       disabled: false,
                                     ),
                                   ),
-                                ),
                               ),
-                            ),
                           ].divide(const SizedBox(height: 24.0)),
                         ),
-                      ),
                     ),
                   ],
                 ),

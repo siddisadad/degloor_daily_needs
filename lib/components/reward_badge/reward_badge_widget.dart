@@ -58,13 +58,12 @@ class _RewardBadgeWidgetState extends State<RewardBadgeWidget> {
       ),
       child: Padding(
         padding: const EdgeInsets.all(24.0),
-        child: Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              widget.icon!,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            widget.icon!,
               Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -118,7 +117,6 @@ class _RewardBadgeWidgetState extends State<RewardBadgeWidget> {
                 ].divide(const SizedBox(height: 4.0)),
               ),
             ].divide(const SizedBox(height: 8.0)),
-          ),
         ),
       ),
     );

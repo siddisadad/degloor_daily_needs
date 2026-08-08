@@ -156,8 +156,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(24.0),
-                    child: Container(
-                      child: Column(
+                    child: Column(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -270,8 +269,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                 child: Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       8.0, 4.0, 8.0, 4.0),
-                                  child: Container(
-                                    child: Row(
+                                  child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -314,7 +312,6 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                         ),
                                       ].divide(const SizedBox(width: 4.0)),
                                     ),
-                                  ),
                                 ),
                               ),
                             ].divide(const SizedBox(width: 16.0)),
@@ -438,7 +435,6 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                           ),
                         ].divide(const SizedBox(height: 16.0)),
                       ),
-                    ),
                   ),
                   Container(
                     height: 1.0,
@@ -469,7 +465,6 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          child: Container(
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -492,7 +487,6 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                 );
                               }).toList().divide(const SizedBox(width: 24.0)),
                             ),
-                          ),
                         ),
                       ],
                     ),
@@ -509,8 +503,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
             ),
             Expanded(
               flex: 1,
-              child: Container(
-                child: SingleChildScrollView(
+              child: SingleChildScrollView(
                   primary: false,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -519,8 +512,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(24.0),
-                        child: Container(
-                          child: Column(
+                        child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -541,8 +533,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(24.0),
-                                  child: Container(
-                                    child: Row(
+                                  child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -635,7 +626,6 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                         ),
                                       ].divide(const SizedBox(width: 16.0)),
                                     ),
-                                  ),
                                 ),
                               ),
                               Column(
@@ -729,23 +719,19 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                               ),
                             ].divide(const SizedBox(height: 24.0)),
                           ),
-                        ),
                       ),
                     ],
                   ),
                 ),
-              ),
             ),
             Align(
               alignment: const AlignmentDirectional(0.0, 1.0),
               child: Consumer<CartProvider>(
                 builder: (context, cart, child) {
                   if (cart.items.isEmpty) return const SizedBox.shrink();
-                  return Container(
-                    child: Padding(
+                  return Padding(
                       padding: const EdgeInsets.all(24.0),
                       child: Container(
-                        child: Container(
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).primary,
                             borderRadius: BorderRadius.circular(9999.0),
@@ -754,8 +740,7 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                           child: Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 16.0, 24.0, 16.0),
-                            child: Container(
-                              child: Row(
+                            child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -876,11 +861,8 @@ class _StoreStorefrontWidgetState extends State<StoreStorefrontWidget> {
                                   ),
                                 ],
                               ),
-                            ),
                           ),
                         ),
-                      ),
-                    ),
                   );
                 },
               ),

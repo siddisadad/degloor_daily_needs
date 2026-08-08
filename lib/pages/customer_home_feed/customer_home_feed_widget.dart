@@ -161,8 +161,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                   Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 16.0),
-                    child: Container(
-                      child: Column(
+                    child: Column(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -331,7 +330,6 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                           ),
                         ].divide(const SizedBox(height: 16.0)),
                       ),
-                    ),
                   ),
                   Container(
                     height: 1.0,
@@ -345,8 +343,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
             ),
             Expanded(
               flex: 1,
-              child: Container(
-                child: SingleChildScrollView(
+              child: SingleChildScrollView(
                   primary: false,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -356,8 +353,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                       Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
-                        child: Container(
-                          child: Column(
+                        child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -368,7 +364,6 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 16.0),
                                   child: Container(
-                                    child: Container(
                                       height: 128.0,
                                       alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: SingleChildScrollView(
@@ -384,8 +379,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       16.0, 0.0, 16.0, 0.0),
-                                              child: Container(
-                                                child: Row(
+                                              child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.min,
                                                   mainAxisAlignment:
@@ -409,8 +403,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                                       child: Padding(
                                                         padding: const EdgeInsets.all(
                                                             24.0),
-                                                        child: Container(
-                                                          child: Column(
+                                                        child: Column(
                                                             mainAxisSize:
                                                                 MainAxisSize
                                                                     .min,
@@ -511,7 +504,6 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                                             ].divide(const SizedBox(
                                                                 height: 8.0)),
                                                           ),
-                                                        ),
                                                       ),
                                                     ),
                                                     Container(
@@ -530,8 +522,7 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                                       child: Padding(
                                                         padding: const EdgeInsets.all(
                                                             24.0),
-                                                        child: Container(
-                                                          child: Column(
+                                                        child: Column(
                                                             mainAxisSize:
                                                                 MainAxisSize
                                                                     .min,
@@ -632,18 +623,15 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                                                             ].divide(const SizedBox(
                                                                 height: 8.0)),
                                                           ),
-                                                        ),
                                                       ),
                                                     ),
                                                   ].divide(
                                                       const SizedBox(width: 16.0)),
                                                 ),
-                                              ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                    ),
                                   ),
                                 ),
                               ),
@@ -835,16 +823,13 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                               ),
                             ].divide(const SizedBox(height: 24.0)),
                           ),
-                        ),
                       ),
                     ],
                   ),
                 ),
               ),
-            ),
             Align(
               alignment: const AlignmentDirectional(0.0, 1.0),
-              child: Container(
                 child: wrapWithModel(
                   model: _model.bottomNavModel,
                   updateCallback: () => safeSetState(() {}),
@@ -852,7 +837,6 @@ class _CustomerHomeFeedWidgetState extends State<CustomerHomeFeedWidget> {
                     child: () => const BottomNavChildWidget(),
                   ),
                 ),
-              ),
             ),
           ],
         ),

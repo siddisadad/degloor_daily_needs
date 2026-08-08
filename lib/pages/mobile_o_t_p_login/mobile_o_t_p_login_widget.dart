@@ -84,8 +84,7 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          child: Row(
+                        child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -153,7 +152,6 @@ class _MobileOTPLoginWidgetState extends State<MobileOTPLoginWidget> {
                               ),
                             ],
                           ),
-                        ),
                       ),
                     ),
                   ].divide(const SizedBox(height: 24.0)),

@@ -73,8 +73,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                   Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
-                    child: Container(
-                      child: Row(
+                    child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -113,7 +112,6 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                           ),
                         ].divide(const SizedBox(width: 16.0)),
                       ),
-                    ),
                   ),
                   Container(
                     height: 1.0,
@@ -127,8 +125,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
             ),
             Expanded(
               flex: 1,
-              child: Container(
-                child: SingleChildScrollView(
+              child: SingleChildScrollView(
                   primary: false,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -137,8 +134,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(24.0),
-                        child: Container(
-                          child: Column(
+                        child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -159,8 +155,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(32.0),
-                                  child: Container(
-                                    child: Column(
+                                  child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -237,7 +232,6 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     24.0, 4.0, 24.0, 4.0),
-                                            child: Container(
                                               child: Text(
                                                 '100% Secure Payments',
                                                 style: FlutterFlowTheme.of(
@@ -274,12 +268,10 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                                       lineHeight: 1.2,
                                                     ),
                                               ),
-                                            ),
                                           ),
                                         ),
                                       ].divide(const SizedBox(height: 16.0)),
                                     ),
-                                  ),
                                 ),
                               ),
                               Row(
@@ -329,8 +321,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(24.0),
-                                  child: Container(
-                                    child: Column(
+                                  child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -407,8 +398,7 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                           ),
                                           child: Padding(
                                             padding: const EdgeInsets.all(16.0),
-                                            child: Container(
-                                              child: Row(
+                                            child: Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -484,7 +474,6 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                                   ),
                                                 ],
                                               ),
-                                            ),
                                           ),
                                         ),
                                         InkWell(
@@ -516,7 +505,6 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                                           ),
                                         ),
                                       ].divide(const SizedBox(height: 16.0)),
-                                    ),
                                   ),
                                 ),
                               ),
@@ -670,22 +658,18 @@ class _UserWalletRewardsWidgetState extends State<UserWalletRewardsWidget> {
                               ),
                             ].divide(const SizedBox(height: 24.0)),
                           ),
-                        ),
                       ),
                     ],
                   ),
                 ),
-              ),
             ),
             Align(
               alignment: const AlignmentDirectional(0.0, 1.0),
-              child: Container(
-                child: wrapWithModel(
-                  model: _model.bottomNavModel,
-                  updateCallback: () => safeSetState(() {}),
-                  child: BottomNavWidget(
-                    child: () => const BottomNavChildWidget(),
-                  ),
+              child: wrapWithModel(
+                model: _model.bottomNavModel,
+                updateCallback: () => safeSetState(() {}),
+                child: BottomNavWidget(
+                  child: () => const BottomNavChildWidget(),
                 ),
               ),
             ),

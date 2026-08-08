@@ -98,15 +98,14 @@ class _SupportBubbleWidgetState extends State<SupportBubbleWidget> {
           ),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Container(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: widget.isUser
-                    ? CrossAxisAlignment.end
-                    : CrossAxisAlignment.start,
-                children: [
-                  Text(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: widget.isUser
+                  ? CrossAxisAlignment.end
+                  : CrossAxisAlignment.start,
+              children: [
+                Text(
                     valueOrDefault<String>(
                       widget.text,
                       'Hello! Welcome to Degloor Daily Needs. How can we help you today?',
@@ -174,8 +173,7 @@ class _SupportBubbleWidgetState extends State<SupportBubbleWidget> {
               ),
             ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
   }
 }

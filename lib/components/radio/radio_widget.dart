@@ -70,17 +70,14 @@ class _RadioWidgetState extends State<RadioWidget> {
               : 1.0,
           1.0,
         ),
-        child: Container(
-          child: Container(
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
-              child: Container(
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(
                           0.0,
                           valueOrDefault<bool>(widget.hasSubtitle, true) ? 3.0 : 0.0,
@@ -189,9 +186,6 @@ class _RadioWidgetState extends State<RadioWidget> {
                 ),
               ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }

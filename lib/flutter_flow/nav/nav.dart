@@ -102,11 +102,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: StoreStorefrontWidget.routeName,
           path: StoreStorefrontWidget.routePath,
           builder: (context, params) => StoreStorefrontWidget(
-            name: params.getParam('name', ParamType.String),
-            rating: params.getParam('rating', ParamType.String),
-            time: params.getParam('time', ParamType.String),
-            image: params.getParam('image', ParamType.String),
-            category: params.getParam('category', ParamType.String),
+            name: params.getParam('name', ParamType.string),
+            rating: params.getParam('rating', ParamType.string),
+            time: params.getParam('time', ParamType.string),
+            image: params.getParam('image', ParamType.string),
+            category: params.getParam('category', ParamType.string),
           ),
         ),
         FFRoute(
@@ -118,7 +118,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: LiveOrderTrackingWidget.routeName,
           path: LiveOrderTrackingWidget.routePath,
           builder: (context, params) => LiveOrderTrackingWidget(
-            orderId: params.getParam('orderId', ParamType.String),
+            orderId: params.getParam('orderId', ParamType.string),
           ),
         ),
         FFRoute(

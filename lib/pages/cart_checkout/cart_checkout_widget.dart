@@ -79,8 +79,7 @@ class _CartCheckoutWidgetState extends State<CartCheckoutWidget> {
                   Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
-                    child: Container(
-                      child: Row(
+                    child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -94,9 +93,7 @@ class _CartCheckoutWidgetState extends State<CartCheckoutWidget> {
                               color: FlutterFlowTheme.of(context).primaryText,
                               size: 24.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
+                            onPressed: () {},
                           ),
                           Text(
                             'Cart & Checkout',
@@ -121,7 +118,6 @@ class _CartCheckoutWidgetState extends State<CartCheckoutWidget> {
                           ),
                         ].divide(const SizedBox(width: 16.0)),
                       ),
-                    ),
                   ),
                   Container(
                     height: 1.0,
@@ -135,8 +131,7 @@ class _CartCheckoutWidgetState extends State<CartCheckoutWidget> {
             ),
             Expanded(
               flex: 1,
-              child: Container(
-                child: SingleChildScrollView(
+              child: SingleChildScrollView(
                   primary: false,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -145,8 +140,7 @@ class _CartCheckoutWidgetState extends State<CartCheckoutWidget> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(24.0),
-                        child: Container(
-                          child: Column(
+                        child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -230,8 +224,7 @@ class _CartCheckoutWidgetState extends State<CartCheckoutWidget> {
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(24.0),
-                                        child: Container(
-                                          child: Row(
+                                        child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -325,7 +318,6 @@ class _CartCheckoutWidgetState extends State<CartCheckoutWidget> {
                                               ),
                                             ].divide(const SizedBox(width: 16.0)),
                                           ),
-                                        ),
                                       ),
                                     ),
                                   ),
@@ -415,8 +407,7 @@ class _CartCheckoutWidgetState extends State<CartCheckoutWidget> {
                                 child: Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       24.0, 16.0, 24.0, 16.0),
-                                  child: Container(
-                                    child: Row(
+                                  child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -466,7 +457,6 @@ class _CartCheckoutWidgetState extends State<CartCheckoutWidget> {
                                         ),
                                       ].divide(const SizedBox(width: 16.0)),
                                     ),
-                                  ),
                                 ),
                               ),
                               Column(
@@ -511,8 +501,7 @@ class _CartCheckoutWidgetState extends State<CartCheckoutWidget> {
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.all(24.0),
-                                      child: Container(
-                                        child: Column(
+                                      child: Column(
                                           mainAxisSize: MainAxisSize.min,
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -846,12 +835,11 @@ class _CartCheckoutWidgetState extends State<CartCheckoutWidget> {
                                             ),
                                           ].divide(const SizedBox(height: 8.0)),
                                         ),
-                                      ),
                                     ),
                                   ),
                                 ].divide(const SizedBox(height: 16.0)),
-                              ),
-                              Column(
+                          ),
+                          Column(
                                 mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -895,12 +883,10 @@ class _CartCheckoutWidgetState extends State<CartCheckoutWidget> {
                               ),
                             ].divide(const SizedBox(height: 24.0)),
                           ),
-                        ),
                       ),
                     ],
                   ),
                 ),
-              ),
             ),
             Container(
               decoration: BoxDecoration(
@@ -920,8 +906,7 @@ class _CartCheckoutWidgetState extends State<CartCheckoutWidget> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(24.0),
-                    child: Container(
-                      child: Row(
+                    child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -1060,7 +1045,6 @@ class _CartCheckoutWidgetState extends State<CartCheckoutWidget> {
                           ),
                         ].divide(const SizedBox(width: 24.0)),
                       ),
-                    ),
                   ),
                 ],
               ),

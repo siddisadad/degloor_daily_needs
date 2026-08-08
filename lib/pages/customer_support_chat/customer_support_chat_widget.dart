@@ -102,8 +102,7 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                   Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
-                    child: Container(
-                      child: Row(
+                    child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -216,13 +215,10 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                               color: FlutterFlowTheme.of(context).primaryText,
                               size: 24.0,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
+                            onPressed: () {},
                           ),
                         ],
                       ),
-                    ),
                   ),
                   Container(
                     height: 1.0,
@@ -236,8 +232,7 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
             ),
             Expanded(
               flex: 1,
-              child: Container(
-                child: SingleChildScrollView(
+              child: SingleChildScrollView(
                   primary: false,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -246,8 +241,7 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(24.0),
-                        child: Container(
-                          child: Column(
+                        child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -264,7 +258,6 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                   child: Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         16.0, 4.0, 16.0, 4.0),
-                                    child: Container(
                                       child: Text(
                                         'Today',
                                         style: FlutterFlowTheme.of(context)
@@ -295,7 +288,6 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                               lineHeight: 1.2,
                                             ),
                                       ),
-                                    ),
                                   ),
                                 ),
                               ),
@@ -313,7 +305,6 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 4.0),
-                                      child: Container(
                                         child: Text(
                                           'Common Topics',
                                           style: FlutterFlowTheme.of(context)
@@ -344,7 +335,6 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                                 lineHeight: 1.2,
                                               ),
                                         ),
-                                      ),
                                     ),
                                     Wrap(
                                       spacing: 8.0,
@@ -416,12 +406,10 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                 ),
                             ].divide(const SizedBox(height: 24.0)),
                           ),
-                        ),
                       ),
                     ],
                   ),
                 ),
-              ),
             ),
             Container(
               decoration: BoxDecoration(
@@ -441,8 +429,7 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Container(
-                      child: Column(
+                    child: Column(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -462,9 +449,7 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                       .secondaryText,
                                   size: 24.0,
                                 ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
-                                },
+                                onPressed: () {},
                               ),
                               Expanded(
                                 flex: 1,
@@ -508,8 +493,7 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                child: Row(
+                              child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -555,12 +539,10 @@ class _CustomerSupportChatWidgetState extends State<CustomerSupportChatWidget> {
                                     ),
                                   ].divide(const SizedBox(width: 8.0)),
                                 ),
-                              ),
                             ),
                           ),
                         ].divide(const SizedBox(height: 16.0)),
                       ),
-                    ),
                   ),
                 ],
               ),

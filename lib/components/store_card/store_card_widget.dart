@@ -138,44 +138,42 @@ class _StoreCardWidgetState extends State<StoreCardWidget> {
                           child: Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 8.0, 4.0, 8.0, 4.0),
-                            child: Container(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.star_rounded,
-                                    color: FlutterFlowTheme.of(context).success,
-                                    size: 14.0,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.star_rounded,
+                                  color: FlutterFlowTheme.of(context).success,
+                                  size: 14.0,
+                                ),
+                                Text(
+                                  valueOrDefault<String>(
+                                    widget.rating,
+                                    '4.8',
                                   ),
-                                  Text(
-                                    valueOrDefault<String>(
-                                      widget.rating,
-                                      '4.8',
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelSmall
-                                        .override(
-                                          font: GoogleFonts.inter(
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelSmall
-                                                    .fontStyle,
-                                          ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .success,
-                                          letterSpacing: 0.0,
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelSmall
+                                      .override(
+                                        font: GoogleFonts.inter(
                                           fontWeight: FontWeight.bold,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .labelSmall
-                                              .fontStyle,
-                                          lineHeight: 1.2,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelSmall
+                                                  .fontStyle,
                                         ),
-                                  ),
-                                ].divide(const SizedBox(width: 4.0)),
-                              ),
+                                        color: FlutterFlowTheme.of(context)
+                                            .success,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .labelSmall
+                                            .fontStyle,
+                                        lineHeight: 1.2,
+                                      ),
+                                ),
+                              ].divide(const SizedBox(width: 4.0)),
                             ),
                           ),
                         ),

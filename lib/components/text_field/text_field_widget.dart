@@ -81,13 +81,12 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (valueOrDefault<bool>(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (valueOrDefault<bool>(
             widget.labelPresent,
             true,
           ))
@@ -515,7 +514,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                   ),
             ),
         ].divide(const SizedBox(height: 6.0)),
-      ),
     );
   }
 }
